@@ -26,7 +26,8 @@ namespace AdminPicasaLike
         /// </summary>
         /// <param name="nom">Nom de l'album à ajouter</param>
         /// <param name="numUtilisateur">Numero de l'utilisateur, doit exister dans la base de donnée Utilisateur</param>
-        public void addAlbum(String nom, String numUtilisateur)
+        /// <returns>Numero d'ajout de l'album</returns>
+        public int addAlbum(String nom, String numUtilisateur)
         {
             try
             {
@@ -36,15 +37,38 @@ namespace AdminPicasaLike
                 SqlCommand oCommand = bdd.executeSQL(sql);
                 oCommand.Parameters.Add("@nom", SqlDbType.VarChar, nom.Length).Value = nom;
                 oCommand.Parameters.Add("@utilisateur", SqlDbType.Int, numUtilisateur.Length).Value = numUtilisateur;
-
                 oCommand.ExecuteNonQuery();
+
                 bdd.deconnect();
+
+                return getIdentCurrent("Album");
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 bdd.deconnect();
+                return 0;
             }
+        }
+
+        /// <summary>
+        /// Recupère la valeur de l'identifiant automatique de table
+        /// </summary>
+        /// <param name="table">Table a laquelle on recupere l'identifiant</param>
+        /// <returns></returns>
+        private int getIdentCurrent(String table)
+        {
+            bdd.connexion();
+
+            String sql2 = "SELECT IDENT_CURRENT('"+table+"');";
+            SqlCommand oCommand2 = bdd.executeSQL(sql2);
+            oCommand2.ExecuteNonQuery();
+            SqlDataReader myReader = oCommand2.ExecuteReader(CommandBehavior.SequentialAccess);
+            myReader.Read();
+            int id = (int)myReader.GetDecimal(0);
+
+            bdd.deconnect();
+            return id;
         }
 
         /// <summary>
@@ -103,7 +127,8 @@ namespace AdminPicasaLike
         /// <param name="nom"></param>
         /// <param name="prenom"></param>
         /// <param name="mdp"></param>
-        public void addUser(String nom, String prenom, String mdp)
+        /// <returns>Numero d'ajout de l'utilisateur</returns>
+        public int addUser(String nom, String prenom, String mdp)
         {
             try
             {
@@ -118,10 +143,13 @@ namespace AdminPicasaLike
                 oCommand.ExecuteNonQuery();
                 Console.WriteLine("Utilisateur ajouter a la base");
                 bdd.deconnect();
+
+                return getIdentCurrent("Utilisateur");
             }
             catch (Exception e)
             {
                 Console.Out.WriteLine("Impossible d'ajouter un utilisateur : " + e.Message);
+                return 0;
             }
         }
 

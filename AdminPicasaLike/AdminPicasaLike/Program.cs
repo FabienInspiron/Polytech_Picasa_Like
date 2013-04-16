@@ -19,6 +19,8 @@ namespace AdminPicasaLike
 
             gest.displayAllUser();
 
+            Console.WriteLine(gest.addAlbum("un album", "45"));
+
             gest.delUser("44");
 
             Console.ReadLine();
