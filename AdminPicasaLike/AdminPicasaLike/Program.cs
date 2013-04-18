@@ -14,14 +14,16 @@ namespace AdminPicasaLike
             ImageBDD img = new ImageBDD(db);
 
             gest.addUser("fabien", "fab", "1234");
-            gest.addUser("fabien1", "fab", "1234");
-            gest.addUser("fabien2", "fab", "1234");
+            int user2 = gest.addUser("fabien1", "fab", "1234");
+            int user = gest.addUser("fabien2", "fab", "1234");
 
-            gest.displayAllUser();
+            gest.addAlbum("un album", user.ToString());
+            int numAlb = gest.addAlbum("un second album", user2.ToString());
+            img.addImageBDD(@"D:\Audi_TT-RS N&B.bmp", "tutu", numAlb.ToString());
+            img.addImageBDD(@"D:\Audi_TT-RS N&B.bmp", "tutu2", numAlb.ToString());
 
-            Console.WriteLine(gest.addAlbum("un album", "45"));
-
-            gest.delUser("44");
+            Console.WriteLine(gest.getAlbums(user).Count);
+            Console.WriteLine(img.getImagesID(user).Count);
 
             Console.ReadLine();
         }

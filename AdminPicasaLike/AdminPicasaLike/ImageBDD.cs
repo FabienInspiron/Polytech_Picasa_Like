@@ -61,7 +61,7 @@ namespace AdminPicasaLike
         /// </summary>
         /// <param name="imageID"></param>
         /// <returns></returns>
-        private byte[] getImage(String imageID)
+        private byte[] getImageByte(int imageID)
         {
             byte[] blob = null;
             try
@@ -71,7 +71,7 @@ namespace AdminPicasaLike
 
                 // construit la requête
                 SqlCommand getImage = new SqlCommand("SELECT id,size, blob " + "FROM Image " + "WHERE id = @id", bdd.oConnection);
-                getImage.Parameters.Add("@id", SqlDbType.VarChar, imageID.Length).Value = imageID;
+                getImage.Parameters.Add("@id", SqlDbType.VarChar, imageID).Value = imageID;
 
                 // exécution de la requête et création du reader
                 SqlDataReader myReader = getImage.ExecuteReader(CommandBehavior.SequentialAccess);
@@ -166,9 +166,9 @@ namespace AdminPicasaLike
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public Bitmap getImageBDD(string ID)
+        public Bitmap getImageBDD(int ID)
         {
-            byte[] bimg = getImage(ID);
+            byte[] bimg = getImageByte(ID);
             return new Bitmap(BytesToBitmap(bimg));
         }
 
@@ -227,6 +227,80 @@ namespace AdminPicasaLike
                 bdd.deconnect();
                 Console.WriteLine("Impossible d'afficher tous les utilisateurs : " + e.Message);
             }
+        }
+
+        /// <summary>
+        /// Retourne les albums de l'utilisateur
+        /// </summary>
+        /// <param name="idUser">Utilisateur connecté auquel on cherche l'album</param>
+        /// <returns>Liste des albums de cet utilisateur</returns>
+        public List<int> getImagesID(int idUser)
+        {
+            List<int> tableID = new List<int>();
+            try
+            {
+                bdd.connexion();
+
+                String sql = "SELECT Image.id FROM Image, Album WHERE Image.album = Album.id AND Album.utilisater = @utilisateur";
+
+                SqlCommand oCommand = bdd.executeSQL(sql);
+                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int, idUser).Value = idUser;
+
+                SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
+                while (myReader.Read())
+                {
+                    int res = myReader.GetInt32(0);
+                    tableID.Add(res);
+                    Console.WriteLine(res);
+                }
+
+                myReader.Close();
+
+                oCommand.ExecuteNonQuery();
+                bdd.deconnect();
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+
+            return tableID;
+        }
+
+        /// <summary>
+        /// Recuperer les images d'un utilisateur sous forme d'un tableau de Byte
+        /// </summary>
+        /// <param name="idUser"></param>
+        /// <returns></returns>
+        public List<byte[]> getImagesUserByte(int idUser)
+        {
+            List<int> idImages = getImagesID(idUser);
+            List<byte[]> retour = new List<byte[]>();
+
+            foreach (int id in idImages)
+            {
+                retour.Add(getImageByte(id));
+            }
+
+            return retour;
+        }
+
+        /// <summary>
+        /// Retourner toutes les images d'un utilisateur au format Bitmap
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public List<Bitmap> getImagesUserBitmap(int user)
+        {
+            List<byte[]> liste = getImagesUserByte(user);
+            List<Bitmap> retour = new List<Bitmap>();
+
+            foreach (byte[] im in liste)
+            {
+                retour.Add(new Bitmap(BytesToBitmap(im)));
+            }
+
+            return retour;
         }
     }
 }

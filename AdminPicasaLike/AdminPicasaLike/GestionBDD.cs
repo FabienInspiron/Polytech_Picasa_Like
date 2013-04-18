@@ -241,5 +241,41 @@ namespace AdminPicasaLike
 
             return id;
         }
+
+        /// <summary>
+        /// Retourne les albums de l'utilisateur
+        /// </summary>
+        /// <param name="idUser">Utilisateur connecté auquel on cherche l'album</param>
+        /// <returns>Liste des albums de cet utilisateur</returns>
+        public List<int> getAlbums(int idUser)
+        {
+            List<int> tableID = new List<int>();
+            try
+            {
+                bdd.connexion();
+
+                String sql = "SELECT id FROM Album WHERE utilisater = @utilisateur";
+
+                SqlCommand oCommand = bdd.executeSQL(sql);
+                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int, idUser).Value = idUser;
+
+                SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
+                while (myReader.Read())
+                {
+                    tableID.Add((int) myReader.GetInt32(0));
+                }
+
+                myReader.Close();
+
+                oCommand.ExecuteNonQuery();
+                bdd.deconnect();
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+
+            return tableID;
+        }
     }
 }
