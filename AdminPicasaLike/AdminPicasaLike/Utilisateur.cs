@@ -30,6 +30,12 @@ namespace AdminPicasaLike
         }
         private String mdp;
 
+        public String Mdp
+        {
+            get { return mdp; }
+            set { mdp = value; }
+        }
+
         Utilisateur(String nom, String prenom, String mdp)
         {
             this.id = 0;

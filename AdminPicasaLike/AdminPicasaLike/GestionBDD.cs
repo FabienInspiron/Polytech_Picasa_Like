@@ -42,7 +42,7 @@ namespace AdminPicasaLike
 
                 SqlCommand oCommand = bdd.executeSQL(sql);
                 oCommand.Parameters.Add("@nom", SqlDbType.VarChar, nom.Length).Value = nom;
-                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int, numUtilisateur).Value = numUtilisateur;
+                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int).Value = numUtilisateur;
                 oCommand.ExecuteNonQuery();
 
                 bdd.deconnect();
@@ -107,16 +107,26 @@ namespace AdminPicasaLike
         /// Suppresion de l'album
         /// </summary>
         /// <param name="id">Numero de l'album à supprimer, Attention cela supprime toutes les photos qui s'y trouve</param>
-        public void delAlbum(String id)
+        public void delAlbum(int id)
         {
             bdd.connexion();
             String sql = "DELETE FROM Album WHERE id=@id";
             SqlCommand oCommand = bdd.executeSQL(sql);
-            oCommand.Parameters.Add("@id", SqlDbType.VarChar, id.Length).Value = id;
+            oCommand.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
 
             oCommand.ExecuteNonQuery();
             Console.WriteLine("Album supprimé de la base");
             bdd.deconnect();
+        }
+
+
+        /// <summary>
+        /// Supprimer un album de la base de donnée
+        /// </summary>
+        /// <param name="a">Album a supprimer</param>
+        public void delAlbum(Album a)
+        {
+            delAlbum(a.Id);
         }
 
         /// <summary>
@@ -134,7 +144,7 @@ namespace AdminPicasaLike
                 String sql = "SELECT id FROM Album WHERE utilisater = @utilisateur";
 
                 SqlCommand oCommand = bdd.executeSQL(sql);
-                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int, idUser).Value = idUser;
+                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int).Value = idUser;
 
                 SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
                 while (myReader.Read())
@@ -157,7 +167,7 @@ namespace AdminPicasaLike
 
         #endregion
 
-        #region utilitaire
+        #region Utilitaire
         /// <summary>
         /// Recupère la valeur de l'identifiant automatique de table
         /// </summary>
@@ -215,21 +225,42 @@ namespace AdminPicasaLike
         }
 
         /// <summary>
+        /// Ajouter un utilisateur à la base de donnée
+        /// </summary>
+        /// <param name="user">Utilisateur a ajouter</param>
+        /// <returns>Utilisateur modifié avec un identifiant correct</returns>
+        public Utilisateur addUser(Utilisateur user) 
+        {
+            int idUser = addUser(user.Nom, user.Prenom, user.Mdp);
+            user.Id = idUser;
+            return user;
+        }
+
+        /// <summary>
         /// Supprimer l'utilsiateur de la base de donnée
         /// Cette suppression entraine la suppression de tous ses albums
         /// </summary>
         /// <param name="id"></param>
-        public void delUser(String id)
+        public void delUser(int id)
         {
             bdd.connexion();
             String sql = "DELETE FROM Utilisateur WHERE id=@id";
             SqlCommand oCommand = bdd.executeSQL(sql);
-            oCommand.Parameters.Add("@id", SqlDbType.Int, id.Length).Value = id;
+            oCommand.Parameters.Add("@id", SqlDbType.Int).Value = id;
 
             oCommand.ExecuteNonQuery();
 
             Console.WriteLine("Utilisateur supprimé de la base");
             bdd.deconnect();
+        }
+
+        /// <summary>
+        /// Suppression de l'utilisateur de la base
+        /// </summary>
+        /// <param name="user">Utilisateur a supprimer</param>
+        public void delUser(Utilisateur user)
+        {
+            delUser(user.Id);
         }
 
         /// <summary>
@@ -312,7 +343,7 @@ namespace AdminPicasaLike
         /// </summary>
         /// <param name="imageID"></param>
         /// <param name="image"></param>
-        private void addImage(String imageID, byte[] image, String numAlbum)
+        private int addImage(String nom, byte[] image, int numAlbum)
         {
             try
             {
@@ -321,7 +352,7 @@ namespace AdminPicasaLike
 
                 // construit la requête
                 SqlCommand ajoutImage = new SqlCommand("INSERT INTO Image (nom, blob, size, album) " + "VALUES(@id, @blob, @size, @album)", bdd.oConnection);
-                ajoutImage.Parameters.Add("@id", SqlDbType.VarChar, imageID.Length).Value = imageID;
+                ajoutImage.Parameters.Add("@id", SqlDbType.VarChar, nom.Length).Value = nom;
                 ajoutImage.Parameters.Add("@blob", SqlDbType.Image, image.Length).Value = image;
                 ajoutImage.Parameters.Add("@size", SqlDbType.Int).Value = image.Length;
                 ajoutImage.Parameters.Add("@album", SqlDbType.Int).Value = numAlbum;
@@ -338,6 +369,20 @@ namespace AdminPicasaLike
                 // dans tous les cas on ferme la connexion
                 bdd.deconnect();
             }
+
+            return getIdentCurrent("Image");
+        }
+
+        /// <summary>
+        /// Ajouter une image a la base de donnée
+        /// </summary>
+        /// <param name="p">Image à ajouter</param>
+        /// <returns></returns>
+        public Photo addImage(Photo p)
+        {
+            int id = addImage(p.nom, p.blob, p.alb.Id);
+            p.id = id;
+            return p;
         }
 
         /// <summary>
@@ -355,7 +400,7 @@ namespace AdminPicasaLike
 
                 // construit la requête
                 SqlCommand getImage = new SqlCommand("SELECT id,size, blob " + "FROM Image " + "WHERE id = @id", bdd.oConnection);
-                getImage.Parameters.Add("@id", SqlDbType.VarChar, imageID).Value = imageID;
+                getImage.Parameters.Add("@id", SqlDbType.VarChar).Value = imageID;
 
                 // exécution de la requête et création du reader
                 SqlDataReader myReader = getImage.ExecuteReader(CommandBehavior.SequentialAccess);
@@ -436,12 +481,12 @@ namespace AdminPicasaLike
         /// <summary>
         /// Ajouter l'image a la base de donnée
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">Chemin vers l'image sur le disque dur</param>
         /// <param name="ID"></param>
-        public void addImageBDD(string path, string ID, string numAlbum)
+        public void addImageBDD(string path, String nom, int numAlbum)
         {
             Bitmap bit = new Bitmap(path);
-            addImage(ID, ImageToByte(bit), numAlbum);
+            addImage(nom, ImageToByte(bit), numAlbum);
         }
 
         /// <summary>
@@ -528,7 +573,7 @@ namespace AdminPicasaLike
                 String sql = "SELECT Image.id FROM Image, Album WHERE Image.album = Album.id AND Album.utilisater = @utilisateur";
 
                 SqlCommand oCommand = bdd.executeSQL(sql);
-                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int, idUser).Value = idUser;
+                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int).Value = idUser;
 
                 SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
                 while (myReader.Read())
