@@ -29,7 +29,7 @@ namespace PicasaLike
 
         public void Init()
         {
-            Bitmap bit;
+            /*Bitmap bit;
 
            // OpenFileDialog open = new OpenFileDialog();
             //open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
@@ -45,9 +45,13 @@ namespace PicasaLike
 
             byte[] bimg = imgdbb.getImage("123");
             Console.WriteLine(bimg.Length);
-            Bitmap img = imgdbb.BytesToBitmap(bimg);
+            //Bitmap img = imgdbb.BytesToBitmap(bimg);
             img.Save(@"D:\test.bmp");
-            //image1.
+            //image1.*/
+
+            DataBase db = new DataBase();
+            GestionBDD gestbd = new GestionBDD(db);
+            gestbd.addUser("fab", "bien", "1234");
         }
 
         public Bitmap openBMP(String path)

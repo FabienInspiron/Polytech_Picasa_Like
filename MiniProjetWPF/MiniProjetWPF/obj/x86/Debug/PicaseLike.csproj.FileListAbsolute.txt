@@ -24,3 +24,5 @@ D:\Cours\SI4\C#.NET\Miniprojet\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\MiniPro
 D:\Cours\SI4\C#.NET\Miniprojet\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\MiniProjetWPF.Properties.Resources.resources
 D:\Cours\SI4\C#.NET\Miniprojet\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\GenerateResource.read.1.tlog
 D:\Cours\SI4\C#.NET\Miniprojet\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\MiniProjetWPF.exe
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\MiniProjetWPF.pdb
