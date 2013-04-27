@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
-using System.Data.SqlClient;
-using System.Data;
 using System.IO;
 using System.Drawing;
 
@@ -13,7 +11,7 @@ namespace AdminPicasaLike
 {
     class GestionBDD
     {
-        
+     
         public DataBase bdd;
 
         /// <summary>
@@ -168,6 +166,103 @@ namespace AdminPicasaLike
         #endregion
 
         #region Utilitaire
+        /// <summary>
+        /// Retourner l'image presente dans la base de donnée
+        /// L'image est identifiée par son ID
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public Bitmap getImageBDD(int ID)
+        {
+            byte[] bimg = getImageByte(ID);
+            return new Bitmap(BytesToBitmap(bimg));
+        }
+
+        /// <summary>
+        /// Convertir un image en tableau de byte
+        /// </summary>
+        /// <param name="img"></param>
+        /// <returns></returns>
+        private static byte[] ImageToByte(Image img)
+        {
+            ImageConverter converter = new ImageConverter();
+            return (byte[])converter.ConvertTo(img, typeof(byte[]));
+        }
+
+        /// <summary>
+        /// Convertir un tableau de byte en image
+        /// </summary>
+        /// <param name="byteArrayIn"></param>
+        /// <returns></returns>
+        private static Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
+        }
+
+        /// <summary>
+        /// Sauvegarder une image dans un fichier temporaire
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns>Nom de l'image créer</returns>
+        public string saveImage(Bitmap image)
+        {
+            String name = Path.GetTempFileName();
+            image.Save(name);
+            return name;
+        }
+
+        /// <summary>
+        /// Sauvegarde l'image avec le nom path
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="path">Chemin contenant le nom de l'image</param>
+        public void saveImage(Bitmap image, string path)
+        {
+            image.Save(path);
+        }
+
+        /// <summary>
+        ///  récupération d'une image de la base à l'aide d'un DataReader
+        /// </summary>
+        /// <param name="imageID"></param>
+        /// <returns></returns>
+        private byte[] getImageByte(int imageID)
+        {
+            byte[] blob = null;
+            try
+            {
+                // connexion au serveur
+                bdd.connexion();
+
+                // construit la requête
+                SqlCommand getImage = new SqlCommand("SELECT id,size, blob " + "FROM Image " + "WHERE id = @id", bdd.oConnection);
+                getImage.Parameters.Add("@id", SqlDbType.VarChar).Value = imageID;
+
+                // exécution de la requête et création du reader
+                SqlDataReader myReader = getImage.ExecuteReader(CommandBehavior.SequentialAccess);
+                if (myReader.Read())
+                {
+                    // lit la taille du blob
+                    int size = myReader.GetInt32(1);
+                    blob = new byte[size];
+                    // récupére le blob de la BDD et le copie dans la variable blob
+                    myReader.GetBytes(2, 0, blob, 0, size);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Erreur :" + e.Message);
+            }
+            finally
+            {
+                // dans tous les cas on ferme la connexion
+                bdd.deconnect();
+            }
+            return blob;
+        }
+
         /// <summary>
         /// Recupère la valeur de l'identifiant automatique de table
         /// </summary>
@@ -386,20 +481,23 @@ namespace AdminPicasaLike
         }
 
         /// <summary>
-        ///  récupération d'une image de la base à l'aide d'un DataReader
+        /// Retourne les photos ayant l'id = imageID
         /// </summary>
         /// <param name="imageID"></param>
         /// <returns></returns>
-        private byte[] getImageByte(int imageID)
+        private Photo getPhotoID(int imageID)
         {
-            byte[] blob = null;
+            String nom = "";
+            byte[] blob = { 0, 1 };
+            int size = 0;
+
             try
             {
                 // connexion au serveur
                 bdd.connexion();
 
                 // construit la requête
-                SqlCommand getImage = new SqlCommand("SELECT id,size, blob " + "FROM Image " + "WHERE id = @id", bdd.oConnection);
+                SqlCommand getImage = new SqlCommand("SELECT id, nom, size, blob " + "FROM Image " + "WHERE id = @id", bdd.oConnection);
                 getImage.Parameters.Add("@id", SqlDbType.VarChar).Value = imageID;
 
                 // exécution de la requête et création du reader
@@ -407,10 +505,11 @@ namespace AdminPicasaLike
                 if (myReader.Read())
                 {
                     // lit la taille du blob
-                    int size = myReader.GetInt32(1);
+                    size = myReader.GetInt32(2);
                     blob = new byte[size];
                     // récupére le blob de la BDD et le copie dans la variable blob
                     myReader.GetBytes(2, 0, blob, 0, size);
+                    nom = myReader.GetString(1);
                 }
             }
             catch (Exception e)
@@ -422,7 +521,8 @@ namespace AdminPicasaLike
                 // dans tous les cas on ferme la connexion
                 bdd.deconnect();
             }
-            return blob;
+
+            return new Photo(nom, blob, size);
         }
 
         /// <summary>
@@ -439,29 +539,6 @@ namespace AdminPicasaLike
             oCommand.ExecuteNonQuery();
             Console.WriteLine("Image supprimée de la base");
             bdd.deconnect();
-        }
-
-        /// <summary>
-        /// Convertir un image en tableau de byte
-        /// </summary>
-        /// <param name="img"></param>
-        /// <returns></returns>
-        private static byte[] ImageToByte(Image img)
-        {
-            ImageConverter converter = new ImageConverter();
-            return (byte[])converter.ConvertTo(img, typeof(byte[]));
-        }
-
-        /// <summary>
-        /// Convertir un tableau de byte en image
-        /// </summary>
-        /// <param name="byteArrayIn"></param>
-        /// <returns></returns>
-        private static Image byteArrayToImage(byte[] byteArrayIn)
-        {
-            MemoryStream ms = new MemoryStream(byteArrayIn);
-            Image returnImage = Image.FromStream(ms);
-            return returnImage;
         }
 
         /// <summary>
@@ -488,41 +565,6 @@ namespace AdminPicasaLike
             Bitmap bit = new Bitmap(path);
             addImage(nom, ImageToByte(bit), numAlbum);
         }
-
-        /// <summary>
-        /// Retourner l'image presente dans la base de donnée
-        /// L'image est identifiée par son ID
-        /// </summary>
-        /// <param name="ID"></param>
-        /// <returns></returns>
-        public Bitmap getImageBDD(int ID)
-        {
-            byte[] bimg = getImageByte(ID);
-            return new Bitmap(BytesToBitmap(bimg));
-        }
-
-        /// <summary>
-        /// Sauvegarder une image dans un fichier temporaire
-        /// </summary>
-        /// <param name="image"></param>
-        /// <returns>Nom de l'image créer</returns>
-        public string saveImage(Bitmap image)
-        {
-            String name = Path.GetTempFileName();
-            image.Save(name);
-            return name;
-        }
-
-        /// <summary>
-        /// Sauvegarde l'image avec le nom path
-        /// </summary>
-        /// <param name="image"></param>
-        /// <param name="path">Chemin contenant le nom de l'image</param>
-        public void saveImage(Bitmap image, string path)
-        {
-            image.Save(path);
-        }
-
 
         /// <summary>
         /// Afficher le nom de toutes les images
@@ -559,13 +601,14 @@ namespace AdminPicasaLike
         }
 
         /// <summary>
-        /// Retourne les albums de l'utilisateur
+        /// Retourne les identifiants des images des utilisateurs
         /// </summary>
         /// <param name="idUser">Utilisateur connecté auquel on cherche l'album</param>
         /// <returns>Liste des albums de cet utilisateur</returns>
-        public List<int> getImagesID(int idUser)
+        public List<int> getImageIDUser(int idUser)
         {
             List<int> tableID = new List<int>();
+
             try
             {
                 bdd.connexion();
@@ -597,36 +640,36 @@ namespace AdminPicasaLike
         }
 
         /// <summary>
-        /// Recuperer les images d'un utilisateur sous forme d'un tableau de Byte
+        /// Recuperer les images d'un utilisateur sous forme d'une photo
         /// </summary>
         /// <param name="idUser"></param>
         /// <returns></returns>
-        public List<byte[]> getImagesUserByte(int idUser)
+        public List<Photo> getPhotoUser(int idUser)
         {
-            List<int> idImages = getImagesID(idUser);
-            List<byte[]> retour = new List<byte[]>();
+            List<int> idImages = getImageIDUser(idUser);
+            List<Photo> retour = new List<Photo>();
 
             foreach (int id in idImages)
             {
-                retour.Add(getImageByte(id));
+                retour.Add(getPhotoID(id));
             }
 
             return retour;
         }
 
         /// <summary>
-        /// Retourner toutes les images d'un utilisateur au format Bitmap
+        /// Recuperer les images d'un utilisateur sous forme d'un tableau de Byte
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="idUser"></param>
         /// <returns></returns>
-        public List<Bitmap> getImagesUserBitmap(int user)
+        public List<byte[]> getImagesUserByte(int idUser)
         {
-            List<byte[]> liste = getImagesUserByte(user);
-            List<Bitmap> retour = new List<Bitmap>();
+            List<int> idImages = getImageIDUser(idUser);
+            List<byte[]> retour = new List<byte[]>();
 
-            foreach (byte[] im in liste)
+            foreach (int id in idImages)
             {
-                retour.Add(new Bitmap(BytesToBitmap(im)));
+                retour.Add(getImageByte(id));
             }
 
             return retour;

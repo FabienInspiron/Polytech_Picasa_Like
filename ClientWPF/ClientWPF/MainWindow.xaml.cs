@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AdminPicasaLike;
 using System.Collections;
+using System.IO;
 
 namespace ClientWPF
 {
@@ -22,36 +23,35 @@ namespace ClientWPF
     public partial class MainWindow : Window
     {
 
-        private ImageCollection imageCollection1; 
+        DataBase db;
+        GestionBDD gestBDD;
+
+        private ImageCollection imageCollection1;
         private ImageCollection imageCollection2;
 
         public MainWindow()
         {
-            
+
             InitializeComponent();
+            db = new DataBase();
+            gestBDD =  new GestionBDD(db);
 
             // On crée notre collection d'image et on y ajoute deux images
             imageCollection1 = new ImageCollection();
-            imageCollection1.Add(new ImageObjet("1", GestionBDD.lireFichier(@"d:\photo\0.jpg")));
-            imageCollection1.Add(new ImageObjet("A", GestionBDD.lireFichier(@"d:\photo\1.jpg")));
-            imageCollection1.Add(new ImageObjet("E", GestionBDD.lireFichier(@"d:\photo\2.jpg")));
+            remplirListeFromServeur();
 
             imageCollection2 = new ImageCollection();
-            imageCollection2.Add(new ImageObjet("1", GestionBDD.lireFichier(@"d:\photo\3.jpg")));
-            imageCollection2.Add(new ImageObjet("A", GestionBDD.lireFichier(@"d:\photo\4.jpg")));
-            imageCollection2.Add(new ImageObjet("E", GestionBDD.lireFichier(@"d:\photo\5.jpg")));
 
             // On lie la collectionau ObjectDataProvider déclaré dans le fichier XAML
             ObjectDataProvider imageSource = (ObjectDataProvider)FindResource("ImageCollection1");
             imageSource.ObjectInstance = imageCollection1;
-
-            ObjectDataProvider imageSource2 = (ObjectDataProvider)FindResource("ImageCollection2");
-            imageSource2.ObjectInstance = imageCollection2;
         }
 
-        private void NotreListbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void remplirListeFromServeur()
         {
-
+            List<byte[]> list = gestBDD.getImagesUserByte(170);
+            foreach (byte[] b in list)
+                imageCollection1.Add(new ImageObjet("E", b));
         }
 
         ListBox dragSource = null;
@@ -100,6 +100,28 @@ namespace ClientWPF
                 }
             }
             return null;
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.FolderBrowserDialog fbd1 = new System.Windows.Forms.FolderBrowserDialog();
+            fbd1.ShowDialog();
+            string myFolder = fbd1.SelectedPath;
+
+            textDirectory.Text = myFolder;
+        }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            List<string> lis = Util.listDir(@textDirectory.Text);
+
+            foreach (string img in lis)
+            {
+                imageCollection2.Add(new ImageObjet(img, GestionBDD.lireFichier(@img)));
+            }
+
+            ObjectDataProvider imageSource2 = (ObjectDataProvider)FindResource("ImageCollection2");
+            imageSource2.ObjectInstance = imageCollection2;
         }
     }
 }

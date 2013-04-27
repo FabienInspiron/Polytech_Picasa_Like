@@ -41,3 +41,16 @@ D:\Cours\SI4\C#.NET\Polytech_Picasa_Like\MiniProjetWPF\MiniProjetWPF\obj\x86\Deb
 D:\Cours\SI4\C#.NET\Polytech_Picasa_Like\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\MiniProjetWPF.Properties.Resources.resources
 D:\Cours\SI4\C#.NET\Polytech_Picasa_Like\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\GenerateResource.read.1.tlog
 D:\Cours\SI4\C#.NET\Polytech_Picasa_Like\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\bin\Debug\MiniProjetWPF.exe
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\bin\Debug\MiniProjetWPF.pdb
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\Images.baml
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\MainWindow.baml
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\Images.g.cs
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\MainWindow.g.cs
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\App.g.cs
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\MiniProjetWPF_MarkupCompile.cache
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\MiniProjetWPF.g.resources
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\MiniProjetWPF.Properties.Resources.resources
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\user\Documents\Polytech\S8\c#\Projet\PicasaLike\MiniProjetWPF\MiniProjetWPF\obj\x86\Debug\GenerateResource.write.1.tlog
