@@ -38,7 +38,7 @@ namespace ClientWPF
 
             // On crée notre collection d'image et on y ajoute deux images
             imageCollection1 = new ImageCollection();
-            remplirListeFromServeur();
+            imageCollection1 = gestBDD.getPhotoUser(170);
 
             imageCollection2 = new ImageCollection();
 
@@ -47,15 +47,8 @@ namespace ClientWPF
             imageSource.ObjectInstance = imageCollection1;
         }
 
-        public void remplirListeFromServeur()
-        {
-            List<ImageObjet> list = gestBDD.getPhotoUser(170);
-
-            foreach (ImageObjet b in list)
-                imageCollection1.Add(b);
-        }
-
         ListBox dragSource = null;
+
         // On initie le Drag and Drop
         private void ImageDragEvent(object sender, MouseButtonEventArgs e)
         {
@@ -67,11 +60,26 @@ namespace ClientWPF
                 DragDrop.DoDragDrop(parent, data, DragDropEffects.Move);
             }
         }
+
         // On ajoute l'objet dans la nouvelle ListBox et on le supprime de l'ancienne
         private void ImageDropEvent(object sender, DragEventArgs e)
         {
             ListBox parent = (ListBox)sender;
             ImageObjet data = (ImageObjet)e.Data.GetData(typeof(ImageObjet));
+
+            // envoi de données vers le serveur
+            if (parent.Name == "ListBox1")
+            {
+                Console.WriteLine("Envoi de " + data.Nom + " vers le serveur");
+                String nameImageComplet = textDirectory.Text + "\\"+ data.Nom;
+                Console.WriteLine(nameImageComplet);
+                gestBDD.addImage(data.Nom,  GestionBDD.lireFichier(nameImageComplet), 85);
+            }
+            else
+            {
+                Console.WriteLine("Envoi de " + data.Nom + " en local");
+            }
+
             try
             {
                 ((IList)parent.ItemsSource).Add(data);
@@ -82,6 +90,7 @@ namespace ClientWPF
                 MessageBoxResult result = MessageBox.Show("Veuillez choisir un dossier pour l'importation local");   
             }
         }
+
         // On récupére l'objet que que l'on a dropé
         private static object GetDataFromListBox(ListBox source, Point point)
         {

@@ -439,7 +439,7 @@ namespace AdminPicasaLike
         /// </summary>
         /// <param name="imageID"></param>
         /// <param name="image"></param>
-        private int addImage(String nom, byte[] image, int numAlbum)
+        public int addImage(String nom, byte[] image, int numAlbum)
         {
             try
             {
@@ -528,7 +528,10 @@ namespace AdminPicasaLike
                 bdd.deconnect();
             }
 
-            return new ImageObjet(nom, blob);
+            ImageObjet o = new ImageObjet(nom.Trim(), blob);
+            o.setId(imageID);
+
+            return o;
         }
 
         /// <summary>
@@ -650,10 +653,10 @@ namespace AdminPicasaLike
         /// </summary>
         /// <param name="idUser"></param>
         /// <returns></returns>
-        public List<ImageObjet> getPhotoUser(int idUser)
+        public ImageCollection getPhotoUser(int idUser)
         {
             List<int> idImages = getImageIDUser(idUser);
-            List<ImageObjet> retour = new List<ImageObjet>();
+            ImageCollection retour = new ImageCollection();
 
             foreach (int id in idImages)
             {
@@ -689,11 +692,18 @@ namespace AdminPicasaLike
         public static byte[] lireFichier(string chemin)
         {
             byte[] data = null;
-            FileInfo fileInfo = new FileInfo(chemin);
-            int nbBytes = (int)fileInfo.Length;
-            FileStream fileStream = new FileStream(chemin, FileMode.Open, FileAccess.Read);
-            BinaryReader br = new BinaryReader(fileStream);
-            data = br.ReadBytes(nbBytes);
+            try
+            {
+                FileInfo fileInfo = new FileInfo(chemin);
+                int nbBytes = (int)fileInfo.Length;
+                FileStream fileStream = new FileStream(chemin, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fileStream);
+                data = br.ReadBytes(nbBytes);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             return data;
         }
 
