@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.IO;
 using System.Drawing;
+using ClientWPF;
 
 namespace AdminPicasaLike
 {
@@ -237,7 +238,7 @@ namespace AdminPicasaLike
                 bdd.connexion();
 
                 // construit la requête
-                SqlCommand getImage = new SqlCommand("SELECT id,size, blob " + "FROM Image " + "WHERE id = @id", bdd.oConnection);
+                SqlCommand getImage = new SqlCommand("SELECT id, size, blob " + "FROM Image " + "WHERE id = @id", bdd.oConnection);
                 getImage.Parameters.Add("@id", SqlDbType.VarChar).Value = imageID;
 
                 // exécution de la requête et création du reader
@@ -485,7 +486,7 @@ namespace AdminPicasaLike
         /// </summary>
         /// <param name="imageID"></param>
         /// <returns></returns>
-        private Photo getPhotoID(int imageID)
+        private ImageObjet getPhotoID(int imageID)
         {
             String nom = "";
             byte[] blob = { 0, 1 };
@@ -498,23 +499,28 @@ namespace AdminPicasaLike
 
                 // construit la requête
                 SqlCommand getImage = new SqlCommand("SELECT id, nom, size, blob " + "FROM Image " + "WHERE id = @id", bdd.oConnection);
-                getImage.Parameters.Add("@id", SqlDbType.VarChar).Value = imageID;
+                getImage.Parameters.Add("@id", SqlDbType.Int).Value = imageID;
+
+                Console.WriteLine("Image " + imageID);
 
                 // exécution de la requête et création du reader
+                //Attention à l'acces sequential il faut lire les données dans l'ordre
                 SqlDataReader myReader = getImage.ExecuteReader(CommandBehavior.SequentialAccess);
                 if (myReader.Read())
                 {
+                    nom = myReader.GetString(1);
+
                     // lit la taille du blob
                     size = myReader.GetInt32(2);
+
                     blob = new byte[size];
+
                     // récupére le blob de la BDD et le copie dans la variable blob
-                    myReader.GetBytes(2, 0, blob, 0, size);
-                    nom = myReader.GetString(1);
+                    myReader.GetBytes(3, 0, blob, 0, size);
                 }
-            }
-            catch (Exception e)
+            } catch (Exception e)
             {
-                Console.WriteLine("Erreur :" + e.Message);
+                Console.WriteLine("Erreur : " + e.Message);
             }
             finally
             {
@@ -522,7 +528,7 @@ namespace AdminPicasaLike
                 bdd.deconnect();
             }
 
-            return new Photo(nom, blob, size);
+            return new ImageObjet(nom, blob);
         }
 
         /// <summary>
@@ -644,10 +650,10 @@ namespace AdminPicasaLike
         /// </summary>
         /// <param name="idUser"></param>
         /// <returns></returns>
-        public List<Photo> getPhotoUser(int idUser)
+        public List<ImageObjet> getPhotoUser(int idUser)
         {
             List<int> idImages = getImageIDUser(idUser);
-            List<Photo> retour = new List<Photo>();
+            List<ImageObjet> retour = new List<ImageObjet>();
 
             foreach (int id in idImages)
             {

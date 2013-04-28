@@ -49,9 +49,10 @@ namespace ClientWPF
 
         public void remplirListeFromServeur()
         {
-            List<byte[]> list = gestBDD.getImagesUserByte(170);
-            foreach (byte[] b in list)
-                imageCollection1.Add(new ImageObjet("E", b));
+            List<ImageObjet> list = gestBDD.getPhotoUser(170);
+
+            foreach (ImageObjet b in list)
+                imageCollection1.Add(b);
         }
 
         ListBox dragSource = null;
@@ -71,8 +72,15 @@ namespace ClientWPF
         {
             ListBox parent = (ListBox)sender;
             ImageObjet data = (ImageObjet)e.Data.GetData(typeof(ImageObjet));
-            ((IList)dragSource.ItemsSource).Remove(data);
-            ((IList)parent.ItemsSource).Add(data);
+            try
+            {
+                ((IList)parent.ItemsSource).Add(data);
+                ((IList)dragSource.ItemsSource).Remove(data);
+            }
+            catch
+            {
+                MessageBoxResult result = MessageBox.Show("Veuillez choisir un dossier pour l'importation local");   
+            }
         }
         // On récupére l'objet que que l'on a dropé
         private static object GetDataFromListBox(ListBox source, Point point)
@@ -117,7 +125,10 @@ namespace ClientWPF
 
             foreach (string img in lis)
             {
-                imageCollection2.Add(new ImageObjet(img, GestionBDD.lireFichier(@img)));
+                string[] words = img.Split('\\');
+                string name = words[words.Length-1];
+
+                imageCollection2.Add(new ImageObjet(name, GestionBDD.lireFichier(@img)));
             }
 
             ObjectDataProvider imageSource2 = (ObjectDataProvider)FindResource("ImageCollection2");
