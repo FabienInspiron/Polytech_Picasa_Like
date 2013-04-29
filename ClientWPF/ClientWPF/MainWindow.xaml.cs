@@ -66,6 +66,8 @@ namespace ClientWPF
             ImageObjet data = (ImageObjet)e.Data.GetData(typeof(ImageObjet));
 
             // Si il y a deplacement depuis les albums
+            if (parent.Name.Equals(dragSource.Name))
+                return;
 
             // envoi de données vers le serveur
             if (parent.Name == "ListBox1")
