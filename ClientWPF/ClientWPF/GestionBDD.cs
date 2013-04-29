@@ -63,8 +63,8 @@ namespace AdminPicasaLike
         /// <returns></returns>
         public Album addAlbum(Album alb)
         {
-            int id = addAlbum(alb.Nom, alb.User.Id);
-            alb.Id = id;
+            int id = addAlbum(alb.nom, alb.user.id);
+            alb.id = id;
             return alb;
         }
 
@@ -125,7 +125,7 @@ namespace AdminPicasaLike
         /// <param name="a">Album a supprimer</param>
         public void delAlbum(Album a)
         {
-            delAlbum(a.Id);
+            delAlbum(a.id);
         }
 
         /// <summary>
@@ -162,6 +162,65 @@ namespace AdminPicasaLike
             }
 
             return tableID;
+        }
+
+        /// <summary>
+        /// Recuperer l'album d'id idAlbum
+        /// </summary>
+        /// <param name="idAlbum"></param>
+        /// <returns></returns>
+        public Album getAlbumID(int idAlbum)
+        {
+            String nom = "";
+            int user = 0;
+
+            List<int> tableID = new List<int>();
+            try
+            {
+                bdd.connexion();
+
+                String sql = "SELECT * FROM Album WHERE id = @alb";
+
+                SqlCommand oCommand = bdd.executeSQL(sql);
+                oCommand.Parameters.Add("@alb", SqlDbType.Int).Value = idAlbum;
+
+                SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
+                while (myReader.Read())
+                {
+                    nom = (String) myReader.GetValue(1);
+                    nom.Trim();
+                    user = myReader.GetInt32(2);
+                }
+
+                myReader.Close();
+
+                oCommand.ExecuteNonQuery();
+                bdd.deconnect();
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+
+            return new Album(idAlbum, nom);
+        }
+
+        /// <summary>
+        /// Recuperer une collection d'album de l'utilisateur
+        /// </summary>
+        /// <param name="idUser"></param>
+        /// <returns></returns>
+        public AlbumCollection getAlbumCollection(int idUser)
+        {
+            AlbumCollection albCo = new AlbumCollection();
+            List<int> idAlbums = getAlbums(idUser);
+
+            foreach (int num in idAlbums)
+            {
+                albCo.Add(getAlbumID(num));
+            }
+
+            return albCo;
         }
 
         #endregion
@@ -342,8 +401,8 @@ namespace AdminPicasaLike
         /// <returns>Utilisateur modifié avec un identifiant correct</returns>
         public Utilisateur addUser(Utilisateur user) 
         {
-            int idUser = addUser(user.Nom, user.Prenom, user.Mdp);
-            user.Id = idUser;
+            int idUser = addUser(user.nom, user.prenom, user.mdp);
+            user.id = idUser;
             return user;
         }
 
@@ -371,7 +430,7 @@ namespace AdminPicasaLike
         /// <param name="user">Utilisateur a supprimer</param>
         public void delUser(Utilisateur user)
         {
-            delUser(user.Id);
+            delUser(user.id);
         }
 
         /// <summary>
@@ -491,7 +550,7 @@ namespace AdminPicasaLike
         /// <returns></returns>
         public Photo addImage(Photo p)
         {
-            int id = addImage(p.nom, p.blob, p.alb.Id);
+            int id = addImage(p.nom, p.blob, p.alb.id);
             p.id = id;
             return p;
         }

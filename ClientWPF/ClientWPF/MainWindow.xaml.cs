@@ -30,6 +30,8 @@ namespace ClientWPF
         private ImageCollection imageCollection1;
         private ImageCollection imageCollection2;
 
+        int IDUser = 170;
+
         public MainWindow()
         {
 
@@ -39,13 +41,17 @@ namespace ClientWPF
 
             // On crée notre collection d'image et on y ajoute deux images
             imageCollection1 = new ImageCollection();
-            imageCollection1 = gestBDD.getPhotoUser(170);
+            imageCollection1 = gestBDD.getPhotoUser(IDUser);
 
             imageCollection2 = new ImageCollection();
 
             // On lie la collectionau ObjectDataProvider déclaré dans le fichier XAML
             ObjectDataProvider imageSource = (ObjectDataProvider)FindResource("ImageCollection1");
             imageSource.ObjectInstance = imageCollection1;
+
+            Console.WriteLine("Albums");
+            Console.WriteLine(gestBDD.getAlbumCollection(IDUser)[0].nom);
+            Console.WriteLine("-----");
         }
 
         ListBox dragSource = null;
@@ -82,13 +88,12 @@ namespace ClientWPF
                 byte[] imageToDownload = gestBDD.getImageByte(data.id);
                 String imagePath = textDirectory.Text + "\\" + data.Nom;
                 Util.ByteArrayToFile(imagePath, imageToDownload);
-                
             }
 
             try
             {
                 ((IList)parent.ItemsSource).Add(data);
-                ((IList)dragSource.ItemsSource).Remove(data);
+                //((IList)dragSource.ItemsSource).Remove(data);
             }
             catch
             {
@@ -136,6 +141,7 @@ namespace ClientWPF
         private void button2_Click(object sender, RoutedEventArgs e)
         {
             List<string> lis = Util.listDir(@textDirectory.Text);
+            imageCollection2.Clear();
 
             foreach (string img in lis)
             {

@@ -5,38 +5,16 @@ using System.Text;
 
 namespace AdminPicasaLike
 {
-    class Utilisateur
+    public class Utilisateur
     {
-        private int id;
+        public int id { get; set; }
+        public String nom { get; set; }
+        public String prenom { get; set; }
 
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-        private String nom;
+        public String mdp { get; set; }
 
-        public String Nom
-        {
-            get { return nom; }
-            set { nom = value; }
-        }
-        private String prenom;
 
-        public String Prenom
-        {
-            get { return prenom; }
-            set { prenom = value; }
-        }
-        private String mdp;
-
-        public String Mdp
-        {
-            get { return mdp; }
-            set { mdp = value; }
-        }
-
-        Utilisateur(String nom, String prenom, String mdp)
+        public Utilisateur(String nom, String prenom, String mdp)
         {
             this.id = 0;
             this.nom = nom;
