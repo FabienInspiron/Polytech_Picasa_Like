@@ -29,8 +29,10 @@ namespace ClientWPF
 
         private ImageCollection imageCollection1;
         private ImageCollection imageCollection2;
+        private AlbumCollection imageCollectionAlbum;
 
         int IDUser = 170;
+        int idAlbumSelected = 0;
 
         public MainWindow()
         {
@@ -39,19 +41,8 @@ namespace ClientWPF
             db = new DataBase();
             gestBDD =  new GestionBDD(db);
 
-            // On crée notre collection d'image et on y ajoute deux images
-            imageCollection1 = new ImageCollection();
-            imageCollection1 = gestBDD.getPhotoUser(IDUser);
-
             imageCollection2 = new ImageCollection();
-
-            // On lie la collectionau ObjectDataProvider déclaré dans le fichier XAML
-            ObjectDataProvider imageSource = (ObjectDataProvider)FindResource("ImageCollection1");
-            imageSource.ObjectInstance = imageCollection1;
-
-            Console.WriteLine("Albums");
-            Console.WriteLine(gestBDD.getAlbumCollection(IDUser)[0].nom);
-            Console.WriteLine("-----");
+            miseAjourAlbum();
         }
 
         ListBox dragSource = null;
@@ -74,13 +65,15 @@ namespace ClientWPF
             ListBox parent = (ListBox)sender;
             ImageObjet data = (ImageObjet)e.Data.GetData(typeof(ImageObjet));
 
+            // Si il y a deplacement depuis les albums
+
             // envoi de données vers le serveur
             if (parent.Name == "ListBox1")
             {
                 Console.WriteLine("Envoi de " + data.Nom + " vers le serveur");
                 String nameImageComplet = textDirectory.Text + "\\"+ data.Nom;
                 Console.WriteLine(nameImageComplet);
-                gestBDD.addImage(data.Nom,  GestionBDD.lireFichier(nameImageComplet), 85);
+                gestBDD.addImage(data.Nom, GestionBDD.lireFichier(nameImageComplet), idAlbumSelected);
             }
             else
             {
@@ -99,6 +92,37 @@ namespace ClientWPF
             {
                 MessageBoxResult result = MessageBox.Show("Veuillez choisir un dossier pour l'importation local");   
             }
+        }
+
+
+        private void ViewPhotoEvent(object sender, MouseButtonEventArgs e)
+        {
+            ListBox lb = (ListBox)sender;
+            Album i = (Album)lb.SelectedItem;
+            idAlbumSelected = i.id;
+            miseAJourPhoto(idAlbumSelected);
+        }
+
+        private void miseAjourAlbum()
+        {
+            // Recuperation des albums de l'utilisateur
+            imageCollectionAlbum = new AlbumCollection();
+            imageCollectionAlbum = gestBDD.getAlbumCollection(IDUser);
+
+            ObjectDataProvider imageSourceAlbum = (ObjectDataProvider)FindResource("ImageCollectionAlbum");
+            imageSourceAlbum.ObjectInstance = imageCollectionAlbum;
+        }
+
+        public void miseAJourPhoto(int idAlb)
+        {
+            // On crée notre collection d'image et on y ajoute deux images
+            imageCollection1 = new ImageCollection();
+            imageCollection1 = gestBDD.getPhotoUserAlbum(IDUser, idAlb);
+
+
+            // On lie la collectionau ObjectDataProvider déclaré dans le fichier XAML
+            ObjectDataProvider imageSource = (ObjectDataProvider)FindResource("ImageCollection1");
+            imageSource.ObjectInstance = imageCollection1;
         }
 
         // On récupére l'objet que que l'on a dropé
@@ -153,6 +177,19 @@ namespace ClientWPF
 
             ObjectDataProvider imageSource2 = (ObjectDataProvider)FindResource("ImageCollection2");
             imageSource2.ObjectInstance = imageCollection2;
+        }
+
+        /// <summary>
+        /// Ajouter un nouvel album
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            gestBDD.addAlbum(textAlbum.Text, IDUser);
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Information;
+            miseAjourAlbum();
         }
     }
 }

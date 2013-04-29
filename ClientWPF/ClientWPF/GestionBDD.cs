@@ -565,6 +565,7 @@ namespace AdminPicasaLike
             String nom = "";
             byte[] blob = { 0, 1 };
             int size = 0;
+            int album = 0;
 
             try
             {
@@ -572,7 +573,7 @@ namespace AdminPicasaLike
                 bdd.connexion();
 
                 // construit la requête
-                SqlCommand getImage = new SqlCommand("SELECT id, nom, size, blob " + "FROM Image " + "WHERE id = @id", bdd.oConnection);
+                SqlCommand getImage = new SqlCommand("SELECT id, nom, size, blob, album " + "FROM Image " + "WHERE id = @id", bdd.oConnection);
                 getImage.Parameters.Add("@id", SqlDbType.Int).Value = imageID;
 
                 Console.WriteLine("Image " + imageID);
@@ -591,6 +592,8 @@ namespace AdminPicasaLike
 
                     // récupére le blob de la BDD et le copie dans la variable blob
                     myReader.GetBytes(3, 0, blob, 0, size);
+
+                    album = myReader.GetInt32(4);
                 }
             } catch (Exception e)
             {
@@ -602,7 +605,7 @@ namespace AdminPicasaLike
                 bdd.deconnect();
             }
 
-            ImageObjet o = new ImageObjet(nom.Trim(), blob);
+            ImageObjet o = new ImageObjet(nom.Trim(), blob, album);
             o.setId(imageID);
 
             return o;
@@ -735,6 +738,21 @@ namespace AdminPicasaLike
             foreach (int id in idImages)
             {
                 retour.Add(getPhotoID(id));
+            }
+
+            return retour;
+        }
+
+        public ImageCollection getPhotoUserAlbum(int idUser, int album)
+        {
+            List<int> idImages = getImageIDUser(idUser);
+            ImageCollection retour = new ImageCollection();
+
+            foreach (int id in idImages)
+            {
+                ImageObjet im = getPhotoID(id);
+                if(im.album == album)
+                    retour.Add(im);
             }
 
             return retour;

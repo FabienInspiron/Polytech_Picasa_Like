@@ -8,12 +8,22 @@ namespace ClientWPF
         public int id { get; set; }
         public String Nom { get; set; }
         public byte[] Image { get; set; }
+        public int album;
 
         public ImageObjet(String Nom, byte[] Image)
         {
             id= 0;
             this.Nom = Nom;
             this.Image = Image;
+            album = 0;
+        }
+
+        public ImageObjet(String Nom, byte[] Image, int album)
+        {
+            id = 0;
+            this.Nom = Nom;
+            this.Image = Image;
+            this.album = album;
         }
 
         public void setId(int id)
