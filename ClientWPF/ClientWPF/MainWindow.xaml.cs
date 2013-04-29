@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using AdminPicasaLike;
 using System.Collections;
 using System.IO;
+using System.IO.IsolatedStorage;
 
 namespace ClientWPF
 {
@@ -78,6 +79,10 @@ namespace ClientWPF
             else
             {
                 Console.WriteLine("Envoi de " + data.Nom + " en local");
+                byte[] imageToDownload = gestBDD.getImageByte(data.id);
+                String imagePath = textDirectory.Text + "\\" + data.Nom;
+                Util.ByteArrayToFile(imagePath, imageToDownload);
+                
             }
 
             try

@@ -176,7 +176,7 @@ namespace AdminPicasaLike
         public Bitmap getImageBDD(int ID)
         {
             byte[] bimg = getImageByte(ID);
-            return new Bitmap(BytesToBitmap(bimg));
+            return new Bitmap(BytesToBitmapPhoto(bimg));
         }
 
         /// <summary>
@@ -195,22 +195,30 @@ namespace AdminPicasaLike
         /// </summary>
         /// <param name="byteArrayIn"></param>
         /// <returns></returns>
-        private static Image byteArrayToImage(byte[] byteArrayIn)
+        public static Image byteArrayToImage(byte[] byteArrayIn)
         {
             MemoryStream ms = new MemoryStream(byteArrayIn);
             Image returnImage = Image.FromStream(ms);
             return returnImage;
         }
 
+
         /// <summary>
         /// Sauvegarder une image dans un fichier temporaire
         /// </summary>
         /// <param name="image"></param>
         /// <returns>Nom de l'image créer</returns>
-        public string saveImage(Bitmap image)
+        public static string saveImage(Bitmap image)
         {
             String name = Path.GetTempFileName();
-            image.Save(name);
+            try
+            {
+                image.Save(name);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             return name;
         }
 
@@ -219,9 +227,16 @@ namespace AdminPicasaLike
         /// </summary>
         /// <param name="image"></param>
         /// <param name="path">Chemin contenant le nom de l'image</param>
-        public void saveImage(Bitmap image, string path)
+        public static void saveImage(Bitmap image, string path)
         {
-            image.Save(path);
+            try
+            {
+                image.Save(path);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         /// <summary>
@@ -229,7 +244,7 @@ namespace AdminPicasaLike
         /// </summary>
         /// <param name="imageID"></param>
         /// <returns></returns>
-        private byte[] getImageByte(int imageID)
+        public byte[] getImageByte(int imageID)
         {
             byte[] blob = null;
             try
@@ -555,7 +570,7 @@ namespace AdminPicasaLike
         /// </summary>
         /// <param name="byteArray"></param>
         /// <returns></returns>
-        private static Bitmap BytesToBitmap(byte[] byteArray)
+        public static Bitmap BytesToBitmapPhoto(byte[] byteArray)
         {
             using (MemoryStream ms = new MemoryStream(byteArray))
             {
