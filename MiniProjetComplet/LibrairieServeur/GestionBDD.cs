@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.IO;
 using System.Drawing;
-using ClientWPF;
+using ObjetDefinition;
 
 namespace AdminPicasaLike
 {
@@ -63,8 +63,8 @@ namespace AdminPicasaLike
         /// <returns></returns>
         public Album addAlbum(Album alb)
         {
-            int id = addAlbum(alb.nom, alb.user.id);
-            alb.id = id;
+            int id = addAlbum(alb.Nom, alb.UserId);
+            alb.Id = id;
             return alb;
         }
 
@@ -125,7 +125,7 @@ namespace AdminPicasaLike
         /// <param name="a">Album a supprimer</param>
         public void delAlbum(Album a)
         {
-            delAlbum(a.id);
+            delAlbum(a.Id);
         }
 
         /// <summary>
@@ -401,8 +401,8 @@ namespace AdminPicasaLike
         /// <returns>Utilisateur modifié avec un identifiant correct</returns>
         public Utilisateur addUser(Utilisateur user) 
         {
-            int idUser = addUser(user.nom, user.prenom, user.mdp);
-            user.id = idUser;
+            int idUser = addUser(user.Nom, user.Prenom, user.Mdp);
+            user.Id = idUser;
             return user;
         }
 
@@ -430,7 +430,7 @@ namespace AdminPicasaLike
         /// <param name="user">Utilisateur a supprimer</param>
         public void delUser(Utilisateur user)
         {
-            delUser(user.id);
+            delUser(user.Id);
         }
 
         /// <summary>
@@ -550,8 +550,8 @@ namespace AdminPicasaLike
         /// <returns></returns>
         public Photo addImage(Photo p)
         {
-            int id = addImage(p.nom, p.blob, p.alb.id);
-            p.id = id;
+            int id = addImage(p.Nom, p.Image, p.Album);
+            p.Id = id;
             return p;
         }
 
@@ -560,7 +560,7 @@ namespace AdminPicasaLike
         /// </summary>
         /// <param name="imageID"></param>
         /// <returns></returns>
-        private ImageObjet getPhotoID(int imageID)
+        private Photo getPhotoID(int imageID)
         {
             String nom = "";
             byte[] blob = { 0, 1 };
@@ -603,8 +603,8 @@ namespace AdminPicasaLike
                 bdd.deconnect();
             }
 
-            ImageObjet o = new ImageObjet(nom.Trim(), blob, album);
-            o.setId(imageID);
+            Photo o = new Photo(nom.Trim(), blob, album);
+            o.Id = imageID;
 
             return o;
         }
@@ -724,14 +724,54 @@ namespace AdminPicasaLike
         }
 
         /// <summary>
+        /// Retourne les identifiants des images des utilisateurs
+        /// </summary>
+        /// <param name="idUser">Utilisateur connecté auquel on cherche l'album</param>
+        /// <returns>Liste des albums de cet utilisateur</returns>
+        public List<int> getImageIDUser(int idUser, int idAlbum)
+        {
+            List<int> tableID = new List<int>();
+
+            try
+            {
+                bdd.connexion();
+
+                String sql = "SELECT Image.id FROM Image, Album WHERE Image.album = Album.id AND Album.utilisater = @utilisateur AND Album.id =@album";
+
+                SqlCommand oCommand = bdd.executeSQL(sql);
+                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int).Value = idUser;
+                oCommand.Parameters.Add("@album", SqlDbType.Int).Value = idAlbum;
+
+                SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
+                while (myReader.Read())
+                {
+                    int res = myReader.GetInt32(0);
+                    tableID.Add(res);
+                    Console.WriteLine(res);
+                }
+
+                myReader.Close();
+
+                oCommand.ExecuteNonQuery();
+                bdd.deconnect();
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+
+            return tableID;
+        }
+
+        /// <summary>
         /// Recuperer les images d'un utilisateur sous forme d'une photo
         /// </summary>
         /// <param name="idUser"></param>
         /// <returns></returns>
-        public ImageCollection getPhotoUser(int idUser)
+        public PhotoCollection getPhotoUser(int idUser)
         {
             List<int> idImages = getImageIDUser(idUser);
-            ImageCollection retour = new ImageCollection();
+            PhotoCollection retour = new PhotoCollection();
 
             foreach (int id in idImages)
             {
@@ -741,16 +781,16 @@ namespace AdminPicasaLike
             return retour;
         }
 
-        public ImageCollection getPhotoUserAlbum(int idUser, int album)
+
+        public PhotoCollection getPhotoUserAlbum(int idUser, int album)
         {
-            List<int> idImages = getImageIDUser(idUser);
-            ImageCollection retour = new ImageCollection();
+            List<int> idImages = getImageIDUser(idUser, album);
+            PhotoCollection retour = new PhotoCollection();
 
             foreach (int id in idImages)
             {
-                ImageObjet im = getPhotoID(id);
-                if(im.album == album)
-                    retour.Add(im);
+                Photo im = getPhotoID(id);
+                retour.Add(im);
             }
 
             return retour;
@@ -774,7 +814,28 @@ namespace AdminPicasaLike
             return retour;
         }
 
-        
+        /// <summary>
+        /// Lit et retourne le contenu du fichier sous la forme de tableau de byte
+        /// </summary>
+        /// <param name="chemin">chemin du fichier</param>
+        /// <returns></returns>
+        public static byte[] lireFichier(string chemin)
+        {
+            byte[] data = null;
+            try
+            {
+                FileInfo fileInfo = new FileInfo(chemin);
+                int nbBytes = (int)fileInfo.Length;
+                FileStream fileStream = new FileStream(chemin, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fileStream);
+                data = br.ReadBytes(nbBytes);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return data;
+        }
 
         #endregion
     }

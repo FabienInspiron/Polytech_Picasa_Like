@@ -60,5 +60,28 @@ namespace AdminPicasaLike
             return false;
         }
 
+        /// <summary>
+        /// Lit et retourne le contenu du fichier sous la forme de tableau de byte
+        /// </summary>
+        /// <param name="chemin">chemin du fichier</param>
+        /// <returns></returns>
+        public static byte[] lireFichier(string chemin)
+        {
+            byte[] data = null;
+            try
+            {
+                FileInfo fileInfo = new FileInfo(chemin);
+                int nbBytes = (int)fileInfo.Length;
+                FileStream fileStream = new FileStream(chemin, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fileStream);
+                data = br.ReadBytes(nbBytes);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return data;
+        }
+
     }
 }
