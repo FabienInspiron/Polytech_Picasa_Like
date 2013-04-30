@@ -576,8 +576,6 @@ namespace AdminPicasaLike
                 SqlCommand getImage = new SqlCommand("SELECT id, nom, size, blob, album " + "FROM Image " + "WHERE id = @id", bdd.oConnection);
                 getImage.Parameters.Add("@id", SqlDbType.Int).Value = imageID;
 
-                Console.WriteLine("Image " + imageID);
-
                 // exécution de la requête et création du reader
                 //Attention à l'acces sequential il faut lire les données dans l'ordre
                 SqlDataReader myReader = getImage.ExecuteReader(CommandBehavior.SequentialAccess);

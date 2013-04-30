@@ -102,6 +102,7 @@ namespace ClientWPF
             ListBox lb = (ListBox)sender;
             Album i = (Album)lb.SelectedItem;
             idAlbumSelected = i.id;
+            Console.WriteLine("album : " + idAlbumSelected);
             miseAJourPhoto(idAlbumSelected);
         }
 
