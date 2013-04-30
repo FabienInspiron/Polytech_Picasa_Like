@@ -16,6 +16,7 @@ namespace ClientWeb
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+
             Response.Redirect("VoirImage.aspx");
         }
     }

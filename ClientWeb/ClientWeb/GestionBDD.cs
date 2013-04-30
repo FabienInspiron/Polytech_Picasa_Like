@@ -504,11 +504,6 @@ namespace AdminPicasaLike
             return id;
         }
 
-        public Boolean connexion(string login, string password)
-        {
-
-        }
-
         #endregion
 
         #region GestionImages

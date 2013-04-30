@@ -6,6 +6,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientWPF", "ClientWPF\ClientWPF\ClientWPF.csproj", "{66318FAD-55E2-432A-9DF5-DB1CAE1D6FB8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientWeb", "ClientWeb\ClientWeb\ClientWeb.csproj", "{370B6F18-F26E-4C64-941F-E96800881FD2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F9D521F0-4F2E-4641-8C42-B625F094C960} = {F9D521F0-4F2E-4641-8C42-B625F094C960}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrairieServeur", "LibrairieServeur\LibrairieServeur.csproj", "{A30088CC-7514-44C2-807E-EBEC146E7248}"
 EndProject

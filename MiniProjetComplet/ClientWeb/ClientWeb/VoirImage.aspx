@@ -6,10 +6,27 @@
     <title></title>
 </head>
 <body>
+Bonjour <% // Si la variable de session user est non nulle,
+            // on "écrit" sa valeur dans la page HTML que l'on génère
+            if (Session["nomUser"] != null)
+            {
+                Response.Write(Session["nomUser"]);
+            }
+            else
+            {
+                Response.Write("inconnu");
+                Response.Redirect("Connexion.aspx");
+            }
+    
+     %>
     <form id="form1" runat="server">
     <div>
         <p>
-            <asp:Image ID="ImageCourante" runat="server" />
+            <asp:ListBox ID="ListAlbum" runat="server" 
+                onselectedindexchanged="AlbumSelected" Width="300px">
+            </asp:ListBox>
+            
+            <asp:Image ID="ImageCourante" runat="server" Height="16px" />
         </p>
         <p>
             Image&nbsp;ID&nbsp;:&nbsp;
