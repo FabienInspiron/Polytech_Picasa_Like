@@ -43,6 +43,7 @@ Title="MainWindow" Height="620" Width="820">
         </Style>
         
         <Style x:Key="AlbumListBoxStyle" TargetType="ListBox">
+            <Setter Property="ItemsSource" Value="{Binding}" />
             <Setter Property="ItemTemplate" Value="{StaticResource AlbumSourceTemplate}" />
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
