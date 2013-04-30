@@ -67,8 +67,7 @@ Title="MainWindow" Height="620" Width="820">
         <ListBox x:Name="ListBoxAlbum"
             Style="{StaticResource AlbumListBoxStyle}"
             DataContext="{StaticResource ImageCollectionAlbum}"
-            Margin="0,0,0,133" AllowDrop="False" 
-            MouseDoubleClick="ViewPhotoEvent" />
+            Margin="0,0,0,133" AllowDrop="False" MouseDoubleClick="ViewPhotoEvent" />
 
         <GridSplitter HorizontalAlignment="Stretch"
             ResizeBehavior="PreviousAndNext"
@@ -78,7 +77,7 @@ Title="MainWindow" Height="620" Width="820">
             Style="{StaticResource ImageListBoxStyle}"
             DataContext="{StaticResource ImageCollection1}"
             PreviewMouseLeftButtonDown="ImageDragEvent"
-            Drop="ImageDropEvent" Margin="0,161,0,0" />
+            Drop="ImageDropEvent" Margin="0,161,0,0" ItemsSource="{Binding}" />
         
         <GridSplitter HorizontalAlignment="Stretch"
             ResizeBehavior="PreviousAndNext"

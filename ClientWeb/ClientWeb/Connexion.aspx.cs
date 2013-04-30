@@ -16,7 +16,7 @@ namespace ClientWeb
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            //ImageCourante.ImageUrl = "Image.aspx?ImageID=" + ImageIDBox.Text;
+            Response.Redirect("VoirImage.aspx");
         }
     }
 }

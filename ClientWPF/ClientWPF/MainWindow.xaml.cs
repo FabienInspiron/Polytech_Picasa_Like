@@ -118,6 +118,7 @@ namespace ClientWPF
 
         public void miseAJourPhoto(int idAlb)
         {
+            Cursor = Cursors.Wait;
             // On crée notre collection d'image et on y ajoute deux images
             imageCollection1 = new ImageCollection();
             imageCollection1 = gestBDD.getPhotoUserAlbum(IDUser, idAlb);
@@ -126,6 +127,7 @@ namespace ClientWPF
             // On lie la collectionau ObjectDataProvider déclaré dans le fichier XAML
             ObjectDataProvider imageSource = (ObjectDataProvider)FindResource("ImageCollection1");
             imageSource.ObjectInstance = imageCollection1;
+            Cursor = Cursors.Arrow;
         }
 
         // On récupére l'objet que que l'on a dropé
@@ -167,6 +169,7 @@ namespace ClientWPF
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
+            Cursor = Cursors.Wait;
             List<string> lis = Util.listDir(@textDirectory.Text);
             imageCollection2.Clear();
 
@@ -180,6 +183,7 @@ namespace ClientWPF
 
             ObjectDataProvider imageSource2 = (ObjectDataProvider)FindResource("ImageCollection2");
             imageSource2.ObjectInstance = imageCollection2;
+            Cursor = Cursors.Arrow;
         }
 
         /// <summary>

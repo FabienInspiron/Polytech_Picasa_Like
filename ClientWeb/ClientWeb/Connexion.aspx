@@ -11,8 +11,7 @@
     <div>
     
         <asp:Label ID="Label1" runat="server" Text="Login : "></asp:Label>
-        <asp:TextBox ID="TextBoxLogin" runat="server" 
-            ontextchanged="TextBox1_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="TextBoxLogin" runat="server"></asp:TextBox>
         <br />
         Mot de passe :
         <asp:TextBox ID="TextBoxMDP" runat="server"></asp:TextBox>
