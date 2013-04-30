@@ -11,7 +11,7 @@ using System.Drawing;
 
 namespace AdminPicasaLike
 {
-    class GestionBDD
+    public class GestionBDD
     {
         
         public DataBase bdd;

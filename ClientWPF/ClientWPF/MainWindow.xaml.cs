@@ -189,10 +189,12 @@ namespace ClientWPF
         /// <param name="e"></param>
         private void button3_Click(object sender, RoutedEventArgs e)
         {
+            Cursor = Cursors.Wait;
             gestBDD.addAlbum(textAlbum.Text, IDUser);
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Information;
             miseAjourAlbum();
+            Cursor = Cursors.Arrow;
         }
     }
 }
