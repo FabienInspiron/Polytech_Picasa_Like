@@ -56,6 +56,8 @@ namespace AdminPicasaLike
             }
         }
 
+
+
         /// <summary>
         /// Ajouter un album a la base de donnée, le numero de l'abum est automatiquement modifié
         /// </summary>
@@ -502,6 +504,40 @@ namespace AdminPicasaLike
             }
 
             return id;
+        }
+
+        /// <summary>
+        /// Méthode de connexion a la base
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="mdp"></param>
+        /// <returns></returns>
+        public Boolean connexion(String login, String mdp)
+        {
+            Boolean ret = false;
+
+            try
+            {
+                bdd.connexion();
+
+                // construit la requête
+                SqlCommand getImage = new SqlCommand("SELECT id " + "FROM Utilisateur " + "WHERE nom = @name AND mdp= @mdp", bdd.oConnection);
+                getImage.Parameters.Add("@name", SqlDbType.VarChar, login.Length).Value = login;
+                getImage.Parameters.Add("@mdp", SqlDbType.VarChar, mdp.Length).Value = mdp;
+
+                // exécution de la requête et création du reader
+                SqlDataReader myReader = getImage.ExecuteReader(CommandBehavior.SequentialAccess);
+
+                ret = myReader.Read();
+                bdd.deconnect();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return ret;
         }
 
         #endregion

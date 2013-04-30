@@ -75,7 +75,7 @@ namespace ClientWPF
                 Console.WriteLine("Envoi de " + data.Nom + " vers le serveur");
                 String nameImageComplet = textDirectory.Text + "\\"+ data.Nom;
                 Console.WriteLine(nameImageComplet);
-                gestBDD.addImage(data.Nom, GestionBDD.lireFichier(nameImageComplet), idAlbumSelected);
+                gestBDD.addImage(data.Nom, Util.lireFichier(nameImageComplet), idAlbumSelected);
             }
             else
             {
@@ -175,7 +175,7 @@ namespace ClientWPF
                 string[] words = img.Split('\\');
                 string name = words[words.Length-1];
 
-                imageCollection2.Add(new ImageObjet(name, GestionBDD.lireFichier(@img)));
+                imageCollection2.Add(new ImageObjet(name, Util.lireFichier(@img)));
             }
 
             ObjectDataProvider imageSource2 = (ObjectDataProvider)FindResource("ImageCollection2");
