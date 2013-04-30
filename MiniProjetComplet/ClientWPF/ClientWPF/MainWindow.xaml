@@ -1,0 +1,101 @@
+﻿<Window x:Class="ClientWPF.MainWindow"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:local="clr-namespace:ClientWPF"
+Title="MainWindow" Height="620" Width="820">
+    <Window.Resources>
+        <local:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter"/>
+
+        <ObjectDataProvider x:Key="ImageCollection1"/>
+        <ObjectDataProvider x:Key="ImageCollection2"/>
+        <ObjectDataProvider x:Key="ImageCollectionAlbum"/>
+
+        <DataTemplate x:Key="ImageSourceTemplate">
+            <Border Padding="5,5,5,5" Margin="5,5,5,5" BorderBrush="DarkGray" BorderThickness="3" CornerRadius="5">
+                <StackPanel Orientation="Vertical">
+                    <Image Width="100" Height="100" Stretch="Fill"  Source="{Binding Path=Image, Converter={StaticResource ByteArrayToImageConverter}, Mode=Default}"/>
+                    <TextBlock Text="{Binding Path=Nom}" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="AlbumSourceTemplate">
+            <Border Padding="5,5,5,5" Margin="5,5,5,5" BorderBrush="DarkGray" BorderThickness="3" CornerRadius="5">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding Path=nom}" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <Style x:Key="ImageListBoxStyle" TargetType="ListBox">
+            <Setter Property="AllowDrop" Value="True" />
+            <Setter Property="ItemsSource" Value="{Binding}" />
+            <Setter Property="ItemTemplate" Value="{StaticResource ImageSourceTemplate}" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="ListBox.ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="AlbumListBoxStyle" TargetType="ListBox">
+            <Setter Property="ItemsSource" Value="{Binding}" />
+            <Setter Property="ItemTemplate" Value="{StaticResource AlbumSourceTemplate}" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="ListBox.ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="288" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <ListBox x:Name="ListBoxAlbum"
+            Style="{StaticResource AlbumListBoxStyle}"
+            DataContext="{StaticResource ImageCollectionAlbum}"
+            Margin="0,0,0,133" AllowDrop="False" 
+            MouseDoubleClick="ViewPhotoEvent" />
+
+        <GridSplitter HorizontalAlignment="Stretch"
+            ResizeBehavior="PreviousAndNext"
+            Height="5" Margin="0,156,0,127" />
+        
+        <ListBox x:Name="ListBox1"
+            Style="{StaticResource ImageListBoxStyle}"
+            DataContext="{StaticResource ImageCollection1}"
+            PreviewMouseLeftButtonDown="ImageDragEvent"
+            Drop="ImageDropEvent" Margin="0,161,0,0" />
+        
+        <GridSplitter HorizontalAlignment="Stretch"
+            ResizeBehavior="PreviousAndNext"
+            Height="5"
+            Grid.Row="1"/>
+        
+        <ListBox x:Name="ListBox2"
+            Style="{StaticResource ImageListBoxStyle}"
+            DataContext="{StaticResource ImageCollection2}"
+            PreviewMouseLeftButtonDown="ImageDragEvent"
+            Drop="ImageDropEvent"
+            Grid.Row="2"/>
+        
+        <TextBox Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="10" Name="textDirectory" VerticalAlignment="Bottom" Width="233" />
+        <Button Content="Parcourir" Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="249,0,0,10" Name="button1" VerticalAlignment="Bottom" Width="75" Click="button1_Click" />
+        <Button Content="Visualiser" Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="330,0,0,11" Name="button2" VerticalAlignment="Bottom" Width="75" Click="button2_Click" />
+        <Button Content="Ajouter" Height="23" HorizontalAlignment="Right" Margin="0,126,23,0" Name="button3" VerticalAlignment="Top" Width="75" Click="button3_Click" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,127,104,0" Name="textAlbum" VerticalAlignment="Top" Width="120" />
+    </Grid>
+</Window>
