@@ -1,9 +1,6 @@
 /TestSaveImg
-*.suo
-*.sln
 *\bin
 *\obj
 .cache
 *.db
 *\Debug
-*\Properties
