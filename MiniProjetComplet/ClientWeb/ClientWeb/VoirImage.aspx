@@ -22,12 +22,39 @@ Bonjour <% // Si la variable de session user est non nulle,
     <form id="form1" runat="server">
     <div>
         <p>
+            Liste des albums : <br />
+            <asp:TextBox ID="TextAlbumAdd" runat="server"></asp:TextBox>
+            <asp:Button ID="Button1" runat="server" Text="Ajouter album" 
+                onclick="Button1_Click" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br />
             <asp:ListBox ID="ListAlbum" runat="server" 
                 onselectedindexchanged="AlbumSelected" Width="300px">
             </asp:ListBox>
+
+            <asp:Button ID="Supprimer" runat="server" onclick="Button2_Click1" 
+                Text="Supprimer album" />
             
+        </p>
+            Liste des photos
+            <br />
+
+            <asp:TextBox ID="TextBoxParcourir" runat="server"></asp:TextBox>
+            <asp:Button ID="Button2" runat="server" Text="Parcourir ..." 
+            onclick="Button2_Click" />
+
+            <br />
+            <asp:ListBox ID="ListBoxPhoto" runat="server" 
+                Width="300px" onselectedindexchanged="ListBoxPhoto_SelectedIndexChanged">
+            </asp:ListBox>
+            
+        </p>
+        <p>
+            &nbsp;</p>
+        <p>
             <asp:Image ID="ImageCourante" runat="server" Height="16px" />
         </p>
+
+        <p>
+            &nbsp;</p>
         <p>
             Image&nbsp;ID&nbsp;:&nbsp;
             <asp:TextBox ID="ImageIDBox" runat="server" />

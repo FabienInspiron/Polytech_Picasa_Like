@@ -88,7 +88,7 @@ namespace ClientWPF
             }
             catch
             {
-                MessageBoxResult result = MessageBox.Show("Veuillez choisir un dossier pour l'importation local");   
+                MessageBoxResult result = MessageBox.Show("Veuillez choisir un dossier pour l'importation local");
             }
         }
 
@@ -172,7 +172,7 @@ namespace ClientWPF
             foreach (string img in lis)
             {
                 string[] words = img.Split('\\');
-                string name = words[words.Length-1];
+                string name = words[words.Length - 1];
 
                 Photo p = new Photo();
                 p.Image = Util.lireFichier(@img);

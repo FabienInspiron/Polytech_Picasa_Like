@@ -292,6 +292,9 @@ namespace ClientWeb.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhotoAlbum", ReplyAction="http://tempuri.org/IService/GetPhotoAlbumResponse")]
         ClientWeb.ServiceReference1.Photo[] GetPhotoAlbum(int userId, int albumId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhoto", ReplyAction="http://tempuri.org/IService/GetPhotoResponse")]
+        ClientWeb.ServiceReference1.Photo GetPhoto(int userId, int albumId, int photoId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddPhoto", ReplyAction="http://tempuri.org/IService/AddPhotoResponse")]
         void AddPhoto(ClientWeb.ServiceReference1.Photo p);
         
@@ -346,6 +349,10 @@ namespace ClientWeb.ServiceReference1 {
         
         public ClientWeb.ServiceReference1.Photo[] GetPhotoAlbum(int userId, int albumId) {
             return base.Channel.GetPhotoAlbum(userId, albumId);
+        }
+        
+        public ClientWeb.ServiceReference1.Photo GetPhoto(int userId, int albumId, int photoId) {
+            return base.Channel.GetPhoto(userId, albumId, photoId);
         }
         
         public void AddPhoto(ClientWeb.ServiceReference1.Photo p) {

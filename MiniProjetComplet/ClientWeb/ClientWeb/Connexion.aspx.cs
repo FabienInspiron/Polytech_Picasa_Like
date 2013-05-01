@@ -30,6 +30,7 @@ namespace ClientWeb
             // Création des variables de cession
             Session["idUser"] = id;
             Session["nomUser"] = TextBoxLogin.Text;
+            Session["Utilisateur"] = u;
 
             // Redirection vers la page de visualisation des images
             Response.Redirect("VoirImage.aspx");
@@ -40,11 +41,6 @@ namespace ClientWeb
         {
             // Redirection vers la page de visualisation des images
             Response.Redirect("Inscription.aspx");
-        }
-
-        protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
-        {
-
         }
     }
 }

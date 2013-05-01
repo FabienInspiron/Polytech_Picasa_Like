@@ -39,6 +39,9 @@
     <Reference Include="MiniProjetWPF">
       <HintPath>..\..\..\MiniProjetWPF\MiniProjetWPF\bin\Debug\MiniProjetWPF.exe</HintPath>
     </Reference>
+    <Reference Include="ObjetsDefinition">
+      <HintPath>..\..\LibrairieServeur\bin\Debug\ObjetsDefinition.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -66,8 +69,6 @@
     <Compile Include="HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Util.cs" />
-    <Compile Include="Utilisateur.cs" />
     <Compile Include="Service References\WebService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -17,7 +17,7 @@ namespace LibrairieServeur
         /// </summary>
         public DataBase()
         {
-            this.connexionStr = "Server=GORRIERI;Database=PicasaLike;Integrated Security=true;";
+            this.connexionStr = "Server=X068;Database=PicasaLike;Integrated Security=true;";
         }
 
         // Constructeur normal
