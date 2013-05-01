@@ -37,14 +37,14 @@ namespace ServeurWCF
             return gestionBdd.getAlbums(userId);
         }
 
-        public PhotoCollection GetPhotoAlbum(int userId, int albumId)
+        public List<Photo> GetPhotoAlbum(int userId, int albumId)
         {
-            throw new NotImplementedException();
+            return gestionBdd.getPhotoUserAlbum(userId, albumId);
         }
 
         public void AddPhoto(Photo p)
         {
-            throw new NotImplementedException();
+            gestionBdd.addImage(p);
         }
 
         public void RemovePhoto(int userId, int albumId, int photoId)

@@ -784,37 +784,60 @@ namespace LibrairieServeur
             return tableID;
         }
 
-        /// <summary>
-        /// Recuperer les images d'un utilisateur sous forme d'une photo
-        /// </summary>
-        /// <param name="idUser"></param>
-        /// <returns></returns>
-        public PhotoCollection getPhotoUser(int idUser)
-        {
-            List<int> idImages = getImageIDUser(idUser);
-            PhotoCollection retour = new PhotoCollection();
+        ///// <summary>
+        ///// Recuperer les images d'un utilisateur sous forme d'une photo
+        ///// </summary>
+        ///// <param name="idUser"></param>
+        ///// <returns></returns>
+        //public PhotoCollection getPhotoUser(int idUser)
+        //{
+        //    List<int> idImages = getImageIDUser(idUser);
+        //    PhotoCollection retour = new PhotoCollection();
 
-            foreach (int id in idImages)
+        //    foreach (int id in idImages)
+        //    {
+        //        retour.Add(getPhotoID(id));
+        //    }
+
+        //    return retour;
+        //}
+
+
+        public List<Photo> getPhotoUserAlbum(int idUser, int album)
+        {
+            List<Photo> photos = new List<Photo>();
+
+            try
             {
-                retour.Add(getPhotoID(id));
+                bdd.connexion();
+
+                String sql = "SELECT Image.size, Image.blob, Image.id, Image.nom, Image.album FROM Image, Album WHERE Image.album = Album.id AND Album.utilisater = @utilisateur AND Album.id =@album";
+
+                SqlCommand oCommand = bdd.executeSQL(sql);
+                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int).Value = idUser;
+                oCommand.Parameters.Add("@album", SqlDbType.Int).Value = album;
+
+                SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
+                while (myReader.Read())
+                {
+                    int size = myReader.GetInt32(0);
+                    byte[] blob = new byte[size];
+                    // récupére le blob de la BDD et le copie dans la variable blob
+                    myReader.GetBytes(1, 0, blob, 0, size);
+                    photos.Add(new Photo(myReader.GetInt32(2), myReader.GetString(3), blob, myReader.GetInt32(4)));
+                }
+
+                myReader.Close();
+
+                //oCommand.ExecuteNonQuery();
+                bdd.deconnect();
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
             }
 
-            return retour;
-        }
-
-
-        public PhotoCollection getPhotoUserAlbum(int idUser, int album)
-        {
-            List<int> idImages = getImageIDUser(idUser, album);
-            PhotoCollection retour = new PhotoCollection();
-
-            foreach (int id in idImages)
-            {
-                Photo im = getPhotoID(id);
-                retour.Add(im);
-            }
-
-            return retour;
+            return photos;
         }
 
         /// <summary>
@@ -833,29 +856,6 @@ namespace LibrairieServeur
             }
 
             return retour;
-        }
-
-        /// <summary>
-        /// Lit et retourne le contenu du fichier sous la forme de tableau de byte
-        /// </summary>
-        /// <param name="chemin">chemin du fichier</param>
-        /// <returns></returns>
-        public static byte[] lireFichier(string chemin)
-        {
-            byte[] data = null;
-            try
-            {
-                FileInfo fileInfo = new FileInfo(chemin);
-                int nbBytes = (int)fileInfo.Length;
-                FileStream fileStream = new FileStream(chemin, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fileStream);
-                data = br.ReadBytes(nbBytes);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            return data;
         }
 
         #endregion

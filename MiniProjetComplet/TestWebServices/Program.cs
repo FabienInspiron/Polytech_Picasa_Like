@@ -50,6 +50,24 @@ namespace TestWebServices
             }
             Console.WriteLine();
 
+            // Ajout de photos
+            //Photo p = new Photo();
+            //p.Album = alC[0].Id;
+            //p.Nom = "photo1.jpg";
+            //p.Image = Util.lireFichier("image1.jpg");
+            //sc.AddPhoto(p);
+
+            //p.Nom = "photo2.jpg";
+            //p.Image = Util.lireFichier("image2.jpg");
+            //sc.AddPhoto(p);
+
+            Photo[] photos = sc.GetPhotoAlbum(ut.Id, alC[0].Id);
+            foreach (Photo ph in photos)
+            {
+                Console.WriteLine("Photo {0}, length:{1}", ph.Nom, ph.Image.Length);
+                Util.ByteArrayToFile(ph.Nom, ph.Image);
+            }
+
             Console.ReadLine();
         }
     }

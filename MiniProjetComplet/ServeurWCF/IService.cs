@@ -33,7 +33,7 @@ namespace ServeurWCF
         List<Album> GetAlbumCollection(int userId);
 
         [OperationContract]
-        PhotoCollection GetPhotoAlbum(int userId, int albumId);
+        List<Photo> GetPhotoAlbum(int userId, int albumId);
 
         [OperationContract]
         void AddPhoto(Photo p);

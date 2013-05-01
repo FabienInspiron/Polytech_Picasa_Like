@@ -17,18 +17,20 @@ namespace ObjetDefinition
         [DataMemberAttribute]
         public int Album { get; set; }
 
-        public Photo(String nom, byte[] image) : this(nom,image,-1)
-        {}
+        public Photo(String nom, byte[] image)
+            : this(-1, nom, image, -1)
+        { }
 
         public Photo(String nom, byte[] image, int album)
+            : this(-1, nom, image, album)
+        { }
+
+        public Photo(int id, String nom, byte[] image, int albumId)
         {
-            this.Id = -1;
+            this.Id = id;
             this.Nom = nom;
             this.Image = image;
-            this.Album = album;
+            this.Album = albumId;
         }
     }
-
-    public class PhotoCollection : ObservableCollection<Photo>
-    { }
 }
