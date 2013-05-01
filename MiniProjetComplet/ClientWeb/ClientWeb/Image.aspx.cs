@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using AdminPicasaLike;
 
 namespace ClientWeb
 {
@@ -13,9 +12,7 @@ namespace ClientWeb
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            DataBase db = new DataBase();
-            GestionBDD gest = new GestionBDD(db);
-
+           /*
             // On récupére la valeur du paramètre ImageID passé dans l’URL
             String id = Request.QueryString["ImageID"];
 
@@ -35,6 +32,7 @@ namespace ClientWeb
                 Response.Flush();
                 Response.End();
             }
+            * */
         }
     }
 }

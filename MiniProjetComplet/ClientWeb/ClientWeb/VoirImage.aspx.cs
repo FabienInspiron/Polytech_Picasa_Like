@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ClientWeb.ServiceReference1;
 
 namespace ClientWeb
 {
@@ -11,15 +12,15 @@ namespace ClientWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Recuperation de tous les albums
-            List<string> listeDAlbum = new List<string>();
-            listeDAlbum.Add("a");
-            listeDAlbum.Add("b");
-            listeDAlbum.Add("c");
-            listeDAlbum.Add("d");
+            Utilisateur u = (Utilisateur) Session["Utilisateur"];
 
-            foreach (String t in listeDAlbum)
-                ListAlbum.Items.Add(t);
+            ServiceClient service = new ServiceClient();
+            Album[] l = service.GetAlbumCollection(u.Id);
+
+            for (int i = 0; i < l.Length; i++)
+            {
+                ListAlbum.Items.Add(l[i].Nom);
+            }
         }
 
         protected void Visualiser_Click(object sender, EventArgs e)

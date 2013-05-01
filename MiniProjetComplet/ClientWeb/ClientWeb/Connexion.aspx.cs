@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ClientWeb.ServiceReference1;
 
 namespace ClientWeb
 {
@@ -12,7 +13,14 @@ namespace ClientWeb
         protected void Button1_Click(object sender, EventArgs e)
         {
             // Création des webservices
-            ServiceReference1.Service1Client service = new ServiceReference1.Service1Client();
+            ServiceClient service = new ServiceClient();
+            Utilisateur u = service.Connexion(TextBoxLogin.Text, TextBoxMDP.Text);
+
+            if (u == null)
+            {
+                Response.Write("Connexion Impossible");
+                return;
+            }
 
             // Recuperation de l'id de l'utilisateur
             int id = 0;

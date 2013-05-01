@@ -12,12 +12,12 @@
     <div>
     
         <asp:Label ID="Label2" runat="server" Text="Login : "></asp:Label>
-        <asp:TextBox ID="TextBox3" runat="server" style="margin-left: 52px" ></asp:TextBox> <br />
+        <asp:TextBox ID="TextBoxNom" runat="server" style="margin-left: 52px" ></asp:TextBox> <br />
         <asp:Label ID="Label3" runat="server" Text="Nom : "></asp:Label>
-        <asp:TextBox ID="TextBox1" runat="server" style="margin-left: 54px" ></asp:TextBox>
+        <asp:TextBox ID="TextBoxPrenom" runat="server" style="margin-left: 54px" ></asp:TextBox>
         <br />
         Mot de passe :
-        <asp:TextBox ID="TextBox2" runat="server" style="margin-left: 2px"></asp:TextBox>
+        <asp:TextBox ID="TextBoxMDP" runat="server" style="margin-left: 2px"></asp:TextBox>
     
     </div>
     <p>
