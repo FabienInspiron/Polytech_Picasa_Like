@@ -824,7 +824,7 @@ namespace LibrairieServeur
                     byte[] blob = new byte[size];
                     // récupére le blob de la BDD et le copie dans la variable blob
                     myReader.GetBytes(1, 0, blob, 0, size);
-                    photos.Add(new Photo(myReader.GetInt32(2), myReader.GetString(3), blob, myReader.GetInt32(4)));
+                    photos.Add(new Photo(myReader.GetInt32(2), myReader.GetString(3).Trim(), blob, myReader.GetInt32(4)));
                 }
 
                 myReader.Close();
