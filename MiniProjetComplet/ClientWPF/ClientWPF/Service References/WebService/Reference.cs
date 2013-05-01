@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestWebServices.WebService {
+namespace ClientWPF.WebService {
     using System.Runtime.Serialization;
     using System;
     
@@ -281,40 +281,40 @@ namespace TestWebServices.WebService {
     public interface IService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Connexion", ReplyAction="http://tempuri.org/IService/ConnexionResponse")]
-        TestWebServices.WebService.Utilisateur Connexion(string pseudo, string mdp);
+        ClientWPF.WebService.Utilisateur Connexion(string pseudo, string mdp);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Instription", ReplyAction="http://tempuri.org/IService/InstriptionResponse")]
-        TestWebServices.WebService.Utilisateur Instription(TestWebServices.WebService.Utilisateur u);
+        ClientWPF.WebService.Utilisateur Instription(ClientWPF.WebService.Utilisateur u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlbumCollection", ReplyAction="http://tempuri.org/IService/GetAlbumCollectionResponse")]
-        TestWebServices.WebService.Album[] GetAlbumCollection(int userId);
+        ClientWPF.WebService.Album[] GetAlbumCollection(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhotoAlbum", ReplyAction="http://tempuri.org/IService/GetPhotoAlbumResponse")]
-        TestWebServices.WebService.Photo[] GetPhotoAlbum(int userId, int albumId);
+        ClientWPF.WebService.Photo[] GetPhotoAlbum(int userId, int albumId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhoto", ReplyAction="http://tempuri.org/IService/GetPhotoResponse")]
-        TestWebServices.WebService.Photo GetPhoto(int userId, int albumId, int photoId);
+        ClientWPF.WebService.Photo GetPhoto(int userId, int albumId, int photoId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddPhoto", ReplyAction="http://tempuri.org/IService/AddPhotoResponse")]
-        void AddPhoto(TestWebServices.WebService.Photo p);
+        void AddPhoto(ClientWPF.WebService.Photo p);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemovePhoto", ReplyAction="http://tempuri.org/IService/RemovePhotoResponse")]
         void RemovePhoto(int userId, int albumId, int photoId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddAlbum", ReplyAction="http://tempuri.org/IService/AddAlbumResponse")]
-        TestWebServices.WebService.Album AddAlbum(TestWebServices.WebService.Album a);
+        ClientWPF.WebService.Album AddAlbum(ClientWPF.WebService.Album a);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAlbum", ReplyAction="http://tempuri.org/IService/RemoveAlbumResponse")]
         void RemoveAlbum(int userId, int albumId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceChannel : TestWebServices.WebService.IService, System.ServiceModel.IClientChannel {
+    public interface IServiceChannel : ClientWPF.WebService.IService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceClient : System.ServiceModel.ClientBase<TestWebServices.WebService.IService>, TestWebServices.WebService.IService {
+    public partial class ServiceClient : System.ServiceModel.ClientBase<ClientWPF.WebService.IService>, ClientWPF.WebService.IService {
         
         public ServiceClient() {
         }
@@ -335,27 +335,27 @@ namespace TestWebServices.WebService {
                 base(binding, remoteAddress) {
         }
         
-        public TestWebServices.WebService.Utilisateur Connexion(string pseudo, string mdp) {
+        public ClientWPF.WebService.Utilisateur Connexion(string pseudo, string mdp) {
             return base.Channel.Connexion(pseudo, mdp);
         }
         
-        public TestWebServices.WebService.Utilisateur Instription(TestWebServices.WebService.Utilisateur u) {
+        public ClientWPF.WebService.Utilisateur Instription(ClientWPF.WebService.Utilisateur u) {
             return base.Channel.Instription(u);
         }
         
-        public TestWebServices.WebService.Album[] GetAlbumCollection(int userId) {
+        public ClientWPF.WebService.Album[] GetAlbumCollection(int userId) {
             return base.Channel.GetAlbumCollection(userId);
         }
         
-        public TestWebServices.WebService.Photo[] GetPhotoAlbum(int userId, int albumId) {
+        public ClientWPF.WebService.Photo[] GetPhotoAlbum(int userId, int albumId) {
             return base.Channel.GetPhotoAlbum(userId, albumId);
         }
         
-        public TestWebServices.WebService.Photo GetPhoto(int userId, int albumId, int photoId) {
+        public ClientWPF.WebService.Photo GetPhoto(int userId, int albumId, int photoId) {
             return base.Channel.GetPhoto(userId, albumId, photoId);
         }
         
-        public void AddPhoto(TestWebServices.WebService.Photo p) {
+        public void AddPhoto(ClientWPF.WebService.Photo p) {
             base.Channel.AddPhoto(p);
         }
         
@@ -363,7 +363,7 @@ namespace TestWebServices.WebService {
             base.Channel.RemovePhoto(userId, albumId, photoId);
         }
         
-        public TestWebServices.WebService.Album AddAlbum(TestWebServices.WebService.Album a) {
+        public ClientWPF.WebService.Album AddAlbum(ClientWPF.WebService.Album a) {
             return base.Channel.AddAlbum(a);
         }
         

@@ -42,6 +42,11 @@ namespace ServeurWCF
             return gestionBdd.getPhotoUserAlbum(userId, albumId);
         }
 
+        public Photo GetPhoto(int userId, int albumId, int photoId)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddPhoto(Photo p)
         {
             gestionBdd.addImage(p);
@@ -61,5 +66,6 @@ namespace ServeurWCF
         {
             throw new NotImplementedException();
         }
+
     }
 }
