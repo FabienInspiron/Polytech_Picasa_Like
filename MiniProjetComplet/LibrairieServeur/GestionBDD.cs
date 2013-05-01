@@ -509,13 +509,12 @@ namespace LibrairieServeur
         /// <summary>
         /// Méthode de connexion a la base
         /// </summary>
-        /// <param name="login"></param>
-        /// <param name="mdp"></param>
+        /// <param name="login">Login</param>
+        /// <param name="mdp">Mot de passe</param>
         /// <returns></returns>
-        public Boolean connexion(String login, String mdp)
+        public Utilisateur connexion(String login, String mdp)
         {
-            Boolean ret = false;
-
+            Utilisateur u = null;
             try
             {
                 bdd.connexion();
@@ -528,7 +527,9 @@ namespace LibrairieServeur
                 // exécution de la requête et création du reader
                 SqlDataReader myReader = getImage.ExecuteReader(CommandBehavior.SequentialAccess);
 
-                ret = myReader.Read();
+                if (myReader.HasRows)
+                    u = new Utilisateur(myReader.GetInt32(0), myReader.GetString(1), myReader.GetString(2), myReader.GetString(3));
+                
                 bdd.deconnect();
 
             }
@@ -537,7 +538,7 @@ namespace LibrairieServeur
                 Console.WriteLine(e.Message);
             }
 
-            return ret;
+            return u;
         }
 
         #endregion

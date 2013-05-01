@@ -11,10 +11,17 @@ namespace ServeurWCF
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service" à la fois dans le code, le fichier svc et le fichier de configuration.
     public class Service :IService
     {
+        private GestionBDD gestionBdd;
 
-        public int connexion(string pseudo, string mdp)
+        public Service()
         {
-            throw new NotImplementedException();
+            DataBase bdd = new DataBase();
+            gestionBdd = new GestionBDD(bdd);
+        }
+
+        public ObjetDefinition.Utilisateur connexion(string pseudo, string mdp)
+        {
+            return gestionBdd.connexion(pseudo, mdp);
         }
 
         public ObjetDefinition.Utilisateur instription(ObjetDefinition.Utilisateur u)

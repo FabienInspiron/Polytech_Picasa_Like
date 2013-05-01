@@ -19,9 +19,12 @@ namespace ObjetDefinition
         public String Mdp { get; set; }
 
 
-        public Utilisateur(String nom, String prenom, String mdp)
+        public Utilisateur(String nom, String prenom, String mdp) : this(-1, nom, prenom,mdp) 
+        {}
+
+        public Utilisateur(int id, String nom, String prenom, String mdp)
         {
-            this.Id = -1;
+            this.Id = id;
             this.Nom = nom;
             this.Prenom = prenom;
             this.Mdp = mdp;

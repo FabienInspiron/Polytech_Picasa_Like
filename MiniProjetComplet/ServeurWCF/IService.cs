@@ -17,9 +17,9 @@ namespace ServeurWCF
         /// </summary>
         /// <param name="pseudo">Pseudo</param>
         /// <param name="mdp">Mot de passe</param>
-        /// <returns>L'id de l'utilisateur ou -1 si la connexion à échoué</returns>
+        /// <returns>L'utilisateur ou null si la connexion à échoué</returns>
         [OperationContract]
-        int connexion(String pseudo, String mdp);
+        Utilisateur connexion(String pseudo, String mdp);
 
         /// <summary>
         /// Gestion inscription
