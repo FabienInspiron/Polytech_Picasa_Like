@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 
-namespace AdminPicasaLike
+namespace LibrairieServeur
 {
     public class DataBase
     {
@@ -17,7 +17,7 @@ namespace AdminPicasaLike
         /// </summary>
         public DataBase()
         {
-            this.connexionStr = "Server=X068;Database=PicasaLike;Integrated Security=true;";
+            this.connexionStr = "Server=GORRIERI;Database=PicasaLike;Integrated Security=true;";
         }
 
         // Constructeur normal

@@ -8,9 +8,9 @@ using System.IO;
 using System.Drawing;
 using ObjetDefinition;
 
-namespace AdminPicasaLike
+namespace LibrairieServeur
 {
-    class GestionBDD
+    public class GestionBDD
     {
      
         public DataBase bdd;

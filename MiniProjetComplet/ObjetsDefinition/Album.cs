@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
 
 namespace ObjetDefinition
 {
+    [DataContractAttribute]
     public class Album
     {
+        [DataMemberAttribute]
         public int Id { get; set; }
+        [DataMemberAttribute]
         public String Nom { get; set; }
+        [DataMemberAttribute]
         public int UserId { get; set; }
 
         /// <summary>
