@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using ClientWPF.WebService;
+using System.Collections.ObjectModel;
 
-namespace AdminPicasaLike
+namespace ClientWPF
 {
     class Util
     {
@@ -82,6 +84,12 @@ namespace AdminPicasaLike
             }
             return data;
         }
+
+        public class AlbumCollection : ObservableCollection<Album>
+        { }
+
+        public class ImageCollection : ObservableCollection<Photo>
+        { }
 
     }
 }

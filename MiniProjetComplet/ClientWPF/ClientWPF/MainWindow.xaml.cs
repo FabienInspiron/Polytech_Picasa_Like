@@ -11,10 +11,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using AdminPicasaLike;
 using System.Collections;
 using System.IO;
 using System.IO.IsolatedStorage;
+using ClientWPF.WebService;
 
 namespace ClientWPF
 {
@@ -24,24 +24,22 @@ namespace ClientWPF
     public partial class MainWindow : Window
     {
 
-        DataBase db;
-        GestionBDD gestBDD;
+        ServiceClient webService;
 
-        private ImageCollection imageCollection1;
-        private ImageCollection imageCollection2;
-        private AlbumCollection imageCollectionAlbum;
+        private ClientWPF.Util.ImageCollection imageCollection1;
+        private ClientWPF.Util.ImageCollection imageCollection2;
+        private ClientWPF.Util.AlbumCollection imageCollectionAlbum;
 
-        int IDUser = 170;
+        int IDUser = 7;
         int idAlbumSelected = 0;
 
         public MainWindow()
         {
 
             InitializeComponent();
-            db = new DataBase();
-            gestBDD =  new GestionBDD(db);
+            webService = new ServiceClient();
 
-            imageCollection2 = new ImageCollection();
+            imageCollection2 = new ClientWPF.Util.ImageCollection();
             miseAjourAlbum();
         }
 
@@ -63,7 +61,7 @@ namespace ClientWPF
         private void ImageDropEvent(object sender, DragEventArgs e)
         {
             ListBox parent = (ListBox)sender;
-            ImageObjet data = (ImageObjet)e.Data.GetData(typeof(ImageObjet));
+            Photo image = (Photo)e.Data.GetData(typeof(Photo));
 
             // Si il y a deplacement depuis les albums
             if (parent.Name.Equals(dragSource.Name))
@@ -72,22 +70,20 @@ namespace ClientWPF
             // envoi de données vers le serveur
             if (parent.Name == "ListBox1")
             {
-                Console.WriteLine("Envoi de " + data.Nom + " vers le serveur");
-                String nameImageComplet = textDirectory.Text + "\\"+ data.Nom;
-                Console.WriteLine(nameImageComplet);
-                gestBDD.addImage(data.Nom, Util.lireFichier(nameImageComplet), idAlbumSelected);
+                //Console.WriteLine("Envoi de " + image.Nom + " vers le serveur");
+                //gestBDD.addImage(data.Nom, Util.lireFichier(nameImageComplet), idAlbumSelected);
+                webService.AddPhoto(image);
             }
-            else
+            else // recupération d'image en local
             {
-                Console.WriteLine("Envoi de " + data.Nom + " en local");
-                byte[] imageToDownload = gestBDD.getImageByte(data.id);
-                String imagePath = textDirectory.Text + "\\" + data.Nom;
-                Util.ByteArrayToFile(imagePath, imageToDownload);
+                //Console.WriteLine("Envoi de {0} en local", image.Nom);
+                String imagePath = textDirectory.Text + "\\" + image.Nom;
+                Util.ByteArrayToFile(imagePath, image.Image);
             }
 
             try
             {
-                ((IList)parent.ItemsSource).Add(data);
+                ((IList)parent.ItemsSource).Add(image);
                 //((IList)dragSource.ItemsSource).Remove(data);
             }
             catch
@@ -100,8 +96,8 @@ namespace ClientWPF
         private void ViewPhotoEvent(object sender, MouseButtonEventArgs e)
         {
             ListBox lb = (ListBox)sender;
-            Album i = (Album)lb.SelectedItem;
-            idAlbumSelected = i.id;
+            Album a = (Album)lb.SelectedItem;
+            idAlbumSelected = a.Id;
             Console.WriteLine("album : " + idAlbumSelected);
             miseAJourPhoto(idAlbumSelected);
         }
@@ -109,8 +105,10 @@ namespace ClientWPF
         private void miseAjourAlbum()
         {
             // Recuperation des albums de l'utilisateur
-            imageCollectionAlbum = new AlbumCollection();
-            imageCollectionAlbum = gestBDD.getAlbumCollection(IDUser);
+            imageCollectionAlbum = new ClientWPF.Util.AlbumCollection();
+            Album[] albums = webService.GetAlbumCollection(IDUser);
+            foreach (Album a in albums)
+                imageCollectionAlbum.Add(a);
 
             ObjectDataProvider imageSourceAlbum = (ObjectDataProvider)FindResource("ImageCollectionAlbum");
             imageSourceAlbum.ObjectInstance = imageCollectionAlbum;
@@ -119,9 +117,10 @@ namespace ClientWPF
         public void miseAJourPhoto(int idAlb)
         {
             // On crée notre collection d'image et on y ajoute deux images
-            imageCollection1 = new ImageCollection();
-            imageCollection1 = gestBDD.getPhotoUserAlbum(IDUser, idAlb);
-
+            imageCollection1 = new ClientWPF.Util.ImageCollection();
+            Photo[] photos = webService.GetPhotoAlbum(IDUser, idAlb);
+            foreach (Photo p in photos)
+                imageCollection1.Add(p);
 
             // On lie la collectionau ObjectDataProvider déclaré dans le fichier XAML
             ObjectDataProvider imageSource = (ObjectDataProvider)FindResource("ImageCollection1");
@@ -175,7 +174,10 @@ namespace ClientWPF
                 string[] words = img.Split('\\');
                 string name = words[words.Length-1];
 
-                imageCollection2.Add(new ImageObjet(name, Util.lireFichier(@img)));
+                Photo p = new Photo();
+                p.Image = Util.lireFichier(@img);
+                p.Nom = name;
+                imageCollection2.Add(p);
             }
 
             ObjectDataProvider imageSource2 = (ObjectDataProvider)FindResource("ImageCollection2");
@@ -189,7 +191,10 @@ namespace ClientWPF
         /// <param name="e"></param>
         private void button3_Click(object sender, RoutedEventArgs e)
         {
-            gestBDD.addAlbum(textAlbum.Text, IDUser);
+            Album a = new Album();
+            a.Nom = textAlbum.Text;
+            a.UserId = IDUser;
+            webService.AddAlbum(a);
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Information;
             miseAjourAlbum();
