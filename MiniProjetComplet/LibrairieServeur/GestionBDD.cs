@@ -365,6 +365,43 @@ namespace LibrairieServeur
         #region GestionUtilisateur
 
         /// <summary>
+        /// Méthode de connexion a la base
+        /// </summary>
+        /// <param name="login">Login</param>
+        /// <param name="mdp">Mot de passe</param>
+        /// <returns></returns>
+        public Utilisateur getUser(String login, String mdp)
+        {
+            Utilisateur u = null;
+            try
+            {
+                bdd.connexion();
+
+                // construit la requête
+                SqlCommand getImage = new SqlCommand("SELECT * " + "FROM Utilisateur " + "WHERE nom = @name AND mdp= @mdp", bdd.oConnection);
+                getImage.Parameters.Add("@name", SqlDbType.VarChar, login.Length).Value = login;
+                getImage.Parameters.Add("@mdp", SqlDbType.VarChar, mdp.Length).Value = mdp;
+
+                // exécution de la requête et création du reader
+                SqlDataReader myReader = getImage.ExecuteReader(CommandBehavior.SequentialAccess);
+
+                if (myReader.HasRows) {
+                    myReader.Read();
+                    u = new Utilisateur(myReader.GetInt32(0), myReader.GetString(1).Trim(), myReader.GetString(2).Trim(), myReader.GetString(3).Trim());
+                }
+
+                bdd.deconnect();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return u;
+        }
+
+        /// <summary>
         /// Ajouter un utilisateur dans la base de donnée
         /// </summary>
         /// <param name="nom"></param>
@@ -504,41 +541,6 @@ namespace LibrairieServeur
             }
 
             return id;
-        }
-
-        /// <summary>
-        /// Méthode de connexion a la base
-        /// </summary>
-        /// <param name="login">Login</param>
-        /// <param name="mdp">Mot de passe</param>
-        /// <returns></returns>
-        public Utilisateur connexion(String login, String mdp)
-        {
-            Utilisateur u = null;
-            try
-            {
-                bdd.connexion();
-
-                // construit la requête
-                SqlCommand getImage = new SqlCommand("SELECT id " + "FROM Utilisateur " + "WHERE nom = @name AND mdp= @mdp", bdd.oConnection);
-                getImage.Parameters.Add("@name", SqlDbType.VarChar, login.Length).Value = login;
-                getImage.Parameters.Add("@mdp", SqlDbType.VarChar, mdp.Length).Value = mdp;
-
-                // exécution de la requête et création du reader
-                SqlDataReader myReader = getImage.ExecuteReader(CommandBehavior.SequentialAccess);
-
-                if (myReader.HasRows)
-                    u = new Utilisateur(myReader.GetInt32(0), myReader.GetString(1), myReader.GetString(2), myReader.GetString(3));
-                
-                bdd.deconnect();
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            return u;
         }
 
         #endregion

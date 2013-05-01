@@ -281,7 +281,7 @@ namespace TestWebServices.WebService {
     public interface IService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/connexion", ReplyAction="http://tempuri.org/IService/connexionResponse")]
-        int connexion(string pseudo, string mdp);
+        TestWebServices.WebService.Utilisateur connexion(string pseudo, string mdp);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/instription", ReplyAction="http://tempuri.org/IService/instriptionResponse")]
         TestWebServices.WebService.Utilisateur instription(TestWebServices.WebService.Utilisateur u);
@@ -332,7 +332,7 @@ namespace TestWebServices.WebService {
                 base(binding, remoteAddress) {
         }
         
-        public int connexion(string pseudo, string mdp) {
+        public TestWebServices.WebService.Utilisateur connexion(string pseudo, string mdp) {
             return base.Channel.connexion(pseudo, mdp);
         }
         

@@ -21,12 +21,12 @@ namespace ServeurWCF
 
         public ObjetDefinition.Utilisateur connexion(string pseudo, string mdp)
         {
-            return gestionBdd.connexion(pseudo, mdp);
+            return gestionBdd.getUser(pseudo, mdp);
         }
 
         public ObjetDefinition.Utilisateur instription(ObjetDefinition.Utilisateur u)
         {
-            throw new NotImplementedException();
+            return gestionBdd.addUser(u);
         }
 
         public ObjetDefinition.AlbumCollection getAlbumCollection(int userId)
