@@ -135,14 +135,14 @@ namespace LibrairieServeur
         /// </summary>
         /// <param name="idUser">Utilisateur connecté auquel on cherche l'album</param>
         /// <returns>Liste des albums de cet utilisateur</returns>
-        public List<int> getAlbums(int idUser)
+        public List<Album> getAlbums(int idUser)
         {
-            List<int> tableID = new List<int>();
+            List<Album> albums = new List<Album>();
             try
             {
                 bdd.connexion();
 
-                String sql = "SELECT id FROM Album WHERE utilisater = @utilisateur";
+                String sql = "SELECT * FROM Album WHERE utilisater = @utilisateur";
 
                 SqlCommand oCommand = bdd.executeSQL(sql);
                 oCommand.Parameters.Add("@utilisateur", SqlDbType.Int).Value = idUser;
@@ -150,7 +150,7 @@ namespace LibrairieServeur
                 SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
                 while (myReader.Read())
                 {
-                    tableID.Add((int)myReader.GetInt32(0));
+                    albums.Add(new Album(myReader.GetInt32(0), myReader.GetString(1).Trim(), myReader.GetInt32(2)));
                 }
 
                 myReader.Close();
@@ -163,7 +163,7 @@ namespace LibrairieServeur
                 Console.Write(e.Message);
             }
 
-            return tableID;
+            return albums;
         }
 
         /// <summary>
@@ -205,24 +205,6 @@ namespace LibrairieServeur
             }
 
             return new Album(idAlbum, nom);
-        }
-
-        /// <summary>
-        /// Recuperer une collection d'album de l'utilisateur
-        /// </summary>
-        /// <param name="idUser"></param>
-        /// <returns></returns>
-        public AlbumCollection getAlbumCollection(int idUser)
-        {
-            AlbumCollection albCo = new AlbumCollection();
-            List<int> idAlbums = getAlbums(idUser);
-
-            foreach (int num in idAlbums)
-            {
-                albCo.Add(getAlbumID(num));
-            }
-
-            return albCo;
         }
 
         #endregion

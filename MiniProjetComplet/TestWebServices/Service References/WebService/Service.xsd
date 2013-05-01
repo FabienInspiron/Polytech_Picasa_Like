@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:50978/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ObjetDefinition" />
-  <xs:element name="connexion">
+  <xs:element name="Connexion">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="pseudo" nillable="true" type="xs:string" />
@@ -9,42 +9,42 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="connexionResponse">
+  <xs:element name="ConnexionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="connexionResult" nillable="true" type="q1:Utilisateur" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="ConnexionResult" nillable="true" type="q1:Utilisateur" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="instription">
+  <xs:element name="Instription">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="u" nillable="true" type="q2:Utilisateur" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="instriptionResponse">
+  <xs:element name="InstriptionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="instriptionResult" nillable="true" type="q3:Utilisateur" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="InstriptionResult" nillable="true" type="q3:Utilisateur" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="getAlbumCollection">
+  <xs:element name="GetAlbumCollection">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="userId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="getAlbumCollectionResponse">
+  <xs:element name="GetAlbumCollectionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="getAlbumCollectionResult" nillable="true" type="q4:ArrayOfAlbum" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="GetAlbumCollectionResult" nillable="true" type="q4:ArrayOfAlbum" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="getPhotoAlbum">
+  <xs:element name="GetPhotoAlbum">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="userId" type="xs:int" />
@@ -52,10 +52,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="getPhotoAlbumResponse">
+  <xs:element name="GetPhotoAlbumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="getPhotoAlbumResult" nillable="true" type="q5:ArrayOfPhoto" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="GetPhotoAlbumResult" nillable="true" type="q5:ArrayOfPhoto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -94,7 +94,9 @@
   </xs:element>
   <xs:element name="AddAlbumResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="AddAlbumResult" nillable="true" type="q8:Album" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RemoveAlbum">

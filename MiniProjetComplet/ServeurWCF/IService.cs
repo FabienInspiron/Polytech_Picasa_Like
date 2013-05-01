@@ -19,7 +19,7 @@ namespace ServeurWCF
         /// <param name="mdp">Mot de passe</param>
         /// <returns>L'utilisateur ou null si la connexion à échoué</returns>
         [OperationContract]
-        Utilisateur connexion(String pseudo, String mdp);
+        Utilisateur Connexion(String pseudo, String mdp);
 
         /// <summary>
         /// Gestion inscription
@@ -27,13 +27,13 @@ namespace ServeurWCF
         /// <param name="u">L'utilisateur à inscrir</param>
         /// <returns>Le nouvel utilisateur si ok, sinon null</returns>
         [OperationContract]
-        Utilisateur instription(Utilisateur u);
+        Utilisateur Instription(Utilisateur u);
 
         [OperationContract]
-        AlbumCollection getAlbumCollection(int userId);
+        List<Album> GetAlbumCollection(int userId);
 
         [OperationContract]
-        PhotoCollection getPhotoAlbum(int userId, int albumId);
+        PhotoCollection GetPhotoAlbum(int userId, int albumId);
 
         [OperationContract]
         void AddPhoto(Photo p);
@@ -42,7 +42,7 @@ namespace ServeurWCF
         void RemovePhoto(int userId, int albumId, int photoId);
 
         [OperationContract]
-        void AddAlbum(Album a);
+        Album AddAlbum(Album a);
 
         [OperationContract]
         void RemoveAlbum(int userId, int albumId);

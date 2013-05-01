@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using LibrairieServeur;
+using ObjetDefinition;
 
 namespace ServeurWCF
 {
@@ -19,27 +20,29 @@ namespace ServeurWCF
             gestionBdd = new GestionBDD(bdd);
         }
 
-        public ObjetDefinition.Utilisateur connexion(string pseudo, string mdp)
+        public Utilisateur Connexion(string pseudo, string mdp)
         {
             return gestionBdd.getUser(pseudo, mdp);
         }
 
-        public ObjetDefinition.Utilisateur instription(ObjetDefinition.Utilisateur u)
+        public Utilisateur Instription(Utilisateur u)
         {
             return gestionBdd.addUser(u);
         }
 
-        public ObjetDefinition.AlbumCollection getAlbumCollection(int userId)
+        public List<Album> GetAlbumCollection(int userId)
+        {
+            List<Album> l = gestionBdd.getAlbums(userId);
+            Console.WriteLine("NB album: {0}", l.Count);
+            return gestionBdd.getAlbums(userId);
+        }
+
+        public PhotoCollection GetPhotoAlbum(int userId, int albumId)
         {
             throw new NotImplementedException();
         }
 
-        public ObjetDefinition.PhotoCollection getPhotoAlbum(int userId, int albumId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddPhoto(ObjetDefinition.Photo p)
+        public void AddPhoto(Photo p)
         {
             throw new NotImplementedException();
         }
@@ -49,9 +52,9 @@ namespace ServeurWCF
             throw new NotImplementedException();
         }
 
-        public void AddAlbum(ObjetDefinition.Album a)
+        public Album AddAlbum(Album a)
         {
-            throw new NotImplementedException();
+            return gestionBdd.addAlbum(a);
         }
 
         public void RemoveAlbum(int userId, int albumId)

@@ -7,29 +7,29 @@
       <xsd:import schemaLocation="http://localhost:50978/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ObjetDefinition" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IService_connexion_InputMessage">
-    <wsdl:part name="parameters" element="tns:connexion" />
+  <wsdl:message name="IService_Connexion_InputMessage">
+    <wsdl:part name="parameters" element="tns:Connexion" />
   </wsdl:message>
-  <wsdl:message name="IService_connexion_OutputMessage">
-    <wsdl:part name="parameters" element="tns:connexionResponse" />
+  <wsdl:message name="IService_Connexion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConnexionResponse" />
   </wsdl:message>
-  <wsdl:message name="IService_instription_InputMessage">
-    <wsdl:part name="parameters" element="tns:instription" />
+  <wsdl:message name="IService_Instription_InputMessage">
+    <wsdl:part name="parameters" element="tns:Instription" />
   </wsdl:message>
-  <wsdl:message name="IService_instription_OutputMessage">
-    <wsdl:part name="parameters" element="tns:instriptionResponse" />
+  <wsdl:message name="IService_Instription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InstriptionResponse" />
   </wsdl:message>
-  <wsdl:message name="IService_getAlbumCollection_InputMessage">
-    <wsdl:part name="parameters" element="tns:getAlbumCollection" />
+  <wsdl:message name="IService_GetAlbumCollection_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlbumCollection" />
   </wsdl:message>
-  <wsdl:message name="IService_getAlbumCollection_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getAlbumCollectionResponse" />
+  <wsdl:message name="IService_GetAlbumCollection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlbumCollectionResponse" />
   </wsdl:message>
-  <wsdl:message name="IService_getPhotoAlbum_InputMessage">
-    <wsdl:part name="parameters" element="tns:getPhotoAlbum" />
+  <wsdl:message name="IService_GetPhotoAlbum_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhotoAlbum" />
   </wsdl:message>
-  <wsdl:message name="IService_getPhotoAlbum_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getPhotoAlbumResponse" />
+  <wsdl:message name="IService_GetPhotoAlbum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhotoAlbumResponse" />
   </wsdl:message>
   <wsdl:message name="IService_AddPhoto_InputMessage">
     <wsdl:part name="parameters" element="tns:AddPhoto" />
@@ -56,21 +56,21 @@
     <wsdl:part name="parameters" element="tns:RemoveAlbumResponse" />
   </wsdl:message>
   <wsdl:portType name="IService">
-    <wsdl:operation name="connexion">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/connexion" message="tns:IService_connexion_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/connexionResponse" message="tns:IService_connexion_OutputMessage" />
+    <wsdl:operation name="Connexion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/Connexion" message="tns:IService_Connexion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ConnexionResponse" message="tns:IService_Connexion_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="instription">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/instription" message="tns:IService_instription_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/instriptionResponse" message="tns:IService_instription_OutputMessage" />
+    <wsdl:operation name="Instription">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/Instription" message="tns:IService_Instription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/InstriptionResponse" message="tns:IService_Instription_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="getAlbumCollection">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/getAlbumCollection" message="tns:IService_getAlbumCollection_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/getAlbumCollectionResponse" message="tns:IService_getAlbumCollection_OutputMessage" />
+    <wsdl:operation name="GetAlbumCollection">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetAlbumCollection" message="tns:IService_GetAlbumCollection_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetAlbumCollectionResponse" message="tns:IService_GetAlbumCollection_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="getPhotoAlbum">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/getPhotoAlbum" message="tns:IService_getPhotoAlbum_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/getPhotoAlbumResponse" message="tns:IService_getPhotoAlbum_OutputMessage" />
+    <wsdl:operation name="GetPhotoAlbum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetPhotoAlbum" message="tns:IService_GetPhotoAlbum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetPhotoAlbumResponse" message="tns:IService_GetPhotoAlbum_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddPhoto">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/AddPhoto" message="tns:IService_AddPhoto_InputMessage" />
@@ -91,8 +91,8 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="connexion">
-      <soap:operation soapAction="http://tempuri.org/IService/connexion" style="document" />
+    <wsdl:operation name="Connexion">
+      <soap:operation soapAction="http://tempuri.org/IService/Connexion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -100,8 +100,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="instription">
-      <soap:operation soapAction="http://tempuri.org/IService/instription" style="document" />
+    <wsdl:operation name="Instription">
+      <soap:operation soapAction="http://tempuri.org/IService/Instription" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -109,8 +109,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getAlbumCollection">
-      <soap:operation soapAction="http://tempuri.org/IService/getAlbumCollection" style="document" />
+    <wsdl:operation name="GetAlbumCollection">
+      <soap:operation soapAction="http://tempuri.org/IService/GetAlbumCollection" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -118,8 +118,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getPhotoAlbum">
-      <soap:operation soapAction="http://tempuri.org/IService/getPhotoAlbum" style="document" />
+    <wsdl:operation name="GetPhotoAlbum">
+      <soap:operation soapAction="http://tempuri.org/IService/GetPhotoAlbum" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

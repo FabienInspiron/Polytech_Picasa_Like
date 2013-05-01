@@ -22,7 +22,8 @@ namespace ObjetDefinition
         /// </summary>
         /// <param name="nom">Nom du doissier</param>
         /// <param name="user">Propriétaire du dossier</param>
-        public Album(String nom, Utilisateur user) : this(nom, user.Id)
+        public Album(String nom, Utilisateur user)
+            : this(-1, nom, user.Id)
         { }
 
         /// <summary>
@@ -31,21 +32,18 @@ namespace ObjetDefinition
         /// <param name="nom"></param>
         /// <param name="userId"></param>
         public Album(String nom, int userId)
-        {
-            this.Id = 0;
-            this.Nom = nom;
-            this.UserId = userId;
-        }
-
+            : this(-1, nom, userId)
+        { }
 
         public Album(int id, String nom)
+            : this(id, nom, -1)
+        { }
+
+        public Album(int id, String nom, int userId)
         {
             this.Id = id;
             this.Nom = nom;
-            this.UserId = -1;
+            this.UserId = userId;
         }
     }
-
-    public class AlbumCollection : ObservableCollection<Album>
-    { }
 }

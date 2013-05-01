@@ -280,17 +280,17 @@ namespace TestWebServices.WebService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WebService.IService")]
     public interface IService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/connexion", ReplyAction="http://tempuri.org/IService/connexionResponse")]
-        TestWebServices.WebService.Utilisateur connexion(string pseudo, string mdp);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Connexion", ReplyAction="http://tempuri.org/IService/ConnexionResponse")]
+        TestWebServices.WebService.Utilisateur Connexion(string pseudo, string mdp);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/instription", ReplyAction="http://tempuri.org/IService/instriptionResponse")]
-        TestWebServices.WebService.Utilisateur instription(TestWebServices.WebService.Utilisateur u);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Instription", ReplyAction="http://tempuri.org/IService/InstriptionResponse")]
+        TestWebServices.WebService.Utilisateur Instription(TestWebServices.WebService.Utilisateur u);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getAlbumCollection", ReplyAction="http://tempuri.org/IService/getAlbumCollectionResponse")]
-        TestWebServices.WebService.Album[] getAlbumCollection(int userId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlbumCollection", ReplyAction="http://tempuri.org/IService/GetAlbumCollectionResponse")]
+        TestWebServices.WebService.Album[] GetAlbumCollection(int userId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/getPhotoAlbum", ReplyAction="http://tempuri.org/IService/getPhotoAlbumResponse")]
-        TestWebServices.WebService.Photo[] getPhotoAlbum(int userId, int albumId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhotoAlbum", ReplyAction="http://tempuri.org/IService/GetPhotoAlbumResponse")]
+        TestWebServices.WebService.Photo[] GetPhotoAlbum(int userId, int albumId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddPhoto", ReplyAction="http://tempuri.org/IService/AddPhotoResponse")]
         void AddPhoto(TestWebServices.WebService.Photo p);
@@ -299,7 +299,7 @@ namespace TestWebServices.WebService {
         void RemovePhoto(int userId, int albumId, int photoId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddAlbum", ReplyAction="http://tempuri.org/IService/AddAlbumResponse")]
-        void AddAlbum(TestWebServices.WebService.Album a);
+        TestWebServices.WebService.Album AddAlbum(TestWebServices.WebService.Album a);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAlbum", ReplyAction="http://tempuri.org/IService/RemoveAlbumResponse")]
         void RemoveAlbum(int userId, int albumId);
@@ -332,20 +332,20 @@ namespace TestWebServices.WebService {
                 base(binding, remoteAddress) {
         }
         
-        public TestWebServices.WebService.Utilisateur connexion(string pseudo, string mdp) {
-            return base.Channel.connexion(pseudo, mdp);
+        public TestWebServices.WebService.Utilisateur Connexion(string pseudo, string mdp) {
+            return base.Channel.Connexion(pseudo, mdp);
         }
         
-        public TestWebServices.WebService.Utilisateur instription(TestWebServices.WebService.Utilisateur u) {
-            return base.Channel.instription(u);
+        public TestWebServices.WebService.Utilisateur Instription(TestWebServices.WebService.Utilisateur u) {
+            return base.Channel.Instription(u);
         }
         
-        public TestWebServices.WebService.Album[] getAlbumCollection(int userId) {
-            return base.Channel.getAlbumCollection(userId);
+        public TestWebServices.WebService.Album[] GetAlbumCollection(int userId) {
+            return base.Channel.GetAlbumCollection(userId);
         }
         
-        public TestWebServices.WebService.Photo[] getPhotoAlbum(int userId, int albumId) {
-            return base.Channel.getPhotoAlbum(userId, albumId);
+        public TestWebServices.WebService.Photo[] GetPhotoAlbum(int userId, int albumId) {
+            return base.Channel.GetPhotoAlbum(userId, albumId);
         }
         
         public void AddPhoto(TestWebServices.WebService.Photo p) {
@@ -356,8 +356,8 @@ namespace TestWebServices.WebService {
             base.Channel.RemovePhoto(userId, albumId, photoId);
         }
         
-        public void AddAlbum(TestWebServices.WebService.Album a) {
-            base.Channel.AddAlbum(a);
+        public TestWebServices.WebService.Album AddAlbum(TestWebServices.WebService.Album a) {
+            return base.Channel.AddAlbum(a);
         }
         
         public void RemoveAlbum(int userId, int albumId) {
