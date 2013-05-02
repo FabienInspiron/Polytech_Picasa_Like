@@ -12,6 +12,8 @@ namespace ServeurWCF
     [ServiceContract]
     public interface IService
     {
+
+        #region utilisateur
         /// <summary>
         /// Gestion de la connexion d'un utilisateur
         /// </summary>
@@ -29,8 +31,22 @@ namespace ServeurWCF
         [OperationContract]
         Utilisateur Instription(Utilisateur u);
 
+        #endregion 
+
+        #region album
+
         [OperationContract]
         List<Album> GetAlbumCollection(int userId);
+
+        [OperationContract]
+        Album AddAlbum(Album a);
+
+        [OperationContract]
+        void RemoveAlbum(int userId, int albumId);
+
+        #endregion
+
+        #region photo
 
         [OperationContract]
         List<Photo> GetPhotoAlbum(int userId, int albumId);
@@ -44,10 +60,6 @@ namespace ServeurWCF
         [OperationContract]
         void RemovePhoto(int userId, int albumId, int photoId);
 
-        [OperationContract]
-        Album AddAlbum(Album a);
-
-        [OperationContract]
-        void RemoveAlbum(int userId, int albumId);
+        # endregion
     }
 }

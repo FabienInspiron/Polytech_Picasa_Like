@@ -289,6 +289,12 @@ namespace ClientAdmin.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlbumCollection", ReplyAction="http://tempuri.org/IService/GetAlbumCollectionResponse")]
         ClientAdmin.ServiceReference1.Album[] GetAlbumCollection(int userId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddAlbum", ReplyAction="http://tempuri.org/IService/AddAlbumResponse")]
+        ClientAdmin.ServiceReference1.Album AddAlbum(ClientAdmin.ServiceReference1.Album a);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAlbum", ReplyAction="http://tempuri.org/IService/RemoveAlbumResponse")]
+        void RemoveAlbum(int userId, int albumId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhotoAlbum", ReplyAction="http://tempuri.org/IService/GetPhotoAlbumResponse")]
         ClientAdmin.ServiceReference1.Photo[] GetPhotoAlbum(int userId, int albumId);
         
@@ -300,12 +306,6 @@ namespace ClientAdmin.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemovePhoto", ReplyAction="http://tempuri.org/IService/RemovePhotoResponse")]
         void RemovePhoto(int userId, int albumId, int photoId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddAlbum", ReplyAction="http://tempuri.org/IService/AddAlbumResponse")]
-        ClientAdmin.ServiceReference1.Album AddAlbum(ClientAdmin.ServiceReference1.Album a);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAlbum", ReplyAction="http://tempuri.org/IService/RemoveAlbumResponse")]
-        void RemoveAlbum(int userId, int albumId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -347,6 +347,14 @@ namespace ClientAdmin.ServiceReference1 {
             return base.Channel.GetAlbumCollection(userId);
         }
         
+        public ClientAdmin.ServiceReference1.Album AddAlbum(ClientAdmin.ServiceReference1.Album a) {
+            return base.Channel.AddAlbum(a);
+        }
+        
+        public void RemoveAlbum(int userId, int albumId) {
+            base.Channel.RemoveAlbum(userId, albumId);
+        }
+        
         public ClientAdmin.ServiceReference1.Photo[] GetPhotoAlbum(int userId, int albumId) {
             return base.Channel.GetPhotoAlbum(userId, albumId);
         }
@@ -361,14 +369,6 @@ namespace ClientAdmin.ServiceReference1 {
         
         public void RemovePhoto(int userId, int albumId, int photoId) {
             base.Channel.RemovePhoto(userId, albumId, photoId);
-        }
-        
-        public ClientAdmin.ServiceReference1.Album AddAlbum(ClientAdmin.ServiceReference1.Album a) {
-            return base.Channel.AddAlbum(a);
-        }
-        
-        public void RemoveAlbum(int userId, int albumId) {
-            base.Channel.RemoveAlbum(userId, albumId);
         }
     }
 }

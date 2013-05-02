@@ -44,6 +44,33 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AddAlbum">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="a" nillable="true" type="q5:Album" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddAlbumResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="AddAlbumResult" nillable="true" type="q6:Album" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveAlbum">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element minOccurs="0" name="albumId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveAlbumResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetPhotoAlbum">
     <xs:complexType>
       <xs:sequence>
@@ -55,7 +82,7 @@
   <xs:element name="GetPhotoAlbumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="GetPhotoAlbumResult" nillable="true" type="q5:ArrayOfPhoto" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="GetPhotoAlbumResult" nillable="true" type="q7:ArrayOfPhoto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -71,14 +98,14 @@
   <xs:element name="GetPhotoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="GetPhotoResult" nillable="true" type="q6:Photo" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="GetPhotoResult" nillable="true" type="q8:Photo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddPhoto">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="p" nillable="true" type="q7:Photo" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="p" nillable="true" type="q9:Photo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -97,33 +124,6 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="RemovePhotoResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AddAlbum">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="a" nillable="true" type="q8:Album" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AddAlbumResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="AddAlbumResult" nillable="true" type="q9:Album" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RemoveAlbum">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="userId" type="xs:int" />
-        <xs:element minOccurs="0" name="albumId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RemoveAlbumResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
