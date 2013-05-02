@@ -283,8 +283,8 @@ namespace ClientAdmin.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Connexion", ReplyAction="http://tempuri.org/IService/ConnexionResponse")]
         ClientAdmin.ServiceReference1.Utilisateur Connexion(string pseudo, string mdp);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Instription", ReplyAction="http://tempuri.org/IService/InstriptionResponse")]
-        ClientAdmin.ServiceReference1.Utilisateur Instription(ClientAdmin.ServiceReference1.Utilisateur u);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Inscription", ReplyAction="http://tempuri.org/IService/InscriptionResponse")]
+        ClientAdmin.ServiceReference1.Utilisateur Inscription(ClientAdmin.ServiceReference1.Utilisateur u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlbumCollection", ReplyAction="http://tempuri.org/IService/GetAlbumCollectionResponse")]
         ClientAdmin.ServiceReference1.Album[] GetAlbumCollection(int userId);
@@ -339,8 +339,8 @@ namespace ClientAdmin.ServiceReference1 {
             return base.Channel.Connexion(pseudo, mdp);
         }
         
-        public ClientAdmin.ServiceReference1.Utilisateur Instription(ClientAdmin.ServiceReference1.Utilisateur u) {
-            return base.Channel.Instription(u);
+        public ClientAdmin.ServiceReference1.Utilisateur Inscription(ClientAdmin.ServiceReference1.Utilisateur u) {
+            return base.Channel.Inscription(u);
         }
         
         public ClientAdmin.ServiceReference1.Album[] GetAlbumCollection(int userId) {

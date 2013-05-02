@@ -24,14 +24,14 @@ namespace ServeurWCF
         # region Album
 
         [OperationContract]
-        List<Utilisateur> getAllAlbums();
+        List<Album> getAllAlbums();
 
         #endregion
 
         # region Photo
 
         [OperationContract]
-        List<Utilisateur> getAllPhoto();
+        List<Photo> getAllPhoto();
 
         #endregion
     }

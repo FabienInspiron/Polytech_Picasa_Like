@@ -283,11 +283,17 @@ namespace ClientWeb.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Connexion", ReplyAction="http://tempuri.org/IService/ConnexionResponse")]
         ClientWeb.ServiceReference1.Utilisateur Connexion(string pseudo, string mdp);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Instription", ReplyAction="http://tempuri.org/IService/InstriptionResponse")]
-        ClientWeb.ServiceReference1.Utilisateur Instription(ClientWeb.ServiceReference1.Utilisateur u);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Inscription", ReplyAction="http://tempuri.org/IService/InscriptionResponse")]
+        ClientWeb.ServiceReference1.Utilisateur Inscription(ClientWeb.ServiceReference1.Utilisateur u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlbumCollection", ReplyAction="http://tempuri.org/IService/GetAlbumCollectionResponse")]
         ClientWeb.ServiceReference1.Album[] GetAlbumCollection(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddAlbum", ReplyAction="http://tempuri.org/IService/AddAlbumResponse")]
+        ClientWeb.ServiceReference1.Album AddAlbum(ClientWeb.ServiceReference1.Album a);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAlbum", ReplyAction="http://tempuri.org/IService/RemoveAlbumResponse")]
+        void RemoveAlbum(int userId, int albumId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhotoAlbum", ReplyAction="http://tempuri.org/IService/GetPhotoAlbumResponse")]
         ClientWeb.ServiceReference1.Photo[] GetPhotoAlbum(int userId, int albumId);
@@ -300,12 +306,6 @@ namespace ClientWeb.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemovePhoto", ReplyAction="http://tempuri.org/IService/RemovePhotoResponse")]
         void RemovePhoto(int userId, int albumId, int photoId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddAlbum", ReplyAction="http://tempuri.org/IService/AddAlbumResponse")]
-        ClientWeb.ServiceReference1.Album AddAlbum(ClientWeb.ServiceReference1.Album a);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAlbum", ReplyAction="http://tempuri.org/IService/RemoveAlbumResponse")]
-        void RemoveAlbum(int userId, int albumId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -339,12 +339,20 @@ namespace ClientWeb.ServiceReference1 {
             return base.Channel.Connexion(pseudo, mdp);
         }
         
-        public ClientWeb.ServiceReference1.Utilisateur Instription(ClientWeb.ServiceReference1.Utilisateur u) {
-            return base.Channel.Instription(u);
+        public ClientWeb.ServiceReference1.Utilisateur Inscription(ClientWeb.ServiceReference1.Utilisateur u) {
+            return base.Channel.Inscription(u);
         }
         
         public ClientWeb.ServiceReference1.Album[] GetAlbumCollection(int userId) {
             return base.Channel.GetAlbumCollection(userId);
+        }
+        
+        public ClientWeb.ServiceReference1.Album AddAlbum(ClientWeb.ServiceReference1.Album a) {
+            return base.Channel.AddAlbum(a);
+        }
+        
+        public void RemoveAlbum(int userId, int albumId) {
+            base.Channel.RemoveAlbum(userId, albumId);
         }
         
         public ClientWeb.ServiceReference1.Photo[] GetPhotoAlbum(int userId, int albumId) {
@@ -361,14 +369,6 @@ namespace ClientWeb.ServiceReference1 {
         
         public void RemovePhoto(int userId, int albumId, int photoId) {
             base.Channel.RemovePhoto(userId, albumId, photoId);
-        }
-        
-        public ClientWeb.ServiceReference1.Album AddAlbum(ClientWeb.ServiceReference1.Album a) {
-            return base.Channel.AddAlbum(a);
-        }
-        
-        public void RemoveAlbum(int userId, int albumId) {
-            base.Channel.RemoveAlbum(userId, albumId);
         }
     }
 }

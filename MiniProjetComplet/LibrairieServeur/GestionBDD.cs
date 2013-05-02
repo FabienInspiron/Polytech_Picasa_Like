@@ -74,23 +74,24 @@ namespace LibrairieServeur
         /// <summary>
         /// Afficher tous les albums present dans la base de donnée
         /// </summary>
-        public void displayAllAlbum()
+        public List<Album> getAllAlbum()
         {
+            List<Album> listAlb = new List<Album>();
             try
             {
                 bdd.connexion();
                 String sql = "SELECT * FROM Album";
                 SqlCommand oCommand = bdd.executeSQL(sql);
 
-                Console.WriteLine("****** Album de la base de données ********");
-                Console.WriteLine("ID" + "\t" + "Nom " + "\t" + "Utilisateur" + "\t");
-
                 SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
                 while (myReader.Read())
                 {
-                    Console.Write(myReader.GetValue(0) + "\t");
-                    Console.Write(myReader.GetValue(1) + "\t");
-                    Console.WriteLine(myReader.GetValue(2));
+                    int id = (int) myReader.GetInt32(0);
+                    String nom = myReader.GetString(1);
+                    int ut = (int) myReader.GetInt32(2);
+
+                    Album alb = new Album(id, nom, ut);
+                    listAlb.Add(alb);
                 }
 
                 myReader.Close();
@@ -104,6 +105,7 @@ namespace LibrairieServeur
             {
                 bdd.deconnect();
             }
+            return listAlb;
         }
 
         /// <summary>
@@ -333,6 +335,7 @@ namespace LibrairieServeur
                 oCommand.Parameters.Add("@mdp", SqlDbType.VarChar, nom.Length).Value = mdp;
 
                 oCommand.ExecuteNonQuery();
+
                 Console.WriteLine("Utilisateur ajouter a la base");
                 bdd.deconnect();
 
@@ -385,37 +388,42 @@ namespace LibrairieServeur
         }
 
         /// <summary>
-        /// Optenez la liste de tous les utilisateurs de la base de donnée
+        /// Afficher tous les utilisateur present dans la base de donnée
         /// </summary>
-        public void displayAllUser()
+        public List<Utilisateur> getAllUser()
         {
+            List<Utilisateur> listUser = new List<Utilisateur>();
             try
             {
                 bdd.connexion();
                 String sql = "SELECT * FROM Utilisateur";
                 SqlCommand oCommand = bdd.executeSQL(sql);
 
-                Console.WriteLine("****** Utilisateurs de la base de données ********");
-                Console.WriteLine("ID" + "\t" + "Nom " + "\t" + "Prenom" + "\t");
-
                 SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
                 while (myReader.Read())
                 {
-                    Console.Write(myReader.GetValue(0) + "\t");
-                    Console.Write(myReader.GetValue(1) + "\t");
-                    Console.WriteLine(myReader.GetValue(2));
+                    int id = (int)myReader.GetInt32(0);
+                    String nom = myReader.GetString(1);
+                    String prenom = myReader.GetString(2);
+                    String mdp = myReader.GetString(3);
+
+                    Utilisateur ut = new Utilisateur(nom, prenom, mdp);
+                    ut.Id = id;
+                    listUser.Add(ut);
                 }
 
                 myReader.Close();
-
-                oCommand.ExecuteNonQuery();
-                bdd.deconnect();
             }
             catch (Exception e)
             {
-                bdd.deconnect();
-                Console.WriteLine("Impossible d'afficher tous les utilisateurs : " + e.Message);
+
+                Console.WriteLine("Impossible d'afficher tous les albums : " + e.Message);
             }
+            finally
+            {
+                bdd.deconnect();
+            }
+            return listUser;
         }
 
         /// <summary>
@@ -591,37 +599,37 @@ namespace LibrairieServeur
         }
 
         /// <summary>
-        /// Afficher le nom de toutes les images
+        /// Afficher tous les utilisateur present dans la base de donnée
         /// </summary>
-        public void displayAllImages()
+        public List<Photo> getAllPhoto()
         {
+            List<Photo> listPhoto = new List<Photo>();
             try
             {
                 bdd.connexion();
-                String sql = "SELECT * FROM Image";
+                String sql = "SELECT * FROM Photo";
                 SqlCommand oCommand = bdd.executeSQL(sql);
-
-                Console.WriteLine("****** Images de la base de données ********");
-                Console.WriteLine("ID" + "\t" + "size " + "\t" + "album" + "\t");
 
                 SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
                 while (myReader.Read())
                 {
-                    Console.Write(myReader.GetValue(1) + "\t");
-                    Console.Write(myReader.GetValue(2) + "\t");
-                    Console.WriteLine(myReader.GetValue(4));
+                    int id = (int)myReader.GetInt32(0);
+
+                    listPhoto.Add(getPhotoID(id));
                 }
 
                 myReader.Close();
-
-                oCommand.ExecuteNonQuery();
-                bdd.deconnect();
             }
             catch (Exception e)
             {
-                bdd.deconnect();
-                Console.WriteLine("Impossible d'afficher tous les utilisateurs : " + e.Message);
+
+                Console.WriteLine("Impossible d'afficher tous les albums : " + e.Message);
             }
+            finally
+            {
+                bdd.deconnect();
+            }
+            return listPhoto;
         }
 
         /// <summary>

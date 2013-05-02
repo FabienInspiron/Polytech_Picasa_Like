@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+
 using LibrairieServeur;
 using ObjetDefinition;
 
@@ -29,24 +30,24 @@ namespace ServeurWCF
 
         public List<Utilisateur> getAllUsers()
         {
-            return null;
+            return gestionBdd.getAllUser();
         }
         #endregion
 
         # region Album
 
-        public List<Utilisateur> getAllAlbums()
+        public List<Album> getAllAlbums()
         {
-            return null;
+            return gestionBdd.getAllAlbum();
         }
 
         #endregion
 
         # region Photo
 
-        public List<Utilisateur> getAllPhoto()
+        public List<Photo> getAllPhoto()
         {
-            return null;
+            return gestionBdd.getAllPhoto();
         }
 
         #endregion

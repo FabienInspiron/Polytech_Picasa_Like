@@ -33,7 +33,7 @@
   <xs:element name="getAllAlbumsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="getAllAlbumsResult" nillable="true" type="q2:ArrayOfUtilisateur" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="getAllAlbumsResult" nillable="true" type="q2:ArrayOfAlbum" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -45,7 +45,7 @@
   <xs:element name="getAllPhotoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="getAllPhotoResult" nillable="true" type="q3:ArrayOfUtilisateur" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="getAllPhotoResult" nillable="true" type="q3:ArrayOfPhoto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
 using ClientWeb.ServiceReference1;
 
 namespace ClientWeb
@@ -24,7 +25,7 @@ namespace ClientWeb
             u.Nom = TextBoxNom.Text;
             u.Mdp = TextBoxMDP.Text;
 
-            Utilisateur u_new = service.Instription(u);
+            Utilisateur u_new = service.Inscription(u);
 
             // Mise en place de la variable de session contenant l'utilisateur
             Session["Utilisateur"] = u_new; 

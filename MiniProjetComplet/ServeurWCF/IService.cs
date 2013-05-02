@@ -29,7 +29,7 @@ namespace ServeurWCF
         /// <param name="u">L'utilisateur à inscrir</param>
         /// <returns>Le nouvel utilisateur si ok, sinon null</returns>
         [OperationContract]
-        Utilisateur Instription(Utilisateur u);
+        Utilisateur Inscription(Utilisateur u);
 
         #endregion 
 

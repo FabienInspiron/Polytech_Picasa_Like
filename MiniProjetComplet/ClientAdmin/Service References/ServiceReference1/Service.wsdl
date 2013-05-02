@@ -135,7 +135,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IService_Instription_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IService_Inscription_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -154,7 +154,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IService_Instription_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IService_Inscription_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -452,11 +452,11 @@
   <wsdl:message name="IService_Connexion_OutputMessage">
     <wsdl:part name="parameters" element="tns:ConnexionResponse" />
   </wsdl:message>
-  <wsdl:message name="IService_Instription_InputMessage">
-    <wsdl:part name="parameters" element="tns:Instription" />
+  <wsdl:message name="IService_Inscription_InputMessage">
+    <wsdl:part name="parameters" element="tns:Inscription" />
   </wsdl:message>
-  <wsdl:message name="IService_Instription_OutputMessage">
-    <wsdl:part name="parameters" element="tns:InstriptionResponse" />
+  <wsdl:message name="IService_Inscription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InscriptionResponse" />
   </wsdl:message>
   <wsdl:message name="IService_GetAlbumCollection_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAlbumCollection" />
@@ -505,9 +505,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService/Connexion" message="tns:IService_Connexion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/ConnexionResponse" message="tns:IService_Connexion_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Instription">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/Instription" message="tns:IService_Instription_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/InstriptionResponse" message="tns:IService_Instription_OutputMessage" />
+    <wsdl:operation name="Inscription">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/Inscription" message="tns:IService_Inscription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/InscriptionResponse" message="tns:IService_Inscription_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAlbumCollection">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetAlbumCollection" message="tns:IService_GetAlbumCollection_InputMessage" />
@@ -552,14 +552,14 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Instription">
-      <soap12:operation soapAction="http://tempuri.org/IService/Instription" style="document" />
+    <wsdl:operation name="Inscription">
+      <soap12:operation soapAction="http://tempuri.org/IService/Inscription" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IService_Instription_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IService_Inscription_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IService_Instription_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IService_Inscription_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

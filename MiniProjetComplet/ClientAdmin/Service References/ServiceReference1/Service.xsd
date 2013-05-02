@@ -16,17 +16,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="Instription">
+  <xs:element name="Inscription">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="u" nillable="true" type="q2:Utilisateur" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InstriptionResponse">
+  <xs:element name="InscriptionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="InstriptionResult" nillable="true" type="q3:Utilisateur" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="InscriptionResult" nillable="true" type="q3:Utilisateur" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

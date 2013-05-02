@@ -25,7 +25,7 @@ namespace ServeurWCF
             return gestionBdd.getUser(pseudo, mdp);
         }
 
-        public Utilisateur Instription(Utilisateur u)
+        public Utilisateur Inscription(Utilisateur u)
         {
             return gestionBdd.addUser(u);
         }

@@ -106,7 +106,8 @@ namespace ClientAdmin
         /// <param name="donee"></param>
         public static void actions(int action, int donnee)
         {
-            ServiceClient service = new ServiceClient();
+            ServiceClient serviceClient = new ServiceClient();
+            //ServiceAdminClient serviceAdmin = new ServiceAdminClient();
 
             switch (action)
             {
@@ -119,7 +120,7 @@ namespace ClientAdmin
                             u.Prenom = getString("Prenom : ");
                             u.Mdp = getString("Mot de passe : ");
 
-                            Utilisateur ret = service.Instription(u);
+                            Utilisateur ret = serviceClient.Inscription(u);
 
                             if (ret == null) Console.WriteLine("Inscription impossible");
                             else Console.WriteLine("Inscription reussite : " + ret.Id);
@@ -128,7 +129,8 @@ namespace ClientAdmin
                             Album albu = new Album();
                             albu.Nom = getString("Nom : ");
                             albu.UserId = getInt("ID Utilisateur : ");
-                            Album a = service.AddAlbum(albu);
+
+                            Album a = serviceClient.AddAlbum(albu);
 
                             if (a == null) Console.WriteLine("Ajout impossible");
                             else Console.WriteLine("Album ajouté : " + a.Id);
@@ -159,17 +161,29 @@ namespace ClientAdmin
                             break;
                     }
                 break;
-                case 4:
-                switch (donnee)
-                {
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                }
-                break;
+                /*
+            case 4:
+                
+            switch (donnee)
+            {
+                case 1:
+                    ClientAdmin.ServiceReferenceAdmin.Utilisateur[] userList = serviceAdmin.getAllUsers();
+                    foreach (ClientAdmin.ServiceReferenceAdmin.Utilisateur u in userList)
+                        Console.WriteLine(u.Id + " - " + u.Nom);
+                    break;
+                case 2:
+                    Album[] albums = serviceAdmin.getAllAlbums();
+                    foreach (Album u in albums)
+                        Console.WriteLine(u.Id + " - " + u.Nom);
+                    break;
+                case 3:
+                      Photo[] photos = serviceAdmin.getAllPhoto();
+                    foreach (Photo u in photos)
+                        Console.WriteLine(u.Id + " - " + u.Nom);
+                    break;
+            }
+            break;
+            */
             }
         }
     }
