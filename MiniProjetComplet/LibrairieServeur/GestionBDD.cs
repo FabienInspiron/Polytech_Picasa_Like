@@ -34,26 +34,28 @@ namespace LibrairieServeur
         /// <returns>Numero d'ajout de l'album</returns>
         public int addAlbum(String nom, int numUtilisateur)
         {
+            int res = -1;
             try
             {
                 bdd.connexion();
-                String sql = "INSERT INTO Album (nom, utilisater) " + "VALUES(@nom, @utilisateur)";
+                String sql = "INSERT INTO Album (nom, utilisater) VALUES(@nom, @utilisateur)";
 
                 SqlCommand oCommand = bdd.executeSQL(sql);
                 oCommand.Parameters.Add("@nom", SqlDbType.VarChar, nom.Length).Value = nom;
                 oCommand.Parameters.Add("@utilisateur", SqlDbType.Int).Value = numUtilisateur;
                 oCommand.ExecuteNonQuery();
 
-                bdd.deconnect();
-
-                return getIdentCurrent("Album");
+                res = getIdentCurrent("Album");
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                bdd.deconnect();
-                return 0;
             }
+            finally {
+                bdd.deconnect();
+            }
+
+            return res;
         }
 
 
@@ -65,8 +67,7 @@ namespace LibrairieServeur
         /// <returns></returns>
         public Album addAlbum(Album alb)
         {
-            int id = addAlbum(alb.Nom, alb.UserId);
-            alb.Id = id;
+            alb.Id = addAlbum(alb.Nom, alb.UserId);
             return alb;
         }
 
@@ -93,14 +94,15 @@ namespace LibrairieServeur
                 }
 
                 myReader.Close();
-
-                oCommand.ExecuteNonQuery();
-                bdd.deconnect();
             }
             catch (Exception e)
             {
-                bdd.deconnect();
+                
                 Console.WriteLine("Impossible d'afficher tous les albums : " + e.Message);
+            }
+            finally
+            {
+                bdd.deconnect();
             }
         }
 
@@ -114,7 +116,6 @@ namespace LibrairieServeur
             String sql = "DELETE FROM Album WHERE id=@id";
             SqlCommand oCommand = bdd.executeSQL(sql);
             oCommand.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
-
             oCommand.ExecuteNonQuery();
             Console.WriteLine("Album supprimé de la base");
             bdd.deconnect();
@@ -154,13 +155,14 @@ namespace LibrairieServeur
                 }
 
                 myReader.Close();
-
-                oCommand.ExecuteNonQuery();
-                bdd.deconnect();
             }
             catch (Exception e)
             {
                 Console.Write(e.Message);
+            }
+            finally
+            {
+                bdd.deconnect();
             }
 
             return albums;
@@ -189,19 +191,19 @@ namespace LibrairieServeur
                 SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
                 while (myReader.Read())
                 {
-                    nom = (String) myReader.GetValue(1);
-                    nom.Trim();
+                    nom = myReader.GetString(1).Trim();
                     user = myReader.GetInt32(2);
                 }
 
                 myReader.Close();
-
-                oCommand.ExecuteNonQuery();
-                bdd.deconnect();
             }
             catch (Exception e)
             {
                 Console.Write(e.Message);
+            }
+            finally
+            {
+                bdd.deconnect();
             }
 
             return new Album(idAlbum, nom);
@@ -210,78 +212,6 @@ namespace LibrairieServeur
         #endregion
 
         #region Utilitaire
-        /// <summary>
-        /// Retourner l'image presente dans la base de donnée
-        /// L'image est identifiée par son ID
-        /// </summary>
-        /// <param name="ID"></param>
-        /// <returns></returns>
-        public Bitmap getImageBDD(int ID)
-        {
-            byte[] bimg = getImageByte(ID);
-            return new Bitmap(BytesToBitmapPhoto(bimg));
-        }
-
-        /// <summary>
-        /// Convertir un image en tableau de byte
-        /// </summary>
-        /// <param name="img"></param>
-        /// <returns></returns>
-        private static byte[] ImageToByte(Image img)
-        {
-            ImageConverter converter = new ImageConverter();
-            return (byte[])converter.ConvertTo(img, typeof(byte[]));
-        }
-
-        /// <summary>
-        /// Convertir un tableau de byte en image
-        /// </summary>
-        /// <param name="byteArrayIn"></param>
-        /// <returns></returns>
-        public static Image byteArrayToImage(byte[] byteArrayIn)
-        {
-            MemoryStream ms = new MemoryStream(byteArrayIn);
-            Image returnImage = Image.FromStream(ms);
-            return returnImage;
-        }
-
-
-        /// <summary>
-        /// Sauvegarder une image dans un fichier temporaire
-        /// </summary>
-        /// <param name="image"></param>
-        /// <returns>Nom de l'image créer</returns>
-        public static string saveImage(Bitmap image)
-        {
-            String name = Path.GetTempFileName();
-            try
-            {
-                image.Save(name);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            return name;
-        }
-
-        /// <summary>
-        /// Sauvegarde l'image avec le nom path
-        /// </summary>
-        /// <param name="image"></param>
-        /// <param name="path">Chemin contenant le nom de l'image</param>
-        public static void saveImage(Bitmap image, string path)
-        {
-            try
-            {
-                image.Save(path);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
         /// <summary>
         ///  récupération d'une image de la base à l'aide d'un DataReader
         /// </summary>
@@ -658,17 +588,6 @@ namespace LibrairieServeur
                 Bitmap img = (Bitmap)Image.FromStream(ms);
                 return img;
             }
-        }
-
-        /// <summary>
-        /// Ajouter l'image a la base de donnée
-        /// </summary>
-        /// <param name="path">Chemin vers l'image sur le disque dur</param>
-        /// <param name="ID"></param>
-        public void addImageBDD(string path, String nom, int numAlbum)
-        {
-            Bitmap bit = new Bitmap(path);
-            addImage(nom, ImageToByte(bit), numAlbum);
         }
 
         /// <summary>

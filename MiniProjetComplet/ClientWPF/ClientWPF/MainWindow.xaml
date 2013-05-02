@@ -22,7 +22,7 @@ Title="MainWindow" Height="620" Width="820">
         <DataTemplate x:Key="AlbumSourceTemplate">
             <Border Padding="5,5,5,5" Margin="5,5,5,5" BorderBrush="DarkGray" BorderThickness="3" CornerRadius="5">
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{Binding Path=nom}" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding Path=Nom}" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Border>
         </DataTemplate>

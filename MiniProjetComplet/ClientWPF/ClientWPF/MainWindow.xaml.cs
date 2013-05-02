@@ -35,7 +35,6 @@ namespace ClientWPF
 
         public MainWindow()
         {
-
             InitializeComponent();
             webService = new ServiceClient();
 
@@ -71,7 +70,7 @@ namespace ClientWPF
             if (parent.Name == "ListBox1")
             {
                 //Console.WriteLine("Envoi de " + image.Nom + " vers le serveur");
-                //gestBDD.addImage(data.Nom, Util.lireFichier(nameImageComplet), idAlbumSelected);
+                image.Album = idAlbumSelected;
                 webService.AddPhoto(image);
             }
             else // recupération d'image en local
@@ -108,7 +107,10 @@ namespace ClientWPF
             imageCollectionAlbum = new ClientWPF.Util.AlbumCollection();
             Album[] albums = webService.GetAlbumCollection(IDUser);
             foreach (Album a in albums)
+            {
+                Console.WriteLine("Album Nom:{0}", a.Nom);
                 imageCollectionAlbum.Add(a);
+            }
 
             ObjectDataProvider imageSourceAlbum = (ObjectDataProvider)FindResource("ImageCollectionAlbum");
             imageSourceAlbum.ObjectInstance = imageCollectionAlbum;
@@ -194,7 +196,8 @@ namespace ClientWPF
             Album a = new Album();
             a.Nom = textAlbum.Text;
             a.UserId = IDUser;
-            webService.AddAlbum(a);
+            a = webService.AddAlbum(a);
+            Console.WriteLine("Album Ajouté {0}({1})", a.Nom, a.Id);
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Information;
             miseAjourAlbum();
