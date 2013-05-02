@@ -46,12 +46,13 @@ Bonjour <% // Si la variable de session user est non nulle,
                 Width="300px" onselectedindexchanged="ListBoxPhoto_SelectedIndexChanged">
             </asp:ListBox>
             
+            <asp:Image ID="ImageCourante" runat="server" Height="16px" />
+            
         </p>
         <p>
             &nbsp;</p>
         <p>
-            <asp:Image ID="ImageCourante" runat="server" Height="16px" />
-        </p>
+            &nbsp;</p>
 
         <p>
             &nbsp;</p>

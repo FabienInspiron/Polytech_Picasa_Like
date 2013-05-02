@@ -46,11 +46,6 @@ namespace ClientWeb
             }
         }
 
-        protected void Visualiser_Click(object sender, EventArgs e)
-        {
-            //ImageCourante.ImageUrl = "Image.aspx?ImageID=" + ImageIDBox.Text;
-        }
-
         protected void AlbumSelected(object sender, EventArgs e)
         {
             String alb = sender.ToString();
