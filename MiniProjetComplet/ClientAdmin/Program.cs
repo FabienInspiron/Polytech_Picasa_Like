@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ClientAdmin.ServiceReference1;
+using ClientAdmin.ServiceReferenceAdmin;
 
 namespace ClientAdmin
 {
@@ -10,10 +11,19 @@ namespace ClientAdmin
     {
         static void Main(string[] args)
         {
-            int actio = getInt(afficherPromptNiveau1());
-            int donnee = getInt(afficherPromptNiveau2());
-            actions(actio, donnee);
-            Console.Read();
+            Boolean continuer = true;
+
+            while (continuer)
+            {
+                int actio = getInt(afficherPromptNiveau1());
+                int donnee = getInt(afficherPromptNiveau2());
+                actions(actio, donnee);
+
+                String Scontinuer = getString("Voulez vous continuer ? (o/n) : ");
+
+                if (!Scontinuer.Equals("o"))
+                    continuer = false;
+            }
         }
 
         public static string afficherPromptNiveau1()
@@ -52,7 +62,7 @@ namespace ClientAdmin
         /// <returns></returns>
         public static int getInt(String message)
         {
-            Console.WriteLine(message);
+            Console.Write(message);
 
             Boolean repeat = true;
             int donnee = 0;
@@ -81,7 +91,7 @@ namespace ClientAdmin
         /// <returns></returns>
         public static String getString(String message)
         {
-            Console.WriteLine(message);
+            Console.Write(message);
             return Console.ReadLine();
         }
 
@@ -107,7 +117,7 @@ namespace ClientAdmin
         public static void actions(int action, int donnee)
         {
             ServiceClient serviceClient = new ServiceClient();
-            //ServiceAdminClient serviceAdmin = new ServiceAdminClient();
+            ServiceAdminClient serviceAdmin = new ServiceAdminClient();
 
             switch (action)
             {
@@ -115,22 +125,22 @@ namespace ClientAdmin
                     switch (donnee)
                     {
                         case 1:
-                            Utilisateur u = new Utilisateur();
+                            ClientAdmin.ServiceReference1.Utilisateur u = new ClientAdmin.ServiceReference1.Utilisateur();
                             u.Nom = getString("Nom : ");
                             u.Prenom = getString("Prenom : ");
                             u.Mdp = getString("Mot de passe : ");
 
-                            Utilisateur ret = serviceClient.Inscription(u);
+                            ServiceReference1.Utilisateur ret = serviceClient.Inscription(u);
 
                             if (ret == null) Console.WriteLine("Inscription impossible");
                             else Console.WriteLine("Inscription reussite : " + ret.Id);
                             break;
                         case 2:
-                            Album albu = new Album();
+                            ServiceReference1.Album albu = new ServiceReference1.Album();
                             albu.Nom = getString("Nom : ");
                             albu.UserId = getInt("ID Utilisateur : ");
 
-                            Album a = serviceClient.AddAlbum(albu);
+                            ServiceReference1.Album a = serviceClient.AddAlbum(albu);
 
                             if (a == null) Console.WriteLine("Ajout impossible");
                             else Console.WriteLine("Album ajouté : " + a.Id);
@@ -154,14 +164,23 @@ namespace ClientAdmin
                     switch (donnee)
                     {
                         case 1:
+                            int idUserToDelete = getInt("Numero de l'utilisateur : ");
+                            serviceAdmin.delUtilisateur(idUserToDelete);
                             break;
                         case 2:
+                            int idUserToDelete2 = getInt("Numero de l'utilisateur : ");
+                            int idAlbumToDelete = getInt("Numero de l'album : ");
+                            serviceClient.RemoveAlbum(idUserToDelete2, idAlbumToDelete);
                             break;
                         case 3:
+                            int idUserToDelete3 = getInt("Numero de l'utilisateur : ");
+                            int idAlbumToDelete3 = getInt("Numero de l'album : ");
+                            int idPhotoToDelete3 = getInt("Numero de la photo : ");
+                            serviceClient.RemovePhoto(idUserToDelete3, idAlbumToDelete3, idPhotoToDelete3);
                             break;
                     }
                 break;
-                /*
+                
             case 4:
                 
             switch (donnee)
@@ -172,18 +191,17 @@ namespace ClientAdmin
                         Console.WriteLine(u.Id + " - " + u.Nom);
                     break;
                 case 2:
-                    Album[] albums = serviceAdmin.getAllAlbums();
-                    foreach (Album u in albums)
+                    ClientAdmin.ServiceReferenceAdmin.Album[] albums = serviceAdmin.getAllAlbums();
+                    foreach (ClientAdmin.ServiceReferenceAdmin.Album u in albums)
                         Console.WriteLine(u.Id + " - " + u.Nom);
                     break;
                 case 3:
-                      Photo[] photos = serviceAdmin.getAllPhoto();
-                    foreach (Photo u in photos)
+                    ClientAdmin.ServiceReferenceAdmin.Photo[] photos = serviceAdmin.getAllPhoto();
+                    foreach (ClientAdmin.ServiceReferenceAdmin.Photo u in photos)
                         Console.WriteLine(u.Id + " - " + u.Nom);
                     break;
             }
             break;
-            */
             }
         }
     }

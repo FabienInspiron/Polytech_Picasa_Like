@@ -59,7 +59,6 @@ Bonjour <% // Si la variable de session user est non nulle,
         <p>
             Image&nbsp;ID&nbsp;:&nbsp;
             <asp:TextBox ID="ImageIDBox" runat="server" />
-            <asp:Button ID="Visualiser" runat="server" OnClick="Visualiser_Click" Text="Visualiser" />
         </p>
     </div>
     </form>
