@@ -47,6 +47,11 @@ namespace ServeurWCF
             return gestionBdd.getImageIDUser(userId, albumId);
         }
 
+        public List<Tuple<int, String>> GetPhotoAlbumTuple(int userId, int albumId)
+        {
+            return gestionBdd.getImageIDUserTuple(userId, albumId);
+        }
+
         public Photo GetPhoto(int userId, int albumId, int photoId)
         {
             return gestionBdd.getPhoto(photoId);

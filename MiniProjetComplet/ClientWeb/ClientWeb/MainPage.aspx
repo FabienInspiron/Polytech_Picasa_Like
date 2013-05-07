@@ -23,7 +23,11 @@
     <div>
         <div>
         <b>List albums</b>
+            <br />
         <br />
+            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <asp:Button ID="Button3" runat="server" onclick="Button3_Click" 
+                Text="Ajouter" />
         <br />
 
         <asp:ListBox ID="lstBrowser" runat="server" Width="200px" 
@@ -36,11 +40,17 @@
     </div>
             <br />
             <br />
-     <b>List Photos</b><br />
+     <b>List Photos</b><br /><br /><asp:FileUpload ID="FileUpload1" runat="server" />
+        <asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
+            Text="Ajouter" />
+        <br />
      <asp:ListBox ID="listPhoto" runat="server" Width="200px" 
                 AutoPostBack="True" 
             onselectedindexchanged="listPhoto_SelectedIndexChanged"></asp:ListBox>
 
+    
+        <asp:Button ID="Button2" runat="server" onclick="Button2_Click" 
+            Text="Actualiser" />
             <br />
             <b>Photo</b><br />
         <asp:Image ID="ImageCourante" runat="server" Height="16px" />

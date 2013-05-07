@@ -55,6 +55,9 @@ namespace ServeurWCF
         List<int> GetPhotoAlbumInt(int userId, int albumId);
 
         [OperationContract]
+        List<Tuple<int, String>> GetPhotoAlbumTuple(int userId, int albumId);
+
+        [OperationContract]
         Photo GetPhoto(int userId, int albumId, int photoId);
 
         [OperationContract]

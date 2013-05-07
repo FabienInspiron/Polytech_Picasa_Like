@@ -47,7 +47,6 @@ namespace ClientWeb
                 Console.WriteLine(f.Message);
             }
         }
-
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             if (lstBrowser.Items.Count > 0 && lstBrowser.SelectedIndex >= 0)
@@ -61,17 +60,22 @@ namespace ClientWeb
 
         protected void lstBrowser_SelectedIndexChanged(object sender, EventArgs e)
         {
+            MAJPhotos();
+        }
+
+        public void MAJPhotos(){
             int pho = int.Parse(lstBrowser.SelectedItem.Value);
             albumSelected = pho;
             //Photo[] listPhotos = service.GetPhotoAlbum(sess.Id, pho);
 
-            int[] listPhotos = service.GetPhotoAlbumInt(iduser, pho);
+            Tuple<int, String>[] listPhotos = service.GetPhotoAlbumTuple(iduser, pho);
 
-            foreach (int p in listPhotos)
+            listPhoto.Items.Clear();
+            foreach (Tuple<int, String> p in listPhotos)
             {
                 ListItem i = new ListItem();
-                i.Text = "Photo - " + p;
-                i.Value = p.ToString();
+                i.Text = p.Item2.ToString();
+                i.Value = p.Item1.ToString();
                 listPhoto.Items.Add(i);
             }
         }
@@ -81,6 +85,37 @@ namespace ClientWeb
             String idImage = listPhoto.SelectedItem.Value;
             String album = albumSelected.ToString();
             ImageCourante.ImageUrl = "Image.aspx?ImageID=" + idImage + "&user=" + iduser + "&album=" + album;
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            if (!FileUpload1.FileName.Equals(""))
+            {
+                Photo p = new Photo();
+                p.Album= int.Parse(lstBrowser.SelectedItem.Value);
+                p.Image = FileUpload1.FileBytes;
+                p.Nom = FileUpload1.FileName;
+                service.AddPhoto(p);
+            }
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            MAJPhotos();
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            Album a = new Album();
+            a.Nom = TextBox1.Text;
+            a.UserId = sess.Id;
+
+            Album ret = service.AddAlbum(a);
+
+            if (ret == null)
+                Response.Write("Erreur, impossible d'ajouter l'album");
+            else
+                Response.Write("Album ajouté");
         }
 
     }

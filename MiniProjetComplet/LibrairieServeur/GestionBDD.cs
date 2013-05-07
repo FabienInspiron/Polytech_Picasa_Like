@@ -712,6 +712,47 @@ namespace LibrairieServeur
             return tableID;
         }
 
+        /// <summary>
+        /// Retourne les tuples des identifiants et des noms des images
+        /// </summary>
+        /// <param name="idUser">Utilisateur connecté auquel on cherche l'album</param>
+        /// <returns>Liste des albums de cet utilisateur</returns>
+        public List<Tuple<int, String>> getImageIDUserTuple(int idUser, int idAlbum)
+        {
+            List<Tuple<int, String>> tableID = new List<Tuple<int, String>>();
+
+            try
+            {
+                bdd.connexion();
+
+                String sql = "SELECT Image.id, Image.nom FROM Image, Album WHERE Image.album = Album.id AND Album.utilisater = @utilisateur AND Album.id =@album";
+
+                SqlCommand oCommand = bdd.executeSQL(sql);
+                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int).Value = idUser;
+                oCommand.Parameters.Add("@album", SqlDbType.Int).Value = idAlbum;
+
+                SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
+                while (myReader.Read())
+                {
+                    int res = myReader.GetInt32(0);
+                    string nom = myReader.GetString(1);
+
+                    tableID.Add(new Tuple<int, string>(res, nom));
+                }
+
+                myReader.Close();
+
+                oCommand.ExecuteNonQuery();
+                bdd.deconnect();
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+
+            return tableID;
+        }
+
         public List<Photo> getPhotoUserAlbum(int idUser, int album)
         {
             List<Photo> photos = new List<Photo>();
