@@ -42,9 +42,14 @@ namespace ServeurWCF
             return gestionBdd.getPhotoUserAlbum(userId, albumId);
         }
 
+        public List<int> GetPhotoAlbumInt(int userId, int albumId)
+        {
+            return gestionBdd.getImageIDUser(userId, albumId);
+        }
+
         public Photo GetPhoto(int userId, int albumId, int photoId)
         {
-            throw new NotImplementedException();
+            return gestionBdd.getPhoto(photoId);
         }
 
         public void AddPhoto(Photo p)

@@ -33,7 +33,7 @@ namespace ClientWeb
             Session["Utilisateur"] = u;
 
             // Redirection vers la page de visualisation des images
-            Response.Redirect("VoirImage.aspx");
+            Response.Redirect("MainPage.aspx");
         }
 
 

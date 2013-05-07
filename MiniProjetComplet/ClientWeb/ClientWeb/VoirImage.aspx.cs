@@ -21,7 +21,6 @@ namespace ClientWeb
 
             sess = (Utilisateur)Session["Utilisateur"];
             service = new ServiceClient();
-
             MAJAlbums();
         }
 
@@ -34,10 +33,11 @@ namespace ClientWeb
                 ListAlbum.Items.Clear();
                 foreach (Album a in albums)
                 {
-                    ListItem l = new ListItem();
-                    l.Text = a.Nom;
-                    l.Value = a.Id.ToString();
-                    ListAlbum.Items.Add(l);
+                    ListItem item = new ListItem();
+                    item.Text = a.Nom;
+                    item.Value = a.Id.ToString();
+
+                    ListAlbum.Items.Add(item);
                 }
             }
             catch (Exception e)
@@ -48,6 +48,10 @@ namespace ClientWeb
 
         protected void AlbumSelected(object sender, EventArgs e)
         {
+            ListBox send = (ListBox)sender;
+            Response.Write(send.SelectedItem.Value);
+
+            /*
             String alb = sender.ToString();
             int album = 0;
             Photo[] photos = service.GetPhotoAlbum(sess.Id, album);
@@ -58,6 +62,7 @@ namespace ClientWeb
                 l.Value = p.Id.ToString();
                 ListBoxPhoto.Items.Add(l);
             }
+             * */
         }
 
         // Afficher les albums
@@ -98,7 +103,52 @@ namespace ClientWeb
             fbd1.ShowDialog();
             string myFolder = fbd1.SelectedPath;
 
-            TextBoxParcourir.Text = myFolder;
+
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            // Iterate through the Items collection of the ListBox and 
+            // display the selected items.
+            foreach (ListItem item in ListAlbum.Items)
+            {
+                if (item.Selected)
+                {
+                    Console.Write(item.Text);
+                }
+
+            }
+        }
+
+
+
+        protected void Button3_Click1(object sender, EventArgs e)
+        {
+            ListBox lstbox1 = form1.FindControl("TextAlbumAdd") as ListBox;
+
+            ListItem item = lstbox1.SelectedItem;
+            if (Items != null)
+            {
+                Response.Write(item.Text);
+            }
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ImageIDBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            ListItem li = ListAlbum.SelectedItem;
+            //TextAlbumAdd.Text = li.Text;
+            Response.Write(ListAlbum.Items.Count);
         }
     }
 }

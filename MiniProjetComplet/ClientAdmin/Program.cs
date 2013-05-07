@@ -31,9 +31,8 @@ namespace ClientAdmin
             String prompt = " ### Bienvenu dans le client admin ### \n";
             prompt += "Veuillez choisir une action : \n";
             prompt += "1 - Ajouter \n";
-            prompt += "2 - Modifier \n";
-            prompt += "3 - Supprimer \n";
-            prompt += "4 - Afficher \n";
+            prompt += "2 - Supprimer \n";
+            prompt += "3 - Afficher \n";
 
             return prompt;
         }
@@ -153,17 +152,6 @@ namespace ClientAdmin
                     switch (donnee)
                     {
                         case 1:
-                            break;
-                        case 2:
-                            break;
-                        case 3:
-                            break;
-                    }
-                break;
-                case 3:
-                    switch (donnee)
-                    {
-                        case 1:
                             int idUserToDelete = getInt("Numero de l'utilisateur : ");
                             serviceAdmin.delUtilisateur(idUserToDelete);
                             break;
@@ -181,7 +169,7 @@ namespace ClientAdmin
                     }
                 break;
                 
-            case 4:
+            case 3:
                 
             switch (donnee)
             {

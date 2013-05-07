@@ -52,6 +52,9 @@ namespace ServeurWCF
         List<Photo> GetPhotoAlbum(int userId, int albumId);
 
         [OperationContract]
+        List<int> GetPhotoAlbumInt(int userId, int albumId);
+
+        [OperationContract]
         Photo GetPhoto(int userId, int albumId, int photoId);
 
         [OperationContract]

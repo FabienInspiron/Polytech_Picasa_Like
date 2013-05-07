@@ -58,22 +58,31 @@ namespace ClientWeb {
         protected global::System.Web.UI.WebControls.Button Supprimer;
         
         /// <summary>
-        /// Contrôle TextBoxParcourir.
+        /// Contrôle Button3.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxParcourir;
+        protected global::System.Web.UI.WebControls.Button Button3;
         
         /// <summary>
-        /// Contrôle Button2.
+        /// Contrôle FileUpload1.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
+        
+        /// <summary>
+        /// Contrôle Button4.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button4;
         
         /// <summary>
         /// Contrôle ListBoxPhoto.
@@ -92,14 +101,5 @@ namespace ClientWeb {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image ImageCourante;
-        
-        /// <summary>
-        /// Contrôle ImageIDBox.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ImageIDBox;
     }
 }

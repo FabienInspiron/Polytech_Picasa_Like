@@ -30,7 +30,7 @@ namespace ClientWPF
         private ClientWPF.Util.ImageCollection imageCollection2;
         private ClientWPF.Util.AlbumCollection imageCollectionAlbum;
 
-        int IDUser = 7;
+        int IDUser = 170;
         int idAlbumSelected = 0;
 
         public MainWindow()

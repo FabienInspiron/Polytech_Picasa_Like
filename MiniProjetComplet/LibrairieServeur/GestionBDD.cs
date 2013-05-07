@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.IO;
 using System.Drawing;
+
 using ObjetDefinition;
 
 namespace LibrairieServeur
@@ -711,25 +712,6 @@ namespace LibrairieServeur
             return tableID;
         }
 
-        ///// <summary>
-        ///// Recuperer les images d'un utilisateur sous forme d'une photo
-        ///// </summary>
-        ///// <param name="idUser"></param>
-        ///// <returns></returns>
-        //public PhotoCollection getPhotoUser(int idUser)
-        //{
-        //    List<int> idImages = getImageIDUser(idUser);
-        //    PhotoCollection retour = new PhotoCollection();
-
-        //    foreach (int id in idImages)
-        //    {
-        //        retour.Add(getPhotoID(id));
-        //    }
-
-        //    return retour;
-        //}
-
-
         public List<Photo> getPhotoUserAlbum(int idUser, int album)
         {
             List<Photo> photos = new List<Photo>();
@@ -765,6 +747,55 @@ namespace LibrairieServeur
             }
 
             return photos;
+        }
+
+        /// <summary>
+        /// Recuperer une photo à partir de son id
+        /// </summary>
+        /// <param name="photo"></param>
+        /// <returns></returns>
+        public Photo getPhoto(int photo)
+        {
+
+            String nom = "";
+            byte[] blob = { 0, 1 };
+            int album = 0;
+
+            try
+            {
+                bdd.connexion();
+
+                String sql = "SELECT id, nom, size, blob, album FROM Image WHERE id=@id";
+
+                SqlCommand oCommand = bdd.executeSQL(sql);
+                oCommand.Parameters.Add("@id", SqlDbType.Int).Value = photo;
+
+                SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
+                while (myReader.Read())
+                {
+                    nom = myReader.GetString(1);
+
+                    // lit la taille du blob
+                    int size = myReader.GetInt32(2);
+
+                    blob = new byte[size];
+                    // récupére le blob de la BDD et le copie dans la variable blob
+                    myReader.GetBytes(3, 0, blob, 0, size);
+
+                    album = myReader.GetInt32(4);
+                }
+
+                myReader.Close();
+
+                //oCommand.ExecuteNonQuery();
+                bdd.deconnect();
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+
+            return new Photo(photo,nom,blob,album);
         }
 
         /// <summary>
