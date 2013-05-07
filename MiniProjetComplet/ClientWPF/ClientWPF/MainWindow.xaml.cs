@@ -31,11 +31,14 @@ namespace ClientWPF
         private ClientWPF.Util.AlbumCollection imageCollectionAlbum;
 
         int IDUser = 170;
+
         int idAlbumSelected = 0;
 
-        public MainWindow()
+        public MainWindow(int idUser)
         {
             InitializeComponent();
+
+            this.IDUser = idUser;
             webService = new ServiceClient();
 
             imageCollection2 = new ClientWPF.Util.ImageCollection();

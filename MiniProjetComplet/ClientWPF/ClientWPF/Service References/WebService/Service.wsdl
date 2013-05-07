@@ -135,7 +135,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IService_Instription_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IService_Inscription_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -154,7 +154,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IService_Instription_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IService_Inscription_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -211,6 +211,82 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IService_AddAlbum_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IService_AddAlbum_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IService_RemoveAlbum_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IService_RemoveAlbum_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IService_GetPhotoAlbum_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -231,6 +307,82 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IService_GetPhotoAlbum_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IService_GetPhotoAlbumInt_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IService_GetPhotoAlbumInt_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IService_GetPhotoAlbumTuple_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IService_GetPhotoAlbumTuple_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -363,87 +515,13 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IService_AddAlbum_Input_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IService_AddAlbum_output_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IService_RemoveAlbum_Input_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IService_RemoveAlbum_output_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:50978/Service.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:50978/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:50978/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ObjetDefinition" />
+      <xsd:import schemaLocation="http://localhost:50978/Service.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:50978/Service.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IService_Connexion_InputMessage">
@@ -452,11 +530,11 @@
   <wsdl:message name="IService_Connexion_OutputMessage">
     <wsdl:part name="parameters" element="tns:ConnexionResponse" />
   </wsdl:message>
-  <wsdl:message name="IService_Instription_InputMessage">
-    <wsdl:part name="parameters" element="tns:Instription" />
+  <wsdl:message name="IService_Inscription_InputMessage">
+    <wsdl:part name="parameters" element="tns:Inscription" />
   </wsdl:message>
-  <wsdl:message name="IService_Instription_OutputMessage">
-    <wsdl:part name="parameters" element="tns:InstriptionResponse" />
+  <wsdl:message name="IService_Inscription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InscriptionResponse" />
   </wsdl:message>
   <wsdl:message name="IService_GetAlbumCollection_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAlbumCollection" />
@@ -464,11 +542,35 @@
   <wsdl:message name="IService_GetAlbumCollection_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAlbumCollectionResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_AddAlbum_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddAlbum" />
+  </wsdl:message>
+  <wsdl:message name="IService_AddAlbum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddAlbumResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_RemoveAlbum_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveAlbum" />
+  </wsdl:message>
+  <wsdl:message name="IService_RemoveAlbum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveAlbumResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_GetPhotoAlbum_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPhotoAlbum" />
   </wsdl:message>
   <wsdl:message name="IService_GetPhotoAlbum_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPhotoAlbumResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetPhotoAlbumInt_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhotoAlbumInt" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetPhotoAlbumInt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhotoAlbumIntResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetPhotoAlbumTuple_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhotoAlbumTuple" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetPhotoAlbumTuple_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhotoAlbumTupleResponse" />
   </wsdl:message>
   <wsdl:message name="IService_GetPhoto_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPhoto" />
@@ -488,34 +590,38 @@
   <wsdl:message name="IService_RemovePhoto_OutputMessage">
     <wsdl:part name="parameters" element="tns:RemovePhotoResponse" />
   </wsdl:message>
-  <wsdl:message name="IService_AddAlbum_InputMessage">
-    <wsdl:part name="parameters" element="tns:AddAlbum" />
-  </wsdl:message>
-  <wsdl:message name="IService_AddAlbum_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AddAlbumResponse" />
-  </wsdl:message>
-  <wsdl:message name="IService_RemoveAlbum_InputMessage">
-    <wsdl:part name="parameters" element="tns:RemoveAlbum" />
-  </wsdl:message>
-  <wsdl:message name="IService_RemoveAlbum_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RemoveAlbumResponse" />
-  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="Connexion">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/Connexion" message="tns:IService_Connexion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/ConnexionResponse" message="tns:IService_Connexion_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Instription">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/Instription" message="tns:IService_Instription_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/InstriptionResponse" message="tns:IService_Instription_OutputMessage" />
+    <wsdl:operation name="Inscription">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/Inscription" message="tns:IService_Inscription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/InscriptionResponse" message="tns:IService_Inscription_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAlbumCollection">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetAlbumCollection" message="tns:IService_GetAlbumCollection_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetAlbumCollectionResponse" message="tns:IService_GetAlbumCollection_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AddAlbum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/AddAlbum" message="tns:IService_AddAlbum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/AddAlbumResponse" message="tns:IService_AddAlbum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAlbum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/RemoveAlbum" message="tns:IService_RemoveAlbum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/RemoveAlbumResponse" message="tns:IService_RemoveAlbum_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetPhotoAlbum">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetPhotoAlbum" message="tns:IService_GetPhotoAlbum_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetPhotoAlbumResponse" message="tns:IService_GetPhotoAlbum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPhotoAlbumInt">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetPhotoAlbumInt" message="tns:IService_GetPhotoAlbumInt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetPhotoAlbumIntResponse" message="tns:IService_GetPhotoAlbumInt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPhotoAlbumTuple">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetPhotoAlbumTuple" message="tns:IService_GetPhotoAlbumTuple_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetPhotoAlbumTupleResponse" message="tns:IService_GetPhotoAlbumTuple_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetPhoto">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetPhoto" message="tns:IService_GetPhoto_InputMessage" />
@@ -528,14 +634,6 @@
     <wsdl:operation name="RemovePhoto">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/RemovePhoto" message="tns:IService_RemovePhoto_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/RemovePhotoResponse" message="tns:IService_RemovePhoto_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="AddAlbum">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/AddAlbum" message="tns:IService_AddAlbum_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/AddAlbumResponse" message="tns:IService_AddAlbum_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="RemoveAlbum">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService/RemoveAlbum" message="tns:IService_RemoveAlbum_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService/RemoveAlbumResponse" message="tns:IService_RemoveAlbum_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IService" type="tns:IService">
@@ -552,14 +650,14 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Instription">
-      <soap12:operation soapAction="http://tempuri.org/IService/Instription" style="document" />
+    <wsdl:operation name="Inscription">
+      <soap12:operation soapAction="http://tempuri.org/IService/Inscription" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IService_Instription_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IService_Inscription_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IService_Instription_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IService_Inscription_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -574,6 +672,28 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AddAlbum">
+      <soap12:operation soapAction="http://tempuri.org/IService/AddAlbum" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IService_AddAlbum_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IService_AddAlbum_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAlbum">
+      <soap12:operation soapAction="http://tempuri.org/IService/RemoveAlbum" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IService_RemoveAlbum_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IService_RemoveAlbum_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetPhotoAlbum">
       <soap12:operation soapAction="http://tempuri.org/IService/GetPhotoAlbum" style="document" />
       <wsdl:input>
@@ -582,6 +702,28 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSHttpBinding_IService_GetPhotoAlbum_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPhotoAlbumInt">
+      <soap12:operation soapAction="http://tempuri.org/IService/GetPhotoAlbumInt" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IService_GetPhotoAlbumInt_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IService_GetPhotoAlbumInt_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPhotoAlbumTuple">
+      <soap12:operation soapAction="http://tempuri.org/IService/GetPhotoAlbumTuple" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IService_GetPhotoAlbumTuple_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IService_GetPhotoAlbumTuple_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -618,28 +760,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="AddAlbum">
-      <soap12:operation soapAction="http://tempuri.org/IService/AddAlbum" style="document" />
-      <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IService_AddAlbum_Input_policy" />
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IService_AddAlbum_output_policy" />
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="RemoveAlbum">
-      <soap12:operation soapAction="http://tempuri.org/IService/RemoveAlbum" style="document" />
-      <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IService_RemoveAlbum_Input_policy" />
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IService_RemoveAlbum_output_policy" />
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="WSHttpBinding_IService" binding="tns:WSHttpBinding_IService">
@@ -647,7 +767,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:50978/Service.svc</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>GORRIERI\user</Upn>
+          <Upn>X068\user</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

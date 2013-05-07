@@ -14,7 +14,6 @@ namespace ClientWeb
         ServiceClient service;
         Utilisateur sess;
         int albumSelected = -1;
-        int iduser = 170;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,7 +29,7 @@ namespace ClientWeb
         {
             try
             {
-                Album[] albums = service.GetAlbumCollection(iduser);
+                Album[] albums = service.GetAlbumCollection(sess.Id);
 
                 lstBrowser.Items.Clear();
                 foreach (Album a in albums)
@@ -68,7 +67,7 @@ namespace ClientWeb
             albumSelected = pho;
             //Photo[] listPhotos = service.GetPhotoAlbum(sess.Id, pho);
 
-            Tuple<int, String>[] listPhotos = service.GetPhotoAlbumTuple(iduser, pho);
+            Tuple<int, String>[] listPhotos = service.GetPhotoAlbumTuple(sess.Id, pho);
 
             listPhoto.Items.Clear();
             foreach (Tuple<int, String> p in listPhotos)
@@ -84,7 +83,7 @@ namespace ClientWeb
         {
             String idImage = listPhoto.SelectedItem.Value;
             String album = albumSelected.ToString();
-            ImageCourante.ImageUrl = "Image.aspx?ImageID=" + idImage + "&user=" + iduser + "&album=" + album;
+            ImageCourante.ImageUrl = "Image.aspx?ImageID=" + idImage + "&user=" + sess.Id + "&album=" + album;
         }
 
         protected void Button1_Click(object sender, EventArgs e)

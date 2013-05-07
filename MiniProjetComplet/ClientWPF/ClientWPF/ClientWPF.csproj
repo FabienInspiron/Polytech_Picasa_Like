@@ -132,6 +132,12 @@
     <None Include="Service References\WebService\Service2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\WebService\Service3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WebService\Service31.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
