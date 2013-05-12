@@ -65,5 +65,14 @@ namespace TestWebServices
             return data;
         }
 
+        public static byte[] ImageByte(Stream Image)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Image.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
+
     }
 }

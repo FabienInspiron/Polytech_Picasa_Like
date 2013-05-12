@@ -63,7 +63,6 @@
   <ItemGroup>
     <Content Include="Service.svc" />
     <Content Include="ServiceAdmin.svc" />
-    <Content Include="Silverlight.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -82,6 +81,7 @@
     <Compile Include="ServiceAdmin.svc.cs">
       <DependentUpon>ServiceAdmin.svc</DependentUpon>
     </Compile>
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

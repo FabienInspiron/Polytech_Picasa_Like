@@ -49,22 +49,25 @@ namespace ServeurWCF
         #region photo
 
         [OperationContract]
-        List<Photo> GetPhotoAlbum(int userId, int albumId);
+        List<ImageInfo> GetPicturesFromUserAlbum(int userId, int albumId);
 
         [OperationContract]
-        List<int> GetPhotoAlbumInt(int userId, int albumId);
+        List<int> GetPicturesIdFromUserAlbum(int userId, int albumId);
 
         [OperationContract]
-        List<Tuple<int, String>> GetPhotoAlbumTuple(int userId, int albumId);
+        List<Tuple<int, String>> GetPicturesAlbumTuple(int userId, int albumId);
 
         [OperationContract]
-        Photo GetPhoto(int userId, int albumId, int photoId);
+        ImageDownloadResponse GetPicture(ImageDownloadRequest p);
 
         [OperationContract]
-        void AddPhoto(Photo p);
+        ImageDownloadResponse GetPictureThumbnail(ImagethumbnailDownloadRequest p);
 
         [OperationContract]
-        void RemovePhoto(int userId, int albumId, int photoId);
+        void AddPicture(Picture p);
+
+        [OperationContract]
+        void RemovePicture(int userId, int albumId, int photoId);
 
         # endregion
     }

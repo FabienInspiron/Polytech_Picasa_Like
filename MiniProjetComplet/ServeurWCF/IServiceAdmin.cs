@@ -31,7 +31,7 @@ namespace ServeurWCF
         # region Photo
 
         [OperationContract]
-        List<Photo> getAllPhoto();
+        List<ImageInfo> getAllPhoto();
 
         #endregion
     }

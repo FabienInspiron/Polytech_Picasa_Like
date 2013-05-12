@@ -481,14 +481,14 @@ namespace LibrairieServeur
                 bdd.connexion();
 
                 // construit la requête
-                SqlCommand ajoutImage = new SqlCommand("INSERT INTO Image (nom, blob, size, album) " + "VALUES(@id, @blob, @size, @album)", bdd.oConnection);
-                ajoutImage.Parameters.Add("@id", SqlDbType.VarChar, nom.Length).Value = nom;
-                ajoutImage.Parameters.Add("@blob", SqlDbType.Image, image.Length).Value = image;
-                ajoutImage.Parameters.Add("@size", SqlDbType.Int).Value = image.Length;
-                ajoutImage.Parameters.Add("@album", SqlDbType.Int).Value = numAlbum;
+                SqlCommand addPictureCommand = new SqlCommand("INSERT INTO Image (nom, blob, size, album) " + "VALUES(@nom, @blob, @size, @album)", bdd.oConnection);
+                addPictureCommand.Parameters.Add("@nom", SqlDbType.VarChar, nom.Length).Value = nom;
+                addPictureCommand.Parameters.Add("@blob", SqlDbType.Image, image.Length).Value = image;
+                addPictureCommand.Parameters.Add("@size", SqlDbType.Int).Value = image.Length;
+                addPictureCommand.Parameters.Add("@album", SqlDbType.Int).Value = numAlbum;
 
                 // execution de la requête
-                ajoutImage.ExecuteNonQuery();
+                addPictureCommand.ExecuteNonQuery();
             }
             catch (Exception e)
             {
@@ -508,65 +508,13 @@ namespace LibrairieServeur
         /// </summary>
         /// <param name="p">Image à ajouter</param>
         /// <returns></returns>
-        public Photo addImage(Photo p)
+        public ImageInfo addImage(Picture p)
         {
-            int id = addImage(p.Nom, p.Image, p.Album);
-            p.Id = id;
-            return p;
-        }
-
-        /// <summary>
-        /// Retourne les photos ayant l'id = imageID
-        /// </summary>
-        /// <param name="imageID"></param>
-        /// <returns></returns>
-        private Photo getPhotoID(int imageID)
-        {
-            String nom = "";
-            byte[] blob = { 0, 1 };
-            int size = 0;
-            int album = 0;
-
-            try
-            {
-                // connexion au serveur
-                bdd.connexion();
-
-                // construit la requête
-                SqlCommand getImage = new SqlCommand("SELECT id, nom, size, blob, album " + "FROM Image " + "WHERE id = @id", bdd.oConnection);
-                getImage.Parameters.Add("@id", SqlDbType.Int).Value = imageID;
-
-                // exécution de la requête et création du reader
-                //Attention à l'acces sequential il faut lire les données dans l'ordre
-                SqlDataReader myReader = getImage.ExecuteReader(CommandBehavior.SequentialAccess);
-                if (myReader.Read())
-                {
-                    nom = myReader.GetString(1);
-
-                    // lit la taille du blob
-                    size = myReader.GetInt32(2);
-
-                    blob = new byte[size];
-
-                    // récupére le blob de la BDD et le copie dans la variable blob
-                    myReader.GetBytes(3, 0, blob, 0, size);
-
-                    album = myReader.GetInt32(4);
-                }
-            } catch (Exception e)
-            {
-                Console.WriteLine("Erreur : " + e.Message);
-            }
-            finally
-            {
-                // dans tous les cas on ferme la connexion
-                bdd.deconnect();
-            }
-
-            Photo o = new Photo(nom.Trim(), blob, album);
-            o.Id = imageID;
-
-            return o;
+            MemoryStream ms = new MemoryStream();
+            p.ImageData.CopyTo(ms);
+            int id = addImage(p.ImageInfo.Nom, ms.ToArray(), p.ImageInfo.Album);
+            p.ImageInfo.Id = id;
+            return p.ImageInfo;
         }
 
         /// <summary>
@@ -602,21 +550,21 @@ namespace LibrairieServeur
         /// <summary>
         /// Afficher tous les utilisateur present dans la base de donnée
         /// </summary>
-        public List<Photo> getAllPhoto()
+        public List<ImageInfo> getAllPhoto()
         {
-            List<Photo> listPhoto = new List<Photo>();
+            List<ImageInfo> listPhoto = new List<ImageInfo>();
             try
             {
                 bdd.connexion();
-                String sql = "SELECT * FROM Photo";
+                /// TODO refaire en plus efficace
+                String sql = "SELECT id FROM Image";
                 SqlCommand oCommand = bdd.executeSQL(sql);
-
                 SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
                 while (myReader.Read())
                 {
                     int id = (int)myReader.GetInt32(0);
 
-                    listPhoto.Add(getPhotoID(id));
+                    //listPhoto.Add(getPhoto(id).ImageInfo);
                 }
 
                 myReader.Close();
@@ -672,14 +620,10 @@ namespace LibrairieServeur
             return tableID;
         }
 
-        /// <summary>
-        /// Retourne les identifiants des images des utilisateurs
-        /// </summary>
-        /// <param name="idUser">Utilisateur connecté auquel on cherche l'album</param>
-        /// <returns>Liste des albums de cet utilisateur</returns>
-        public List<int> getImageIDUser(int idUser, int idAlbum)
+
+        public List<int> getImagesIdFromAlbum(int idUser, int album)
         {
-            List<int> tableID = new List<int>();
+            List<int> photos = new List<int>();
 
             try
             {
@@ -689,24 +633,65 @@ namespace LibrairieServeur
 
                 SqlCommand oCommand = bdd.executeSQL(sql);
                 oCommand.Parameters.Add("@utilisateur", SqlDbType.Int).Value = idUser;
-                oCommand.Parameters.Add("@album", SqlDbType.Int).Value = idAlbum;
+                oCommand.Parameters.Add("@album", SqlDbType.Int).Value = album;
 
                 SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
                 while (myReader.Read())
                 {
-                    int res = myReader.GetInt32(0);
-                    tableID.Add(res);
-                    Console.WriteLine(res);
+                    photos.Add(myReader.GetInt32(0));
                 }
 
                 myReader.Close();
 
-                oCommand.ExecuteNonQuery();
+                //oCommand.ExecuteNonQuery();
                 bdd.deconnect();
             }
             catch (Exception e)
             {
                 Console.Write(e.Message);
+            }
+
+            return photos;
+        }
+
+
+        /// <summary>
+        /// Retourne les identifiants des images des utilisateurs
+        /// </summary>
+        /// <param name="idUser">Utilisateur connecté auquel on cherche l'album</param>
+        /// <returns>Liste des albums de cet utilisateur</returns>
+        public List<ImageInfo> getImagesFromAlbum(int idUser, int idAlbum)
+        {
+            List<ImageInfo> tableID = new List<ImageInfo>();
+
+            try
+            {
+                bdd.connexion();
+
+                String sql = "SELECT Image.id, Image.nom, Image.album FROM Image, Album WHERE Image.album = Album.id AND Album.utilisater = @utilisateur AND Album.id =@album";
+
+                SqlCommand oCommand = bdd.executeSQL(sql);
+                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int).Value = idUser;
+                oCommand.Parameters.Add("@album", SqlDbType.Int).Value = idAlbum;
+
+                SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
+                while (myReader.Read())
+                {
+                    tableID.Add(new ImageInfo(myReader.GetInt32(0), myReader.GetString(1), myReader.GetInt32(2)));
+                }
+
+                myReader.Close();
+
+                //oCommand.ExecuteNonQuery();
+                bdd.deconnect();
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+            finally
+            {
+                bdd.deconnect();
             }
 
             return tableID;
@@ -753,49 +738,12 @@ namespace LibrairieServeur
             return tableID;
         }
 
-        public List<Photo> getPhotoUserAlbum(int idUser, int album)
-        {
-            List<Photo> photos = new List<Photo>();
-
-            try
-            {
-                bdd.connexion();
-
-                String sql = "SELECT Image.size, Image.blob, Image.id, Image.nom, Image.album FROM Image, Album WHERE Image.album = Album.id AND Album.utilisater = @utilisateur AND Album.id =@album";
-
-                SqlCommand oCommand = bdd.executeSQL(sql);
-                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int).Value = idUser;
-                oCommand.Parameters.Add("@album", SqlDbType.Int).Value = album;
-
-                SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
-                while (myReader.Read())
-                {
-                    int size = myReader.GetInt32(0);
-                    byte[] blob = new byte[size];
-                    // récupére le blob de la BDD et le copie dans la variable blob
-                    myReader.GetBytes(1, 0, blob, 0, size);
-                    photos.Add(new Photo(myReader.GetInt32(2), myReader.GetString(3).Trim(), blob, myReader.GetInt32(4)));
-                }
-
-                myReader.Close();
-
-                //oCommand.ExecuteNonQuery();
-                bdd.deconnect();
-            }
-            catch (Exception e)
-            {
-                Console.Write(e.Message);
-            }
-
-            return photos;
-        }
-
         /// <summary>
         /// Recuperer une photo à partir de son id
         /// </summary>
         /// <param name="photo"></param>
         /// <returns></returns>
-        public Photo getPhoto(int photo)
+        public byte[] getPhoto(int photo)
         {
 
             String nom = "";
@@ -806,7 +754,7 @@ namespace LibrairieServeur
             {
                 bdd.connexion();
 
-                String sql = "SELECT id, nom, size, blob, album FROM Image WHERE id=@id";
+                String sql = "SELECT size, blob, album FROM Image WHERE id=@id";
 
                 SqlCommand oCommand = bdd.executeSQL(sql);
                 oCommand.Parameters.Add("@id", SqlDbType.Int).Value = photo;
@@ -814,14 +762,12 @@ namespace LibrairieServeur
                 SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
                 while (myReader.Read())
                 {
-                    nom = myReader.GetString(1);
-
                     // lit la taille du blob
-                    int size = myReader.GetInt32(2);
+                    int size = myReader.GetInt32(0);
 
                     blob = new byte[size];
                     // récupére le blob de la BDD et le copie dans la variable blob
-                    myReader.GetBytes(3, 0, blob, 0, size);
+                    myReader.GetBytes(1, 0, blob, 0, size);
 
                     album = myReader.GetInt32(4);
                 }
@@ -836,7 +782,7 @@ namespace LibrairieServeur
                 Console.Write(e.Message);
             }
 
-            return new Photo(photo,nom,blob,album);
+            return blob;
         }
 
         /// <summary>

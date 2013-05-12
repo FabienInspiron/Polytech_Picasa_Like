@@ -26,13 +26,15 @@ namespace ClientWPF
 
         ServiceClient webService;
 
-        private ClientWPF.Util.ImageCollection imageCollection1;
-        private ClientWPF.Util.ImageCollection imageCollection2;
-        private ClientWPF.Util.AlbumCollection imageCollectionAlbum;
+        private ImageCollection imageCollection1;
+        private ImageCollection imageCollection2;
+        private AlbumCollection imageCollectionAlbum;
 
         int IDUser = 170;
 
         int idAlbumSelected = 0;
+
+        String LocalDirectory = null;
 
         public MainWindow(int idUser)
         {
@@ -41,7 +43,7 @@ namespace ClientWPF
             this.IDUser = idUser;
             webService = new ServiceClient();
 
-            imageCollection2 = new ClientWPF.Util.ImageCollection();
+            imageCollection2 = new ImageCollection();
             miseAjourAlbum();
         }
 
@@ -73,14 +75,21 @@ namespace ClientWPF
             if (parent.Name == "ListBox1")
             {
                 //Console.WriteLine("Envoi de " + image.Nom + " vers le serveur");
-                image.Album = idAlbumSelected;
-                webService.AddPhoto(image);
+                ImageInfo i = new ImageInfo();
+                i.Nom = image.Nom;
+                i.Album = idAlbumSelected;
+
+                webService.AddPicture(i, new FileStream(@LocalDirectory + "\\" + image.Nom, FileMode.Open, FileAccess.Read));
             }
             else // recupération d'image en local
             {
                 //Console.WriteLine("Envoi de {0} en local", image.Nom);
-                String imagePath = textDirectory.Text + "\\" + image.Nom;
-                Util.ByteArrayToFile(imagePath, image.Image);
+                String imagePath = LocalDirectory + "\\" + image.Nom;
+                ImageInfo img = new ImageInfo();
+                img.Album = image.Album;
+                img.Id = image.Id;
+                img.Nom = image.Nom;
+                Util.StreamToFile(imagePath, webService.GetPicture(img));
             }
 
             try
@@ -107,7 +116,7 @@ namespace ClientWPF
         private void miseAjourAlbum()
         {
             // Recuperation des albums de l'utilisateur
-            imageCollectionAlbum = new ClientWPF.Util.AlbumCollection();
+            imageCollectionAlbum = new AlbumCollection();
             Album[] albums = webService.GetAlbumCollection(IDUser);
             foreach (Album a in albums)
             {
@@ -122,10 +131,14 @@ namespace ClientWPF
         public void miseAJourPhoto(int idAlb)
         {
             // On crée notre collection d'image et on y ajoute deux images
-            imageCollection1 = new ClientWPF.Util.ImageCollection();
-            Photo[] photos = webService.GetPhotoAlbum(IDUser, idAlb);
-            foreach (Photo p in photos)
-                imageCollection1.Add(p);
+            imageCollection1 = new ImageCollection();
+            ImageInfo[] photos = webService.GetPicturesFromUserAlbum(IDUser, idAlb);
+            foreach (ImageInfo p in photos)
+            {
+                Photo ph = new Photo(p.Id, p.Nom, p.Album);
+                ph.Image = Util.StreamToByte(webService.GetPictureThumbnail(p, 100));
+                imageCollection1.Add(ph);
+            }
 
             // On lie la collectionau ObjectDataProvider déclaré dans le fichier XAML
             ObjectDataProvider imageSource = (ObjectDataProvider)FindResource("ImageCollection1");
@@ -160,18 +173,13 @@ namespace ClientWPF
             return null;
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void selectDirButton_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.FolderBrowserDialog fbd1 = new System.Windows.Forms.FolderBrowserDialog();
             fbd1.ShowDialog();
-            string myFolder = fbd1.SelectedPath;
+            LocalDirectory = fbd1.SelectedPath;
 
-            textDirectory.Text = myFolder;
-        }
-
-        private void button2_Click(object sender, RoutedEventArgs e)
-        {
-            List<string> lis = Util.listDir(@textDirectory.Text);
+            List<string> lis = Util.listDir(@LocalDirectory);
             imageCollection2.Clear();
 
             foreach (string img in lis)
@@ -179,9 +187,8 @@ namespace ClientWPF
                 string[] words = img.Split('\\');
                 string name = words[words.Length - 1];
 
-                Photo p = new Photo();
-                p.Image = Util.lireFichier(@img);
-                p.Nom = name;
+                Photo p = new Photo(name);
+                p.Image = Util.CreateThumbnail(Util.lireFichier(@img), 100) ;
                 imageCollection2.Add(p);
             }
 

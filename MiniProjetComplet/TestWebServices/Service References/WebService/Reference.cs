@@ -185,24 +185,18 @@ namespace TestWebServices.WebService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Photo", Namespace="http://schemas.datacontract.org/2004/07/ObjetDefinition")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ImageInfo", Namespace="http://schemas.datacontract.org/2004/07/ObjetDefinition")]
     [System.SerializableAttribute()]
-    public partial class Photo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class ImageInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AlbumField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] ImageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NomField;
+        
+        private int AlbumField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -214,20 +208,7 @@ namespace TestWebServices.WebService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Album {
-            get {
-                return this.AlbumField;
-            }
-            set {
-                if ((this.AlbumField.Equals(value) != true)) {
-                    this.AlbumField = value;
-                    this.RaisePropertyChanged("Album");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public int Id {
             get {
                 return this.IdField;
@@ -240,20 +221,7 @@ namespace TestWebServices.WebService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] Image {
-            get {
-                return this.ImageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ImageField, value) != true)) {
-                    this.ImageField = value;
-                    this.RaisePropertyChanged("Image");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string Nom {
             get {
                 return this.NomField;
@@ -262,6 +230,19 @@ namespace TestWebServices.WebService {
                 if ((object.ReferenceEquals(this.NomField, value) != true)) {
                     this.NomField = value;
                     this.RaisePropertyChanged("Nom");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public int Album {
+            get {
+                return this.AlbumField;
+            }
+            set {
+                if ((this.AlbumField.Equals(value) != true)) {
+                    this.AlbumField = value;
+                    this.RaisePropertyChanged("Album");
                 }
             }
         }
@@ -283,29 +264,102 @@ namespace TestWebServices.WebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Connexion", ReplyAction="http://tempuri.org/IService/ConnexionResponse")]
         TestWebServices.WebService.Utilisateur Connexion(string pseudo, string mdp);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Instription", ReplyAction="http://tempuri.org/IService/InstriptionResponse")]
-        TestWebServices.WebService.Utilisateur Instription(TestWebServices.WebService.Utilisateur u);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Inscription", ReplyAction="http://tempuri.org/IService/InscriptionResponse")]
+        TestWebServices.WebService.Utilisateur Inscription(TestWebServices.WebService.Utilisateur u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlbumCollection", ReplyAction="http://tempuri.org/IService/GetAlbumCollectionResponse")]
         TestWebServices.WebService.Album[] GetAlbumCollection(int userId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhotoAlbum", ReplyAction="http://tempuri.org/IService/GetPhotoAlbumResponse")]
-        TestWebServices.WebService.Photo[] GetPhotoAlbum(int userId, int albumId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhoto", ReplyAction="http://tempuri.org/IService/GetPhotoResponse")]
-        TestWebServices.WebService.Photo GetPhoto(int userId, int albumId, int photoId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddPhoto", ReplyAction="http://tempuri.org/IService/AddPhotoResponse")]
-        void AddPhoto(TestWebServices.WebService.Photo p);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemovePhoto", ReplyAction="http://tempuri.org/IService/RemovePhotoResponse")]
-        void RemovePhoto(int userId, int albumId, int photoId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddAlbum", ReplyAction="http://tempuri.org/IService/AddAlbumResponse")]
         TestWebServices.WebService.Album AddAlbum(TestWebServices.WebService.Album a);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAlbum", ReplyAction="http://tempuri.org/IService/RemoveAlbumResponse")]
         void RemoveAlbum(int userId, int albumId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesFromUserAlbum", ReplyAction="http://tempuri.org/IService/GetPicturesFromUserAlbumResponse")]
+        TestWebServices.WebService.ImageInfo[] GetPicturesFromUserAlbum(int userId, int albumId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesIdFromUserAlbum", ReplyAction="http://tempuri.org/IService/GetPicturesIdFromUserAlbumResponse")]
+        int[] GetPicturesIdFromUserAlbum(int userId, int albumId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesAlbumTuple", ReplyAction="http://tempuri.org/IService/GetPicturesAlbumTupleResponse")]
+        System.Tuple<int, string>[] GetPicturesAlbumTuple(int userId, int albumId);
+        
+        // CODEGEN : La génération du contrat de message depuis le nom de wrapper (ImageDownloadRequest) du message ImageDownloadRequest ne correspond pas à la valeur par défaut (GetPicture)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicture", ReplyAction="http://tempuri.org/IService/GetPictureResponse")]
+        TestWebServices.WebService.ImageDownloadResponse GetPicture(TestWebServices.WebService.ImageDownloadRequest request);
+        
+        // CODEGEN : La génération du contrat de message depuis l'opération AddPicture n'est ni RPC, ni encapsulée dans un document.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddPicture", ReplyAction="http://tempuri.org/IService/AddPictureResponse")]
+        TestWebServices.WebService.AddPictureResponse AddPicture(TestWebServices.WebService.Picture request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemovePicture", ReplyAction="http://tempuri.org/IService/RemovePictureResponse")]
+        void RemovePicture(int userId, int albumId, int photoId);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ImageDownloadRequest", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class ImageDownloadRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public TestWebServices.WebService.ImageInfo ImageInfo;
+        
+        public ImageDownloadRequest() {
+        }
+        
+        public ImageDownloadRequest(TestWebServices.WebService.ImageInfo ImageInfo) {
+            this.ImageInfo = ImageInfo;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ImageDownloadResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class ImageDownloadResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public System.IO.Stream ImageData;
+        
+        public ImageDownloadResponse() {
+        }
+        
+        public ImageDownloadResponse(System.IO.Stream ImageData) {
+            this.ImageData = ImageData;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Picture", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class Picture {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public TestWebServices.WebService.ImageInfo ImageInfo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public System.IO.Stream ImageData;
+        
+        public Picture() {
+        }
+        
+        public Picture(TestWebServices.WebService.ImageInfo ImageInfo, System.IO.Stream ImageData) {
+            this.ImageInfo = ImageInfo;
+            this.ImageData = ImageData;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AddPictureResponse {
+        
+        public AddPictureResponse() {
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -339,28 +393,12 @@ namespace TestWebServices.WebService {
             return base.Channel.Connexion(pseudo, mdp);
         }
         
-        public TestWebServices.WebService.Utilisateur Instription(TestWebServices.WebService.Utilisateur u) {
-            return base.Channel.Instription(u);
+        public TestWebServices.WebService.Utilisateur Inscription(TestWebServices.WebService.Utilisateur u) {
+            return base.Channel.Inscription(u);
         }
         
         public TestWebServices.WebService.Album[] GetAlbumCollection(int userId) {
             return base.Channel.GetAlbumCollection(userId);
-        }
-        
-        public TestWebServices.WebService.Photo[] GetPhotoAlbum(int userId, int albumId) {
-            return base.Channel.GetPhotoAlbum(userId, albumId);
-        }
-        
-        public TestWebServices.WebService.Photo GetPhoto(int userId, int albumId, int photoId) {
-            return base.Channel.GetPhoto(userId, albumId, photoId);
-        }
-        
-        public void AddPhoto(TestWebServices.WebService.Photo p) {
-            base.Channel.AddPhoto(p);
-        }
-        
-        public void RemovePhoto(int userId, int albumId, int photoId) {
-            base.Channel.RemovePhoto(userId, albumId, photoId);
         }
         
         public TestWebServices.WebService.Album AddAlbum(TestWebServices.WebService.Album a) {
@@ -369,6 +407,46 @@ namespace TestWebServices.WebService {
         
         public void RemoveAlbum(int userId, int albumId) {
             base.Channel.RemoveAlbum(userId, albumId);
+        }
+        
+        public TestWebServices.WebService.ImageInfo[] GetPicturesFromUserAlbum(int userId, int albumId) {
+            return base.Channel.GetPicturesFromUserAlbum(userId, albumId);
+        }
+        
+        public int[] GetPicturesIdFromUserAlbum(int userId, int albumId) {
+            return base.Channel.GetPicturesIdFromUserAlbum(userId, albumId);
+        }
+        
+        public System.Tuple<int, string>[] GetPicturesAlbumTuple(int userId, int albumId) {
+            return base.Channel.GetPicturesAlbumTuple(userId, albumId);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        TestWebServices.WebService.ImageDownloadResponse TestWebServices.WebService.IService.GetPicture(TestWebServices.WebService.ImageDownloadRequest request) {
+            return base.Channel.GetPicture(request);
+        }
+        
+        public System.IO.Stream GetPicture(TestWebServices.WebService.ImageInfo ImageInfo) {
+            TestWebServices.WebService.ImageDownloadRequest inValue = new TestWebServices.WebService.ImageDownloadRequest();
+            inValue.ImageInfo = ImageInfo;
+            TestWebServices.WebService.ImageDownloadResponse retVal = ((TestWebServices.WebService.IService)(this)).GetPicture(inValue);
+            return retVal.ImageData;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        TestWebServices.WebService.AddPictureResponse TestWebServices.WebService.IService.AddPicture(TestWebServices.WebService.Picture request) {
+            return base.Channel.AddPicture(request);
+        }
+        
+        public void AddPicture(TestWebServices.WebService.ImageInfo ImageInfo, System.IO.Stream ImageData) {
+            TestWebServices.WebService.Picture inValue = new TestWebServices.WebService.Picture();
+            inValue.ImageInfo = ImageInfo;
+            inValue.ImageData = ImageData;
+            TestWebServices.WebService.AddPictureResponse retVal = ((TestWebServices.WebService.IService)(this)).AddPicture(inValue);
+        }
+        
+        public void RemovePicture(int userId, int albumId, int photoId) {
+            base.Channel.RemovePicture(userId, albumId, photoId);
         }
     }
 }

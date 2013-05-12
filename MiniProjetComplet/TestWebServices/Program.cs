@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TestWebServices.WebService;
+using System.IO;
 
 namespace TestWebServices
 {
@@ -51,21 +52,30 @@ namespace TestWebServices
             Console.WriteLine();
 
             // Ajout de photos
-            //Photo p = new Photo();
-            //p.Album = alC[0].Id;
-            //p.Nom = "photo1.jpg";
-            //p.Image = Util.lireFichier("image1.jpg");
-            //sc.AddPhoto(p);
+            ImageInfo pi = new ImageInfo();
+            pi.Album = alC[0].Id;
+            pi.Nom = "phot1.jpg";
+            sc.AddPicture(pi, new FileStream("image1.jpg", FileMode.Open));
 
             //p.Nom = "photo2.jpg";
             //p.Image = Util.lireFichier("image2.jpg");
             //sc.AddPhoto(p);
 
-            Photo[] photos = sc.GetPhotoAlbum(ut.Id, alC[0].Id);
-            foreach (Photo ph in photos)
+            ImageInfo[] photos = sc.GetPicturesFromUserAlbum(ut.Id, alC[0].Id);
+            foreach (ImageInfo ph in photos)
             {
-                Console.WriteLine("Photo {0}, length:{1}", ph.Nom, ph.Image.Length);
-                Util.ByteArrayToFile(ph.Nom, ph.Image);
+                Stream p = sc.GetPicture(ph);
+                int b, i = 0;
+                List<byte> bytes = new List<byte>();
+                do
+                {
+                    b = p.ReadByte();
+                    bytes.Add((byte)b); //read next byte from stream  
+                    i++;
+                } while (b != -1);
+                Console.WriteLine("Photo {0}, length:{1}", ph.Nom, i);
+
+                Util.ByteArrayToFile(ph.Nom, bytes.ToArray());
             }
 
             Console.ReadLine();

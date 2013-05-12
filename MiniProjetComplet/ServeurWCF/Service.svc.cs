@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using LibrairieServeur;
 using ObjetDefinition;
+using System.IO;
 
 namespace ServeurWCF
 {
@@ -37,32 +38,41 @@ namespace ServeurWCF
             return gestionBdd.getAlbums(userId);
         }
 
-        public List<Photo> GetPhotoAlbum(int userId, int albumId)
+        public List<ImageInfo> GetPicturesFromUserAlbum(int userId, int albumId)
         {
-            return gestionBdd.getPhotoUserAlbum(userId, albumId);
+            return gestionBdd.getImagesFromAlbum(userId, albumId);
         }
 
-        public List<int> GetPhotoAlbumInt(int userId, int albumId)
+        public List<int> GetPicturesIdFromUserAlbum(int userId, int albumId)
         {
-            return gestionBdd.getImageIDUser(userId, albumId);
+            return gestionBdd.getImagesIdFromAlbum(userId, albumId);
         }
 
-        public List<Tuple<int, String>> GetPhotoAlbumTuple(int userId, int albumId)
+        public List<Tuple<int, String>> GetPicturesAlbumTuple(int userId, int albumId)
         {
             return gestionBdd.getImageIDUserTuple(userId, albumId);
         }
 
-        public Photo GetPhoto(int userId, int albumId, int photoId)
+        public ImageDownloadResponse GetPicture(ImageDownloadRequest p)
         {
-            return gestionBdd.getPhoto(photoId);
+            ImageDownloadResponse imdr = new ImageDownloadResponse();
+            imdr.ImageData = new MemoryStream(gestionBdd.getPhoto(p.ImageInfo.Id));
+            return imdr;
         }
 
-        public void AddPhoto(Photo p)
+        public ImageDownloadResponse GetPictureThumbnail(ImagethumbnailDownloadRequest p)
+        {
+            ImageDownloadResponse imdr = new ImageDownloadResponse();
+            imdr.ImageData = new MemoryStream(Util.CreateThumbnail(gestionBdd.getPhoto(p.ImageInfo.Id), p.MaxLargestSide));
+            return imdr;
+        }
+
+        public void AddPicture(Picture p)
         {
             gestionBdd.addImage(p);
         }
 
-        public void RemovePhoto(int userId, int albumId, int photoId)
+        public void RemovePicture(int userId, int albumId, int photoId)
         {
             throw new NotImplementedException();
         }

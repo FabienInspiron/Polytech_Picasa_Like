@@ -45,7 +45,7 @@ namespace ServeurWCF
 
         # region Photo
 
-        public List<Photo> getAllPhoto()
+        public List<ImageInfo> getAllPhoto()
         {
             return gestionBdd.getAllPhoto();
         }

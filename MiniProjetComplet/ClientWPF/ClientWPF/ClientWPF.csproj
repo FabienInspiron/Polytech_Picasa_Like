@@ -60,6 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ByteArrayToImageConverter.cs" />
+    <Compile Include="MyClasses.cs" />
     <Compile Include="HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
@@ -116,7 +117,7 @@
     <None Include="Service References\WebService\ClientWPF.WebService.Album.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\WebService\ClientWPF.WebService.Photo.datasource">
+    <None Include="Service References\WebService\ClientWPF.WebService.ImageInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\WebService\ClientWPF.WebService.Utilisateur.datasource">
@@ -136,6 +137,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\WebService\Service31.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WebService\Service4.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

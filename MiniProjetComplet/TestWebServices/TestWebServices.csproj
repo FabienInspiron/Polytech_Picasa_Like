@@ -97,10 +97,19 @@
     <None Include="Service References\WebService\Service2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\WebService\Service3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WebService\Service32.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WebService\Service4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\WebService\TestWebServices.WebService.Album.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\WebService\TestWebServices.WebService.Photo.datasource">
+    <None Include="Service References\WebService\TestWebServices.WebService.ImageInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\WebService\TestWebServices.WebService.Utilisateur.datasource">
