@@ -26,7 +26,8 @@ namespace ClientWeb
             if (id != null)
             {
                 ServiceClient service = new ServiceClient();
-                Photo p = service.GetPhoto(userI, albumI, idI);
+
+                Picture p = service.GetPicture(userI, albumI, idI);
 
                 // on récupére notre image là où il faut
                 Byte[] bytes = p.Image;

@@ -185,24 +185,18 @@ namespace ClientWeb.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Photo", Namespace="http://schemas.datacontract.org/2004/07/ObjetDefinition")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ImageInfo", Namespace="http://schemas.datacontract.org/2004/07/ObjetDefinition")]
     [System.SerializableAttribute()]
-    public partial class Photo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class ImageInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AlbumField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] ImageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NomField;
+        
+        private int AlbumField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -214,20 +208,7 @@ namespace ClientWeb.ServiceReference1 {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Album {
-            get {
-                return this.AlbumField;
-            }
-            set {
-                if ((this.AlbumField.Equals(value) != true)) {
-                    this.AlbumField = value;
-                    this.RaisePropertyChanged("Album");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public int Id {
             get {
                 return this.IdField;
@@ -240,20 +221,7 @@ namespace ClientWeb.ServiceReference1 {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] Image {
-            get {
-                return this.ImageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ImageField, value) != true)) {
-                    this.ImageField = value;
-                    this.RaisePropertyChanged("Image");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string Nom {
             get {
                 return this.NomField;
@@ -262,6 +230,19 @@ namespace ClientWeb.ServiceReference1 {
                 if ((object.ReferenceEquals(this.NomField, value) != true)) {
                     this.NomField = value;
                     this.RaisePropertyChanged("Nom");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public int Album {
+            get {
+                return this.AlbumField;
+            }
+            set {
+                if ((this.AlbumField.Equals(value) != true)) {
+                    this.AlbumField = value;
+                    this.RaisePropertyChanged("Album");
                 }
             }
         }
@@ -295,23 +276,115 @@ namespace ClientWeb.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAlbum", ReplyAction="http://tempuri.org/IService/RemoveAlbumResponse")]
         void RemoveAlbum(int userId, int albumId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhotoAlbum", ReplyAction="http://tempuri.org/IService/GetPhotoAlbumResponse")]
-        ClientWeb.ServiceReference1.Photo[] GetPhotoAlbum(int userId, int albumId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesFromUserAlbum", ReplyAction="http://tempuri.org/IService/GetPicturesFromUserAlbumResponse")]
+        ClientWeb.ServiceReference1.ImageInfo[] GetPicturesFromUserAlbum(int userId, int albumId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhotoAlbumInt", ReplyAction="http://tempuri.org/IService/GetPhotoAlbumIntResponse")]
-        int[] GetPhotoAlbumInt(int userId, int albumId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesIdFromUserAlbum", ReplyAction="http://tempuri.org/IService/GetPicturesIdFromUserAlbumResponse")]
+        int[] GetPicturesIdFromUserAlbum(int userId, int albumId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhotoAlbumTuple", ReplyAction="http://tempuri.org/IService/GetPhotoAlbumTupleResponse")]
-        System.Tuple<int, string>[] GetPhotoAlbumTuple(int userId, int albumId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesAlbumTuple", ReplyAction="http://tempuri.org/IService/GetPicturesAlbumTupleResponse")]
+        System.Tuple<int, string>[] GetPicturesAlbumTuple(int userId, int albumId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhoto", ReplyAction="http://tempuri.org/IService/GetPhotoResponse")]
-        ClientWeb.ServiceReference1.Photo GetPhoto(int userId, int albumId, int photoId);
+        // CODEGEN : La génération du contrat de message depuis le nom de wrapper (ImageDownloadRequest) du message ImageDownloadRequest ne correspond pas à la valeur par défaut (GetPicture)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicture", ReplyAction="http://tempuri.org/IService/GetPictureResponse")]
+        ClientWeb.ServiceReference1.ImageDownloadResponse GetPicture(ClientWeb.ServiceReference1.ImageDownloadRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddPhoto", ReplyAction="http://tempuri.org/IService/AddPhotoResponse")]
-        void AddPhoto(ClientWeb.ServiceReference1.Photo p);
+        // CODEGEN : La génération du contrat de message depuis le nom de wrapper (ImagethumbnailDownloadRequest) du message ImagethumbnailDownloadRequest ne correspond pas à la valeur par défaut (GetPictureThumbnail)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPictureThumbnail", ReplyAction="http://tempuri.org/IService/GetPictureThumbnailResponse")]
+        ClientWeb.ServiceReference1.ImageDownloadResponse GetPictureThumbnail(ClientWeb.ServiceReference1.ImagethumbnailDownloadRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemovePhoto", ReplyAction="http://tempuri.org/IService/RemovePhotoResponse")]
-        void RemovePhoto(int userId, int albumId, int photoId);
+        // CODEGEN : La génération du contrat de message depuis l'opération AddPicture n'est ni RPC, ni encapsulée dans un document.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddPicture", ReplyAction="http://tempuri.org/IService/AddPictureResponse")]
+        ClientWeb.ServiceReference1.AddPictureResponse AddPicture(ClientWeb.ServiceReference1.Picture request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemovePicture", ReplyAction="http://tempuri.org/IService/RemovePictureResponse")]
+        void RemovePicture(int userId, int albumId, int photoId);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ImageDownloadRequest", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class ImageDownloadRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public ClientWeb.ServiceReference1.ImageInfo ImageInfo;
+        
+        public ImageDownloadRequest() {
+        }
+        
+        public ImageDownloadRequest(ClientWeb.ServiceReference1.ImageInfo ImageInfo) {
+            this.ImageInfo = ImageInfo;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ImageDownloadResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class ImageDownloadResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public System.IO.Stream ImageData;
+        
+        public ImageDownloadResponse() {
+        }
+        
+        public ImageDownloadResponse(System.IO.Stream ImageData) {
+            this.ImageData = ImageData;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ImagethumbnailDownloadRequest", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class ImagethumbnailDownloadRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public ClientWeb.ServiceReference1.ImageInfo ImageInfo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public int MaxLargestSide;
+        
+        public ImagethumbnailDownloadRequest() {
+        }
+        
+        public ImagethumbnailDownloadRequest(ClientWeb.ServiceReference1.ImageInfo ImageInfo, int MaxLargestSide) {
+            this.ImageInfo = ImageInfo;
+            this.MaxLargestSide = MaxLargestSide;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Picture", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class Picture {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public ClientWeb.ServiceReference1.ImageInfo ImageInfo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public System.IO.Stream ImageData;
+        
+        public Picture() {
+        }
+        
+        public Picture(ClientWeb.ServiceReference1.ImageInfo ImageInfo, System.IO.Stream ImageData) {
+            this.ImageInfo = ImageInfo;
+            this.ImageData = ImageData;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AddPictureResponse {
+        
+        public AddPictureResponse() {
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -361,28 +434,57 @@ namespace ClientWeb.ServiceReference1 {
             base.Channel.RemoveAlbum(userId, albumId);
         }
         
-        public ClientWeb.ServiceReference1.Photo[] GetPhotoAlbum(int userId, int albumId) {
-            return base.Channel.GetPhotoAlbum(userId, albumId);
+        public ClientWeb.ServiceReference1.ImageInfo[] GetPicturesFromUserAlbum(int userId, int albumId) {
+            return base.Channel.GetPicturesFromUserAlbum(userId, albumId);
         }
         
-        public int[] GetPhotoAlbumInt(int userId, int albumId) {
-            return base.Channel.GetPhotoAlbumInt(userId, albumId);
+        public int[] GetPicturesIdFromUserAlbum(int userId, int albumId) {
+            return base.Channel.GetPicturesIdFromUserAlbum(userId, albumId);
         }
         
-        public System.Tuple<int, string>[] GetPhotoAlbumTuple(int userId, int albumId) {
-            return base.Channel.GetPhotoAlbumTuple(userId, albumId);
+        public System.Tuple<int, string>[] GetPicturesAlbumTuple(int userId, int albumId) {
+            return base.Channel.GetPicturesAlbumTuple(userId, albumId);
         }
         
-        public ClientWeb.ServiceReference1.Photo GetPhoto(int userId, int albumId, int photoId) {
-            return base.Channel.GetPhoto(userId, albumId, photoId);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClientWeb.ServiceReference1.ImageDownloadResponse ClientWeb.ServiceReference1.IService.GetPicture(ClientWeb.ServiceReference1.ImageDownloadRequest request) {
+            return base.Channel.GetPicture(request);
         }
         
-        public void AddPhoto(ClientWeb.ServiceReference1.Photo p) {
-            base.Channel.AddPhoto(p);
+        public System.IO.Stream GetPicture(ClientWeb.ServiceReference1.ImageInfo ImageInfo) {
+            ClientWeb.ServiceReference1.ImageDownloadRequest inValue = new ClientWeb.ServiceReference1.ImageDownloadRequest();
+            inValue.ImageInfo = ImageInfo;
+            ClientWeb.ServiceReference1.ImageDownloadResponse retVal = ((ClientWeb.ServiceReference1.IService)(this)).GetPicture(inValue);
+            return retVal.ImageData;
         }
         
-        public void RemovePhoto(int userId, int albumId, int photoId) {
-            base.Channel.RemovePhoto(userId, albumId, photoId);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClientWeb.ServiceReference1.ImageDownloadResponse ClientWeb.ServiceReference1.IService.GetPictureThumbnail(ClientWeb.ServiceReference1.ImagethumbnailDownloadRequest request) {
+            return base.Channel.GetPictureThumbnail(request);
+        }
+        
+        public System.IO.Stream GetPictureThumbnail(ClientWeb.ServiceReference1.ImageInfo ImageInfo, int MaxLargestSide) {
+            ClientWeb.ServiceReference1.ImagethumbnailDownloadRequest inValue = new ClientWeb.ServiceReference1.ImagethumbnailDownloadRequest();
+            inValue.ImageInfo = ImageInfo;
+            inValue.MaxLargestSide = MaxLargestSide;
+            ClientWeb.ServiceReference1.ImageDownloadResponse retVal = ((ClientWeb.ServiceReference1.IService)(this)).GetPictureThumbnail(inValue);
+            return retVal.ImageData;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClientWeb.ServiceReference1.AddPictureResponse ClientWeb.ServiceReference1.IService.AddPicture(ClientWeb.ServiceReference1.Picture request) {
+            return base.Channel.AddPicture(request);
+        }
+        
+        public void AddPicture(ClientWeb.ServiceReference1.ImageInfo ImageInfo, System.IO.Stream ImageData) {
+            ClientWeb.ServiceReference1.Picture inValue = new ClientWeb.ServiceReference1.Picture();
+            inValue.ImageInfo = ImageInfo;
+            inValue.ImageData = ImageData;
+            ClientWeb.ServiceReference1.AddPictureResponse retVal = ((ClientWeb.ServiceReference1.IService)(this)).AddPicture(inValue);
+        }
+        
+        public void RemovePicture(int userId, int albumId, int photoId) {
+            base.Channel.RemovePicture(userId, albumId, photoId);
         }
     }
 }

@@ -33,6 +33,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="ObjetsDefinition">
+      <HintPath>..\..\ObjetsDefinition\bin\Debug\ObjetsDefinition.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
@@ -64,7 +67,7 @@
     <None Include="Service References\ServiceReference1\ClientWeb.ServiceReference1.Album.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServiceReference1\ClientWeb.ServiceReference1.Photo.datasource">
+    <None Include="Service References\ServiceReference1\ClientWeb.ServiceReference1.ImageInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ServiceReference1\ClientWeb.ServiceReference1.Utilisateur.datasource">
@@ -103,6 +106,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceReference1\Service4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\Service5.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
