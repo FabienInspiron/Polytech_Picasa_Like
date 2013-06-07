@@ -76,7 +76,7 @@ namespace ClientWPF
             if (parent.Name == "ListBox1")
             {
                 //Console.WriteLine("Envoi de " + image.Nom + " vers le serveur");
-                ImageInfo i = new ImageInfo();
+                ImageInfo i = new ImageInfo("defaut");
                 i.Nom = image.Nom;
                 i.Album = idAlbumSelected;
 
@@ -86,7 +86,7 @@ namespace ClientWPF
             {
                 //Console.WriteLine("Envoi de {0} en local", image.Nom);
                 String imagePath = LocalDirectory + "\\" + image.Nom;
-                ImageInfo img = new ImageInfo();
+                ImageInfo img = new ImageInfo("defaut");
                 img.Album = image.Album;
                 img.Id = image.Id;
                 img.Nom = image.Nom;

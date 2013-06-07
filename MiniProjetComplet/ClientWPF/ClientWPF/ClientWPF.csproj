@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LibrairieServeur">
+      <HintPath>..\..\LibrairieServeur\bin\Debug\LibrairieServeur.dll</HintPath>
+    </Reference>
     <Reference Include="ObjetsDefinition">
       <HintPath>..\..\ObjetsDefinition\bin\Debug\ObjetsDefinition.dll</HintPath>
     </Reference>
@@ -110,6 +113,7 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\DataSources\ObjetDefinition.Album.datasource" />
+    <None Include="Properties\DataSources\ObjetDefinition.ImageInfo.datasource" />
     <None Include="Properties\DataSources\ObjetDefinition.Photo.datasource" />
     <None Include="Properties\DataSources\ObjetDefinition.Utilisateur.datasource" />
     <None Include="Properties\Settings.settings">
@@ -117,15 +121,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\WebService\ClientWPF.WebService.Album.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WebService\ClientWPF.WebService.Photo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\WebService\ClientWPF.WebService.Utilisateur.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\WebService\Service.wsdl" />
     <None Include="Service References\WebService\Service.xsd">
       <SubType>Designer</SubType>
@@ -140,6 +135,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\WebService\Service31.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WebService\Service4.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

@@ -9,309 +9,136 @@
 //------------------------------------------------------------------------------
 
 namespace ClientWPF.WebService {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Utilisateur", Namespace="http://schemas.datacontract.org/2004/07/ObjetDefinition")]
-    [System.SerializableAttribute()]
-    public partial class Utilisateur : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MdpField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NomField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PrenomField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Mdp {
-            get {
-                return this.MdpField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MdpField, value) != true)) {
-                    this.MdpField = value;
-                    this.RaisePropertyChanged("Mdp");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Nom {
-            get {
-                return this.NomField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NomField, value) != true)) {
-                    this.NomField = value;
-                    this.RaisePropertyChanged("Nom");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Prenom {
-            get {
-                return this.PrenomField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PrenomField, value) != true)) {
-                    this.PrenomField = value;
-                    this.RaisePropertyChanged("Prenom");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Album", Namespace="http://schemas.datacontract.org/2004/07/ObjetDefinition")]
-    [System.SerializableAttribute()]
-    public partial class Album : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NomField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int UserIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Nom {
-            get {
-                return this.NomField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NomField, value) != true)) {
-                    this.NomField = value;
-                    this.RaisePropertyChanged("Nom");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Photo", Namespace="http://schemas.datacontract.org/2004/07/ObjetDefinition")]
-    [System.SerializableAttribute()]
-    public partial class Photo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AlbumField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] ImageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NomField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Album {
-            get {
-                return this.AlbumField;
-            }
-            set {
-                if ((this.AlbumField.Equals(value) != true)) {
-                    this.AlbumField = value;
-                    this.RaisePropertyChanged("Album");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] Image {
-            get {
-                return this.ImageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ImageField, value) != true)) {
-                    this.ImageField = value;
-                    this.RaisePropertyChanged("Image");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Nom {
-            get {
-                return this.NomField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NomField, value) != true)) {
-                    this.NomField = value;
-                    this.RaisePropertyChanged("Nom");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WebService.IService")]
     public interface IService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Connexion", ReplyAction="http://tempuri.org/IService/ConnexionResponse")]
-        ClientWPF.WebService.Utilisateur Connexion(string pseudo, string mdp);
+        ObjetDefinition.Utilisateur Connexion(string pseudo, string mdp);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Inscription", ReplyAction="http://tempuri.org/IService/InscriptionResponse")]
-        ClientWPF.WebService.Utilisateur Inscription(ClientWPF.WebService.Utilisateur u);
+        ObjetDefinition.Utilisateur Inscription(ObjetDefinition.Utilisateur u);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlbumCollection", ReplyAction="http://tempuri.org/IService/GetAlbumCollectionResponse")]
-        ClientWPF.WebService.Album[] GetAlbumCollection(int userId);
+        ObjetDefinition.Album[] GetAlbumCollection(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddAlbum", ReplyAction="http://tempuri.org/IService/AddAlbumResponse")]
-        ClientWPF.WebService.Album AddAlbum(ClientWPF.WebService.Album a);
+        ObjetDefinition.Album AddAlbum(ObjetDefinition.Album a);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAlbum", ReplyAction="http://tempuri.org/IService/RemoveAlbumResponse")]
         void RemoveAlbum(int userId, int albumId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhotoAlbum", ReplyAction="http://tempuri.org/IService/GetPhotoAlbumResponse")]
-        ClientWPF.WebService.Photo[] GetPhotoAlbum(int userId, int albumId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesFromUserAlbum", ReplyAction="http://tempuri.org/IService/GetPicturesFromUserAlbumResponse")]
+        ObjetDefinition.ImageInfo[] GetPicturesFromUserAlbum(int userId, int albumId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhotoAlbumInt", ReplyAction="http://tempuri.org/IService/GetPhotoAlbumIntResponse")]
-        int[] GetPhotoAlbumInt(int userId, int albumId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesIdFromUserAlbum", ReplyAction="http://tempuri.org/IService/GetPicturesIdFromUserAlbumResponse")]
+        int[] GetPicturesIdFromUserAlbum(int userId, int albumId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhotoAlbumTuple", ReplyAction="http://tempuri.org/IService/GetPhotoAlbumTupleResponse")]
-        System.Tuple<int, string>[] GetPhotoAlbumTuple(int userId, int albumId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesAlbumTuple", ReplyAction="http://tempuri.org/IService/GetPicturesAlbumTupleResponse")]
+        System.Tuple<int, string>[] GetPicturesAlbumTuple(int userId, int albumId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPhoto", ReplyAction="http://tempuri.org/IService/GetPhotoResponse")]
-        ClientWPF.WebService.Photo GetPhoto(int userId, int albumId, int photoId);
+        // CODEGEN : La génération du contrat de message depuis le nom de wrapper (ImageDownloadRequest) du message ImageDownloadRequest ne correspond pas à la valeur par défaut (GetPicture)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicture", ReplyAction="http://tempuri.org/IService/GetPictureResponse")]
+        ClientWPF.WebService.ImageDownloadResponse GetPicture(ClientWPF.WebService.ImageDownloadRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddPhoto", ReplyAction="http://tempuri.org/IService/AddPhotoResponse")]
-        void AddPhoto(ClientWPF.WebService.Photo p);
+        // CODEGEN : La génération du contrat de message depuis le nom de wrapper (ImagethumbnailDownloadRequest) du message ImagethumbnailDownloadRequest ne correspond pas à la valeur par défaut (GetPictureThumbnail)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPictureThumbnail", ReplyAction="http://tempuri.org/IService/GetPictureThumbnailResponse")]
+        ClientWPF.WebService.ImageDownloadResponse GetPictureThumbnail(ClientWPF.WebService.ImagethumbnailDownloadRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemovePhoto", ReplyAction="http://tempuri.org/IService/RemovePhotoResponse")]
-        void RemovePhoto(int userId, int albumId, int photoId);
+        // CODEGEN : La génération du contrat de message depuis l'opération AddPicture n'est ni RPC, ni encapsulée dans un document.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddPicture", ReplyAction="http://tempuri.org/IService/AddPictureResponse")]
+        ClientWPF.WebService.AddPictureResponse AddPicture(ClientWPF.WebService.Picture request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemovePicture", ReplyAction="http://tempuri.org/IService/RemovePictureResponse")]
+        void RemovePicture(int userId, int albumId, int photoId);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ImageDownloadRequest", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class ImageDownloadRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public ObjetDefinition.ImageInfo ImageInfo;
+        
+        public ImageDownloadRequest() {
+        }
+        
+        public ImageDownloadRequest(ObjetDefinition.ImageInfo ImageInfo) {
+            this.ImageInfo = ImageInfo;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ImageDownloadResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class ImageDownloadResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public System.IO.Stream ImageData;
+        
+        public ImageDownloadResponse() {
+        }
+        
+        public ImageDownloadResponse(System.IO.Stream ImageData) {
+            this.ImageData = ImageData;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ImagethumbnailDownloadRequest", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class ImagethumbnailDownloadRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public ObjetDefinition.ImageInfo ImageInfo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public int MaxLargestSide;
+        
+        public ImagethumbnailDownloadRequest() {
+        }
+        
+        public ImagethumbnailDownloadRequest(ObjetDefinition.ImageInfo ImageInfo, int MaxLargestSide) {
+            this.ImageInfo = ImageInfo;
+            this.MaxLargestSide = MaxLargestSide;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Picture", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class Picture {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public ObjetDefinition.ImageInfo ImageInfo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public System.IO.Stream ImageData;
+        
+        public Picture() {
+        }
+        
+        public Picture(ObjetDefinition.ImageInfo ImageInfo, System.IO.Stream ImageData) {
+            this.ImageInfo = ImageInfo;
+            this.ImageData = ImageData;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AddPictureResponse {
+        
+        public AddPictureResponse() {
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -341,19 +168,19 @@ namespace ClientWPF.WebService {
                 base(binding, remoteAddress) {
         }
         
-        public ClientWPF.WebService.Utilisateur Connexion(string pseudo, string mdp) {
+        public ObjetDefinition.Utilisateur Connexion(string pseudo, string mdp) {
             return base.Channel.Connexion(pseudo, mdp);
         }
         
-        public ClientWPF.WebService.Utilisateur Inscription(ClientWPF.WebService.Utilisateur u) {
+        public ObjetDefinition.Utilisateur Inscription(ObjetDefinition.Utilisateur u) {
             return base.Channel.Inscription(u);
         }
         
-        public ClientWPF.WebService.Album[] GetAlbumCollection(int userId) {
+        public ObjetDefinition.Album[] GetAlbumCollection(int userId) {
             return base.Channel.GetAlbumCollection(userId);
         }
         
-        public ClientWPF.WebService.Album AddAlbum(ClientWPF.WebService.Album a) {
+        public ObjetDefinition.Album AddAlbum(ObjetDefinition.Album a) {
             return base.Channel.AddAlbum(a);
         }
         
@@ -361,28 +188,57 @@ namespace ClientWPF.WebService {
             base.Channel.RemoveAlbum(userId, albumId);
         }
         
-        public ClientWPF.WebService.Photo[] GetPhotoAlbum(int userId, int albumId) {
-            return base.Channel.GetPhotoAlbum(userId, albumId);
+        public ObjetDefinition.ImageInfo[] GetPicturesFromUserAlbum(int userId, int albumId) {
+            return base.Channel.GetPicturesFromUserAlbum(userId, albumId);
         }
         
-        public int[] GetPhotoAlbumInt(int userId, int albumId) {
-            return base.Channel.GetPhotoAlbumInt(userId, albumId);
+        public int[] GetPicturesIdFromUserAlbum(int userId, int albumId) {
+            return base.Channel.GetPicturesIdFromUserAlbum(userId, albumId);
         }
         
-        public System.Tuple<int, string>[] GetPhotoAlbumTuple(int userId, int albumId) {
-            return base.Channel.GetPhotoAlbumTuple(userId, albumId);
+        public System.Tuple<int, string>[] GetPicturesAlbumTuple(int userId, int albumId) {
+            return base.Channel.GetPicturesAlbumTuple(userId, albumId);
         }
         
-        public ClientWPF.WebService.Photo GetPhoto(int userId, int albumId, int photoId) {
-            return base.Channel.GetPhoto(userId, albumId, photoId);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClientWPF.WebService.ImageDownloadResponse ClientWPF.WebService.IService.GetPicture(ClientWPF.WebService.ImageDownloadRequest request) {
+            return base.Channel.GetPicture(request);
         }
         
-        public void AddPhoto(ClientWPF.WebService.Photo p) {
-            base.Channel.AddPhoto(p);
+        public System.IO.Stream GetPicture(ObjetDefinition.ImageInfo ImageInfo) {
+            ClientWPF.WebService.ImageDownloadRequest inValue = new ClientWPF.WebService.ImageDownloadRequest();
+            inValue.ImageInfo = ImageInfo;
+            ClientWPF.WebService.ImageDownloadResponse retVal = ((ClientWPF.WebService.IService)(this)).GetPicture(inValue);
+            return retVal.ImageData;
         }
         
-        public void RemovePhoto(int userId, int albumId, int photoId) {
-            base.Channel.RemovePhoto(userId, albumId, photoId);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClientWPF.WebService.ImageDownloadResponse ClientWPF.WebService.IService.GetPictureThumbnail(ClientWPF.WebService.ImagethumbnailDownloadRequest request) {
+            return base.Channel.GetPictureThumbnail(request);
+        }
+        
+        public System.IO.Stream GetPictureThumbnail(ObjetDefinition.ImageInfo ImageInfo, int MaxLargestSide) {
+            ClientWPF.WebService.ImagethumbnailDownloadRequest inValue = new ClientWPF.WebService.ImagethumbnailDownloadRequest();
+            inValue.ImageInfo = ImageInfo;
+            inValue.MaxLargestSide = MaxLargestSide;
+            ClientWPF.WebService.ImageDownloadResponse retVal = ((ClientWPF.WebService.IService)(this)).GetPictureThumbnail(inValue);
+            return retVal.ImageData;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ClientWPF.WebService.AddPictureResponse ClientWPF.WebService.IService.AddPicture(ClientWPF.WebService.Picture request) {
+            return base.Channel.AddPicture(request);
+        }
+        
+        public void AddPicture(ObjetDefinition.ImageInfo ImageInfo, System.IO.Stream ImageData) {
+            ClientWPF.WebService.Picture inValue = new ClientWPF.WebService.Picture();
+            inValue.ImageInfo = ImageInfo;
+            inValue.ImageData = ImageData;
+            ClientWPF.WebService.AddPictureResponse retVal = ((ClientWPF.WebService.IService)(this)).AddPicture(inValue);
+        }
+        
+        public void RemovePicture(int userId, int albumId, int photoId) {
+            base.Channel.RemovePicture(userId, albumId, photoId);
         }
     }
 }
