@@ -6,6 +6,7 @@ using System.IO;
 using ClientWPF.WebService;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace ClientWPF
 {
@@ -108,7 +109,20 @@ namespace ClientWPF
             return bytes.ToArray();
         }
 
-        public static byte[] CreateThumbnail(byte[] PassedImage, int LargestSide)
+        public static byte[] imageToByteArray(System.Drawing.Image imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            return ms.ToArray();
+        }
+
+        /// <summary>
+        /// Create a square thumbnail
+        /// </summary>
+        /// <param name="PassedImage">Image to reduce</param>
+        /// <param name="LargestSide">Side size</param>
+        /// <returns></returns>
+        public static byte[] CreateThumbnailC(byte[] PassedImage, int LargestSide)
         {
             byte[] ReturnedThumbnail;
 
@@ -121,32 +135,37 @@ namespace ClientWPF
                 // create the start Bitmap from the MemoryStream that contains the image  
                 Bitmap startBitmap = new Bitmap(StartMemoryStream);
 
-                // set thumbnail height and width proportional to the original image.  
-                int newHeight;
-                int newWidth;
-                double HW_ratio;
+                Bitmap resizedImage = new Bitmap(LargestSide, LargestSide);
                 if (startBitmap.Height > startBitmap.Width)
                 {
-                    newHeight = LargestSide;
-                    HW_ratio = (double)((double)LargestSide / (double)startBitmap.Height);
-                    newWidth = (int)(HW_ratio * (double)startBitmap.Width);
+                    int offset = (startBitmap.Height - startBitmap.Width) / 2;
+
+                    Console.WriteLine("offset : " + offset * LargestSide / startBitmap.Height);
+                    
+                    using (Graphics gfx = Graphics.FromImage(resizedImage))
+                    {
+                        gfx.DrawImage(startBitmap,
+                            new Rectangle(0, 0, LargestSide, LargestSide),
+                            new Rectangle(0, offset, startBitmap.Width, startBitmap.Width),
+                            GraphicsUnit.Pixel);
+                    }
                 }
-                else
+                else // width > height
                 {
-                    newWidth = LargestSide;
-                    HW_ratio = (double)((double)LargestSide / (double)startBitmap.Width);
-                    newHeight = (int)(HW_ratio * (double)startBitmap.Height);
+                    int offset = (startBitmap.Width - startBitmap.Height) / 2;
+                    Console.WriteLine("offset : " + offset * LargestSide / startBitmap.Width);
+
+                    using (Graphics gfx = Graphics.FromImage(resizedImage))
+                    {
+                        gfx.DrawImage(startBitmap,
+                            new Rectangle(0, 0, LargestSide, LargestSide),
+                            new Rectangle(offset, 0, startBitmap.Height, startBitmap.Height),
+                            GraphicsUnit.Pixel);
+                    }
                 }
-
-                // create a new Bitmap with dimensions for the thumbnail.  
-                Bitmap newBitmap = new Bitmap(newWidth, newHeight);
-
-                // Copy the image from the START Bitmap into the NEW Bitmap.  
-                // This will create a thumnail size of the same image.  
-                newBitmap = ResizeImage(startBitmap, newWidth, newHeight);
 
                 // Save this image to the specified stream in the specified format.  
-                newBitmap.Save(NewMemoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                resizedImage.Save(NewMemoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
 
                 // Fill the byte[] for the thumbnail from the new MemoryStream.  
                 ReturnedThumbnail = NewMemoryStream.ToArray();
@@ -155,18 +174,5 @@ namespace ClientWPF
             // return the resized image as a string of bytes.  
             return ReturnedThumbnail;
         }
-
-        // Resize a Bitmap  
-        private static Bitmap ResizeImage(Bitmap image, int width, int height)
-        {
-            Bitmap resizedImage = new Bitmap(width, height);
-            using (Graphics gfx = Graphics.FromImage(resizedImage))
-            {
-                gfx.DrawImage(image, new Rectangle(0, 0, width, height),
-                    new Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
-            }
-            return resizedImage;
-        }
-
     }
 }

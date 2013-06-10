@@ -9,22 +9,21 @@ Title="MainWindow" Height="620" Width="820">
         <ObjectDataProvider x:Key="ImageCollection1"/>
         <ObjectDataProvider x:Key="ImageCollection2"/>
         <ObjectDataProvider x:Key="ImageCollectionAlbum"/>
-        
+
         <DataTemplate x:Key="ImageSourceTemplate">
-            <Border Padding="5,5,5,5" Margin="5,5,5,5" BorderBrush="DarkGray" BorderThickness="3" CornerRadius="5">
+            <Border BorderBrush="Blue" BorderThickness="1" CornerRadius="1" Background="Blue" Margin="5">
                 <StackPanel Orientation="Vertical">
-                    <Image Height="110" Width="110" Stretch="None"  Source="{Binding Path=Image, Converter={StaticResource ByteArrayToImageConverter}, Mode=Default}"/>
-                    <TextBlock Text="{Binding Path=Nom}" HorizontalAlignment="Center"/>
+                    <Image Height="100" Width="100" Stretch="None"  Source="{Binding Path=Image, Converter={StaticResource ByteArrayToImageConverter}, Mode=Default}"/>
+                    <TextBlock Text="{Binding Path=Nom}" HorizontalAlignment="Center" Foreground="White" Width="100" TextAlignment="Center" />
                 </StackPanel>
             </Border>
         </DataTemplate>
-        
+
         <DataTemplate x:Key="AlbumSourceTemplate">
-            <Border Padding="5,5,5,5" Margin="5,5,5,5" BorderBrush="DarkGray" BorderThickness="3" CornerRadius="5">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{Binding Path=Nom}" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
+            <StackPanel Orientation="Vertical" Width="100" Margin="5">
+                <Image Source="/ClientWPF;component/dossier.png" Width="100" />
+                <TextBlock Text="{Binding Path=Nom}" HorizontalAlignment="Center" DataContext="{Binding}" TextAlignment="Center" />
+            </StackPanel>
         </DataTemplate>
 
         <Style x:Key="ImageListBoxStyle" TargetType="ListBox">
@@ -41,7 +40,7 @@ Title="MainWindow" Height="620" Width="820">
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="AlbumListBoxStyle" TargetType="ListBox">
             <Setter Property="ItemsSource" Value="{Binding}" />
             <Setter Property="ItemTemplate" Value="{StaticResource AlbumSourceTemplate}" />
@@ -55,36 +54,36 @@ Title="MainWindow" Height="620" Width="820">
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
     </Window.Resources>
-    <Grid>
+    <Grid Background="#FF212121">
         <Grid.RowDefinitions>
             <RowDefinition Height="288" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <ListBox x:Name="ListBoxAlbum"
             Style="{StaticResource AlbumListBoxStyle}"
             DataContext="{StaticResource ImageCollectionAlbum}"
             Margin="0,0,0,133" AllowDrop="False" 
-            MouseDoubleClick="ViewPhotoEvent" />
-
+            MouseDoubleClick="ViewPhotoEvent">
+        </ListBox>
         <GridSplitter HorizontalAlignment="Stretch"
             ResizeBehavior="PreviousAndNext"
             Height="5" Margin="0,156,0,127" />
-        
+
         <ListBox x:Name="ListBox1"
             Style="{StaticResource ImageListBoxStyle}"
             DataContext="{StaticResource ImageCollection1}"
             PreviewMouseLeftButtonDown="ImageDragEvent"
             Drop="ImageDropEvent" Margin="0,161,0,0" />
-        
+
         <GridSplitter HorizontalAlignment="Stretch"
             ResizeBehavior="PreviousAndNext"
             Height="5"
             Grid.Row="1"/>
-        
+
         <ListBox x:Name="ListBox2"
             Style="{StaticResource ImageListBoxStyle}"
             DataContext="{StaticResource ImageCollection2}"

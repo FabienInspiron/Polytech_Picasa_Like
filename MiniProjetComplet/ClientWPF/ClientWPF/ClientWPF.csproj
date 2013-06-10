@@ -36,9 +36,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ObjetsDefinition">
-      <HintPath>..\..\ObjetsDefinition\bin\Debug\ObjetsDefinition.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -120,7 +117,7 @@
     <None Include="Service References\WebService\ClientWPF.WebService.Album.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\WebService\ClientWPF.WebService.Photo.datasource">
+    <None Include="Service References\WebService\ClientWPF.WebService.ImageInfo1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\WebService\ClientWPF.WebService.Utilisateur.datasource">
@@ -142,6 +139,9 @@
     <None Include="Service References\WebService\Service31.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\WebService\Service41.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -160,6 +160,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="dossier.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

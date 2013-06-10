@@ -15,7 +15,6 @@ using System.Collections;
 using System.IO;
 using System.IO.IsolatedStorage;
 using ClientWPF.WebService;
-using ObjetDefinition;
 
 namespace ClientWPF
 {
@@ -189,8 +188,13 @@ namespace ClientWPF
                 string name = words[words.Length - 1];
 
                 Photo p = new Photo(name);
-                p.Image = Util.CreateThumbnail(Util.lireFichier(@img), 100) ;
+                p.Image = Util.CreateThumbnailC(Util.lireFichier(@img), 100);
                 imageCollection2.Add(p);
+
+                //Photo p = new Photo(name);
+                //System.Drawing.Image image = System.Drawing.Image.FromFile(@img);
+                //p.Image = Util.imageToByteArray(Util.FixedSize(image, 100, 100));
+                //imageCollection2.Add(p);
             }
 
             ObjectDataProvider imageSource2 = (ObjectDataProvider)FindResource("ImageCollection2");
