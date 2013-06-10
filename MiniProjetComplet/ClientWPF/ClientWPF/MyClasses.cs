@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
-using ObjetDefinition;
 
 namespace ClientWPF
 {
-    public class AlbumCollection : ObservableCollection<Album>
+    public class AlbumCollection : ObservableCollection<ClientWPF.WebService.Album>
     { }
 
     public class ImageCollection : ObservableCollection<Photo>

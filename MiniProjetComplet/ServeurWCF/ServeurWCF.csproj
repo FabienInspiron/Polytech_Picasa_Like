@@ -35,17 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LibrairieServeur, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="LibrairieServeur">
       <HintPath>..\LibrairieServeur\bin\Debug\LibrairieServeur.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="ObjetsDefinition, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ObjetsDefinition\bin\Debug\ObjetsDefinition.dll</HintPath>
+    <Reference Include="ObjetsDefinition">
+      <HintPath>..\LibrairieServeur\bin\Debug\ObjetsDefinition.dll</HintPath>
     </Reference>
-    <Reference Include="System.IdentityModel" />
-    <Reference Include="System.IdentityModel.Selectors" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -76,8 +72,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomRoleProvider.cs" />
-    <Compile Include="CustomUserNameValidator.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="IServiceAdmin.cs" />
     <Compile Include="Service.svc.cs">

@@ -90,14 +90,11 @@ namespace ClientWeb
         {
             if (!FileUpload1.FileName.Equals(""))
             {
-                /*
                 Photo p = new Photo();
                 p.Album= int.Parse(lstBrowser.SelectedItem.Value);
                 p.Image = FileUpload1.FileBytes;
                 p.Nom = FileUpload1.FileName;
                 service.AddPhoto(p);
-                */
-                Console.WriteLine("Tutu");
             }
         }
 

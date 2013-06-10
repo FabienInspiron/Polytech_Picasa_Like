@@ -3,7 +3,6 @@
   <xs:import schemaLocation="http://localhost:50978/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ObjetDefinition" />
   <xs:import schemaLocation="http://localhost:50978/Service.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:import schemaLocation="http://localhost:50978/Service.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System" />
-  <xs:import schemaLocation="http://localhost:50978/Service.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/Message" />
   <xs:element name="Connexion">
     <xs:complexType>
       <xs:sequence>
@@ -74,7 +73,7 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetPicturesFromUserAlbum">
+  <xs:element name="GetPhotoAlbum">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="userId" type="xs:int" />
@@ -82,29 +81,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetPicturesFromUserAlbumResponse">
+  <xs:element name="GetPhotoAlbumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="GetPicturesFromUserAlbumResult" nillable="true" type="q7:ArrayOfImageInfo" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="GetPhotoAlbumResult" nillable="true" type="q7:ArrayOfPhoto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetPicturesIdFromUserAlbum">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="userId" type="xs:int" />
-        <xs:element minOccurs="0" name="albumId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetPicturesIdFromUserAlbumResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetPicturesIdFromUserAlbumResult" nillable="true" type="q8:ArrayOfint" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetPicturesAlbumTuple">
+  <xs:element name="GetPhotoAlbumInt">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="userId" type="xs:int" />
@@ -112,44 +96,29 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetPicturesAlbumTupleResponse">
+  <xs:element name="GetPhotoAlbumIntResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="GetPicturesAlbumTupleResult" nillable="true" type="q9:ArrayOfTupleOfintstring" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetPhotoAlbumIntResult" nillable="true" type="q8:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ImageDownloadRequest">
+  <xs:element name="GetPhotoAlbumTuple">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="ImageInfo" nillable="true" type="q10:ImageInfo" />
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element minOccurs="0" name="albumId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ImageDownloadResponse">
+  <xs:element name="GetPhotoAlbumTupleResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/Message" name="ImageData" type="q11:StreamBody" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="GetPhotoAlbumTupleResult" nillable="true" type="q9:ArrayOfTupleOfintstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ImagethumbnailDownloadRequest">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="ImageInfo" nillable="true" type="q12:ImageInfo" />
-        <xs:element minOccurs="0" name="MaxLargestSide" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="Picture">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.microsoft.com/Message" name="ImageData" type="q13:StreamBody" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/ObjetDefinition" name="ImageInfo" nillable="true" type="q14:ImageInfo" />
-  <xs:element name="RemovePicture">
+  <xs:element name="GetPhoto">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="userId" type="xs:int" />
@@ -158,7 +127,35 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RemovePictureResponse">
+  <xs:element name="GetPhotoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="GetPhotoResult" nillable="true" type="q10:Photo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddPhoto">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/ObjetDefinition" minOccurs="0" name="p" nillable="true" type="q11:Photo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddPhotoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemovePhoto">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element minOccurs="0" name="albumId" type="xs:int" />
+        <xs:element minOccurs="0" name="photoId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemovePhotoResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

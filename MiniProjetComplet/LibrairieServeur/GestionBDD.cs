@@ -8,7 +8,6 @@ using System.IO;
 using System.Drawing;
 
 using ObjetDefinition;
-using ObjetsDefinition;
 
 namespace LibrairieServeur
 {
@@ -319,7 +318,6 @@ namespace LibrairieServeur
 
         /// <summary>
         /// Ajouter un utilisateur dans la base de donnée
-        /// et lui donne par default le role "user"
         /// </summary>
         /// <param name="nom"></param>
         /// <param name="prenom"></param>
@@ -341,9 +339,6 @@ namespace LibrairieServeur
 
                 Console.WriteLine("Utilisateur ajouter a la base");
                 bdd.deconnect();
-
-                // Ajoute le role pour l'utilistaur
-                addRole(nom, "user");
 
                 return getIdentCurrent("Utilisateur");
             }
@@ -808,172 +803,6 @@ namespace LibrairieServeur
             return retour;
         }
 
-        #endregion
-
-        #region GestionRoles
-
-        /// <summary>
-        /// Ajouter un role dans la base
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="role"></param>
-        public int addRole(String Unuser, String Unrole)
-        {
-            try
-            {
-                bdd.connexion();
-
-                String sql = "INSERT INTO roles (username, role) VALUES(@user, @role)";
-                SqlCommand oCommand = bdd.executeSQL(sql);
-                oCommand.Parameters.Add("@user", SqlDbType.VarChar, Unuser.Length).Value = Unuser;
-                oCommand.Parameters.Add("@role", SqlDbType.VarChar, Unrole.Length).Value = Unrole;
-
-                oCommand.ExecuteNonQuery();
-
-                Console.WriteLine("Role ajouté à la base");
-                bdd.deconnect();
-
-                return getIdentCurrent("roles");
-            }
-            catch (Exception e)
-            {
-                Console.Out.WriteLine("Impossible d'ajouter un role : " + e.Message);
-                return 0;
-            }
-        }
-
-        /// <summary>
-        /// SUpprimer le role
-        /// </summary>
-        /// <param name="id">identifiant du role a supprimer</param>
-        public void delRole(int id)
-        {
-            bdd.connexion();
-            String sql = "DELETE FROM roles WHERE id=@id";
-            SqlCommand oCommand = bdd.executeSQL(sql);
-            oCommand.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
-            oCommand.ExecuteNonQuery();
-            Console.WriteLine("role supprimé de la base");
-            bdd.deconnect();
-        }
-
-   
-        /// <summary>
-        /// Supprimer le role de la bases
-        /// </summary>
-        /// <param name="Unuser">Login de l'utilisateur</param>
-        public void delRole(String Unuser)
-        {
-            bdd.connexion();
-            String sql = "DELETE FROM roles WHERE username=@user";
-            SqlCommand oCommand = bdd.executeSQL(sql);
-            oCommand.Parameters.Add("@user", SqlDbType.VarChar, Unuser.Length).Value = Unuser;
-            oCommand.ExecuteNonQuery();
-            Console.WriteLine("role supprimé de la base");
-            bdd.deconnect();
-        }
-
-        /// <summary>
-        /// Supprimer un role
-        /// </summary>
-        /// <param name="Unuser">Login de l'utilisateur</param>
-        /// <param name="role">role de l'utilisateur a supprimer</param>
-        public void delRole(String Unuser, String role)
-        {
-            bdd.connexion();
-            String sql = "DELETE FROM roles WHERE username=@user AND role=@role";
-            SqlCommand oCommand = bdd.executeSQL(sql);
-            oCommand.Parameters.Add("@user", SqlDbType.VarChar, Unuser.Length).Value = Unuser;
-            oCommand.Parameters.Add("@role", SqlDbType.VarChar, role.Length).Value = role;
-            oCommand.ExecuteNonQuery();
-            Console.WriteLine("role supprimé de la base");
-            bdd.deconnect();
-        }
-
-        /// <summary>
-        /// Obtenir le rôle d'un utilisateur
-        /// </summary>
-        /// <param name="user"></param>
-        public String getRole(String user)
-        {
-            String role = null;
-
-            List<int> tableID = new List<int>();
-            try
-            {
-                bdd.connexion();
-
-                String sql = "SELECT role FROM roles WHERE username = @use";
-
-                SqlCommand oCommand = bdd.executeSQL(sql);
-                oCommand.Parameters.Add("@use", SqlDbType.VarChar, user.Length).Value = user;
-
-                SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
-                while (myReader.Read())
-                {
-                    role = myReader.GetString(0).Trim();
-                }
-
-                myReader.Close();
-            }
-            catch (Exception e)
-            {
-                Console.Write(e.Message);
-            }
-            finally
-            {
-                bdd.deconnect();
-            }
-
-            return role;
-        }
-
-        /// <summary>
-        /// Modifier le role d'un utilisateur
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="role"></param>
-        public void setRole(String user, String role)
-        {
-
-        }
-
-        /// <summary>
-        /// Afficher tous les utilisateur present dans la base de donnée
-        /// </summary>
-        public List<Role> getAllRole()
-        {
-            List<Role> listRole = new List<Role>();
-            try
-            {
-                bdd.connexion();
-                String sql = "SELECT * FROM roles";
-                SqlCommand oCommand = bdd.executeSQL(sql);
-
-                SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
-                while (myReader.Read())
-                {
-                    int id = (int)myReader.GetInt32(0);
-                    String nom = myReader.GetString(1);
-                    String role = myReader.GetString(2);
-
-                    Role r = new Role(id, nom, role);
-                    listRole.Add(r);
-                }
-
-                myReader.Close();
-            }
-            catch (Exception e)
-            {
-
-                Console.WriteLine("Impossible d'afficher tous les roles : " + e.Message);
-            }
-            finally
-            {
-                bdd.deconnect();
-            }
-            return listRole;
-        }
         #endregion
     }
 }

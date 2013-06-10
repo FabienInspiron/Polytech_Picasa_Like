@@ -25,14 +25,7 @@ namespace ClientWeb
             // Si ce paramètre n'est pas nul
             if (id != null)
             {
-             
                 ServiceClient service = new ServiceClient();
-
-                ImageInfo inf = new ImageInfo();
-                inf.Id = idI;
-                inf.Album = albumI;
-
-                Photo ph = service.GetPictureThumbnail(inf, 50);
 
                 Picture p = service.GetPicture(userI, albumI, idI);
 

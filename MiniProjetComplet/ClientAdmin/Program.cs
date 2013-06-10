@@ -43,7 +43,6 @@ namespace ClientAdmin
             prompt += "1 - Utilisateur \n";
             prompt += "2 - Album \n";
             prompt += "3 - Photo \n";
-            prompt += "4 - Roles \n";
 
             return prompt;
         }
@@ -149,8 +148,6 @@ namespace ClientAdmin
                             break;
                     }
                 break;
-
-                // gestion des 
                 case 2:
                     switch (donnee)
                     {
@@ -172,34 +169,8 @@ namespace ClientAdmin
                     }
                 break;
                 
-            // Gestion des utilisateurs
-            //
             case 3:
                 
-            switch (donnee)
-            {
-                case 1:
-                    ClientAdmin.ServiceReferenceAdmin.Utilisateur[] userList = serviceAdmin.getAllUsers();
-                    foreach (ClientAdmin.ServiceReferenceAdmin.Utilisateur u in userList)
-                        Console.WriteLine(u.Id + " - " + u.Nom);
-                    break;
-                case 2:
-                    ClientAdmin.ServiceReferenceAdmin.Album[] albums = serviceAdmin.getAllAlbums();
-                    foreach (ClientAdmin.ServiceReferenceAdmin.Album u in albums)
-                        Console.WriteLine(u.Id + " - " + u.Nom);
-                    break;
-                case 3:
-                    ClientAdmin.ServiceReferenceAdmin.Photo[] photos = serviceAdmin.getAllPhoto();
-                    foreach (ClientAdmin.ServiceReferenceAdmin.Photo u in photos)
-                        Console.WriteLine(u.Id + " - " + u.Nom);
-                    break;
-            }
-            break;
-
-            // gestion des roles
-            //
-            case 4:
-
             switch (donnee)
             {
                 case 1:

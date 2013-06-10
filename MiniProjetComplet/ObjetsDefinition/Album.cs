@@ -17,14 +17,6 @@ namespace ObjetDefinition
         [DataMemberAttribute]
         public int UserId { get; set; }
 
-
-        public Album()
-        {
-            Id = -1;
-            Nom = "defaut";
-            UserId = -1;
-        }
-
         /// <summary>
         /// Création d'un album
         /// </summary>

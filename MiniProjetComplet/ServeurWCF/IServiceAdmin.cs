@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using ObjetDefinition;
-using ObjetsDefinition;
 
 namespace ServeurWCF
 {
@@ -34,22 +33,6 @@ namespace ServeurWCF
         [OperationContract]
         List<ImageInfo> getAllPhoto();
 
-        #endregion
-
-        # region Roles
-
-        [OperationContract]
-        void addRole(String username, String role);
-
-        [OperationContract]
-        void delRole(String username);
-
-        [OperationContract]
-        void delRole(int id);
-
-        [OperationContract]
-        List<Role> getAllRole(int id);
-        
         #endregion
     }
 }
