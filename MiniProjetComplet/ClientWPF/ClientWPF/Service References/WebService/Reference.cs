@@ -274,7 +274,7 @@ namespace ClientWPF.WebService {
         ClientWPF.WebService.Album AddAlbum(ClientWPF.WebService.Album a);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAlbum", ReplyAction="http://tempuri.org/IService/RemoveAlbumResponse")]
-        void RemoveAlbum(int userId, int albumId);
+        int RemoveAlbum(int userId, int albumId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesFromUserAlbum", ReplyAction="http://tempuri.org/IService/GetPicturesFromUserAlbumResponse")]
         ClientWPF.WebService.ImageInfo[] GetPicturesFromUserAlbum(int userId, int albumId);
@@ -298,7 +298,7 @@ namespace ClientWPF.WebService {
         ClientWPF.WebService.AddPictureResponse AddPicture(ClientWPF.WebService.Picture request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemovePicture", ReplyAction="http://tempuri.org/IService/RemovePictureResponse")]
-        void RemovePicture(int userId, int albumId, int photoId);
+        int RemovePicture(int userId, int albumId, int photoId);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -430,8 +430,8 @@ namespace ClientWPF.WebService {
             return base.Channel.AddAlbum(a);
         }
         
-        public void RemoveAlbum(int userId, int albumId) {
-            base.Channel.RemoveAlbum(userId, albumId);
+        public int RemoveAlbum(int userId, int albumId) {
+            return base.Channel.RemoveAlbum(userId, albumId);
         }
         
         public ClientWPF.WebService.ImageInfo[] GetPicturesFromUserAlbum(int userId, int albumId) {
@@ -483,8 +483,8 @@ namespace ClientWPF.WebService {
             ClientWPF.WebService.AddPictureResponse retVal = ((ClientWPF.WebService.IService)(this)).AddPicture(inValue);
         }
         
-        public void RemovePicture(int userId, int albumId, int photoId) {
-            base.Channel.RemovePicture(userId, albumId, photoId);
+        public int RemovePicture(int userId, int albumId, int photoId) {
+            return base.Channel.RemovePicture(userId, albumId, photoId);
         }
     }
 }

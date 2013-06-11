@@ -26,24 +26,24 @@ namespace ClientWPF
 
         ServiceClient webService;
 
-        private ImageCollection imageCollection1;
-        private ImageCollection imageCollection2;
-        private AlbumCollection imageCollectionAlbum;
+        private ImageCollection remotePictureCollection;
+        private ImageCollection localPictureCollection;
+        private AlbumCollection albumCollection;
 
-        int IDUser = 170;
+        int userID;
 
-        int idAlbumSelected = 0;
+        int idSelectedAlbum = 0;
 
         String LocalDirectory = null;
 
-        public MainWindow(int idUser)
+        public MainWindow(int userID)
         {
             InitializeComponent();
 
-            this.IDUser = idUser;
+            this.userID = userID;
             webService = new ServiceClient();
 
-            imageCollection2 = new ImageCollection();
+            localPictureCollection = new ImageCollection();
             miseAjourAlbum();
         }
 
@@ -77,7 +77,7 @@ namespace ClientWPF
                 //Console.WriteLine("Envoi de " + image.Nom + " vers le serveur");
                 ImageInfo i = new ImageInfo();
                 i.Nom = image.Nom;
-                i.Album = idAlbumSelected;
+                i.Album = idSelectedAlbum;
 
                 webService.AddPicture(i, new FileStream(@LocalDirectory + "\\" + image.Nom, FileMode.Open, FileAccess.Read));
             }
@@ -108,41 +108,41 @@ namespace ClientWPF
         {
             ListBox lb = (ListBox)sender;
             Album a = (Album)lb.SelectedItem;
-            idAlbumSelected = a.Id;
-            Console.WriteLine("album : " + idAlbumSelected);
-            miseAJourPhoto(idAlbumSelected);
+            idSelectedAlbum = a.Id;
+            Console.WriteLine("album : " + idSelectedAlbum);
+            miseAJourPhoto(idSelectedAlbum);
         }
 
         private void miseAjourAlbum()
         {
             // Recuperation des albums de l'utilisateur
-            imageCollectionAlbum = new AlbumCollection();
-            Album[] albums = webService.GetAlbumCollection(IDUser);
+            albumCollection = new AlbumCollection();
+            Album[] albums = webService.GetAlbumCollection(userID);
             foreach (Album a in albums)
             {
                 Console.WriteLine("Album Nom:{0}", a.Nom);
-                imageCollectionAlbum.Add(a);
+                albumCollection.Add(a);
             }
 
             ObjectDataProvider imageSourceAlbum = (ObjectDataProvider)FindResource("ImageCollectionAlbum");
-            imageSourceAlbum.ObjectInstance = imageCollectionAlbum;
+            imageSourceAlbum.ObjectInstance = albumCollection;
         }
 
         public void miseAJourPhoto(int idAlb)
         {
             // On crée notre collection d'image et on y ajoute deux images
-            imageCollection1 = new ImageCollection();
-            ImageInfo[] photos = webService.GetPicturesFromUserAlbum(IDUser, idAlb);
+            remotePictureCollection = new ImageCollection();
+            ImageInfo[] photos = webService.GetPicturesFromUserAlbum(userID, idAlb);
             foreach (ImageInfo p in photos)
             {
                 Photo ph = new Photo(p.Id, p.Nom, p.Album);
                 ph.Image = Util.StreamToByte(webService.GetPictureThumbnail(p, 100));
-                imageCollection1.Add(ph);
+                remotePictureCollection.Add(ph);
             }
 
             // On lie la collectionau ObjectDataProvider déclaré dans le fichier XAML
             ObjectDataProvider imageSource = (ObjectDataProvider)FindResource("ImageCollection1");
-            imageSource.ObjectInstance = imageCollection1;
+            imageSource.ObjectInstance = remotePictureCollection;
         }
 
         // On récupére l'objet que que l'on a dropé
@@ -176,29 +176,32 @@ namespace ClientWPF
         private void selectDirButton_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.FolderBrowserDialog fbd1 = new System.Windows.Forms.FolderBrowserDialog();
-            fbd1.ShowDialog();
-            LocalDirectory = fbd1.SelectedPath;
-
-            List<string> lis = Util.listDir(@LocalDirectory);
-            imageCollection2.Clear();
-
-            foreach (string img in lis)
+            System.Windows.Forms.DialogResult result = fbd1.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
             {
-                string[] words = img.Split('\\');
-                string name = words[words.Length - 1];
+                LocalDirectory = fbd1.SelectedPath;
 
-                Photo p = new Photo(name);
-                p.Image = Util.CreateThumbnailC(Util.lireFichier(@img), 100);
-                imageCollection2.Add(p);
+                List<string> lis = Util.listDir(@LocalDirectory);
+                localPictureCollection.Clear();
 
-                //Photo p = new Photo(name);
-                //System.Drawing.Image image = System.Drawing.Image.FromFile(@img);
-                //p.Image = Util.imageToByteArray(Util.FixedSize(image, 100, 100));
-                //imageCollection2.Add(p);
+                foreach (string img in lis)
+                {
+                    string[] words = img.Split('\\');
+                    string name = words[words.Length - 1];
+
+                    Photo p = new Photo(name);
+                    p.Image = Util.CreateThumbnailC(Util.lireFichier(@img), 100);
+                    localPictureCollection.Add(p);
+
+                    //Photo p = new Photo(name);
+                    //System.Drawing.Image image = System.Drawing.Image.FromFile(@img);
+                    //p.Image = Util.imageToByteArray(Util.FixedSize(image, 100, 100));
+                    //imageCollection2.Add(p);
+                }
+
+                ObjectDataProvider imageSource2 = (ObjectDataProvider)FindResource("ImageCollection2");
+                imageSource2.ObjectInstance = localPictureCollection;
             }
-
-            ObjectDataProvider imageSource2 = (ObjectDataProvider)FindResource("ImageCollection2");
-            imageSource2.ObjectInstance = imageCollection2;
         }
 
         /// <summary>
@@ -210,12 +213,29 @@ namespace ClientWPF
         {
             Album a = new Album();
             a.Nom = textAlbum.Text;
-            a.UserId = IDUser;
+            a.UserId = userID;
             a = webService.AddAlbum(a);
             Console.WriteLine("Album Ajouté {0}({1})", a.Nom, a.Id);
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBoxImage icon = MessageBoxImage.Information;
             miseAjourAlbum();
+        }
+
+        private void ListBoxAlbum_KeyUp(object sender, KeyEventArgs e)
+        {
+            ListBox lb = (ListBox)sender;
+            if (e.Key == Key.Delete && lb.SelectedItem != null)
+            {
+                // Delete confirmation
+                if (MessageBox.Show("Do you want to delete this folder?",
+                    "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    
+                    int albumId = ((Album)lb.SelectedItem).Id;
+                    if (webService.RemoveAlbum(userID, albumId) == 1)
+                        albumCollection.RemoveAt(lb.SelectedIndex);
+                    else
+                        MessageBox.Show("Error on delete"); 
+                }
+            }
         }
     }
 }

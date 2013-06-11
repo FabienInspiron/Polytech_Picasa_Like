@@ -162,9 +162,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="back.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="dossier.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -56,42 +56,46 @@ Title="MainWindow" Height="620" Width="820">
         </Style>
 
     </Window.Resources>
-    <Grid Background="#FF212121">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="288" />
+            <RowDefinition Height="150"/>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <ListBox x:Name="ListBoxAlbum"
+                Style="{StaticResource AlbumListBoxStyle}"
+                DataContext="{StaticResource ImageCollectionAlbum}"
+                AllowDrop="False" 
+                MouseDoubleClick="ViewPhotoEvent" KeyUp="ListBoxAlbum_KeyUp"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            </ListBox>
+            <Button Content="Ajouter" Height="23" HorizontalAlignment="Left"  Name="button3" VerticalAlignment="Bottom" Width="75" Click="button3_Click" Canvas.Left="132" Canvas.Bottom="6
+                    " Margin="132,0,0,5" />
+            <TextBox Height="23" HorizontalAlignment="Left" Name="textAlbum" VerticalAlignment="Bottom" Width="120" Canvas.Left="6" Canvas.Bottom="6" Margin="6,0,0,5" />
+        </Grid>
+        <GridSplitter HorizontalAlignment="Stretch" Grid.Row="1"
+                      VerticalAlignment="Center" Background="Azure"
+                      ShowsPreview="True" ResizeDirection="Rows" Height="3" />
 
-        <ListBox x:Name="ListBoxAlbum"
-            Style="{StaticResource AlbumListBoxStyle}"
-            DataContext="{StaticResource ImageCollectionAlbum}"
-            Margin="0,0,0,133" AllowDrop="False" 
-            MouseDoubleClick="ViewPhotoEvent">
-        </ListBox>
-        <GridSplitter HorizontalAlignment="Stretch"
-            ResizeBehavior="PreviousAndNext"
-            Height="5" Margin="0,156,0,127" />
-
-        <ListBox x:Name="ListBox1"
+        <ListBox x:Name="ListBox1" Grid.Row="2"
             Style="{StaticResource ImageListBoxStyle}"
             DataContext="{StaticResource ImageCollection1}"
             PreviewMouseLeftButtonDown="ImageDragEvent"
-            Drop="ImageDropEvent" Margin="0,161,0,0" />
+            Drop="ImageDropEvent"  />
 
-        <GridSplitter HorizontalAlignment="Stretch"
-            ResizeBehavior="PreviousAndNext"
-            Height="5"
-            Grid.Row="1"/>
-
-        <ListBox x:Name="ListBox2"
+        <GridSplitter HorizontalAlignment="Stretch" Grid.Row="3"
+                      VerticalAlignment="Center" Background="Azure"
+                      ShowsPreview="True" Height="3"/>
+        <Grid Grid.Row="4">
+            <ListBox x:Name="ListBox2"
             Style="{StaticResource ImageListBoxStyle}"
             DataContext="{StaticResource ImageCollection2}"
             PreviewMouseLeftButtonDown="ImageDragEvent"
-            Drop="ImageDropEvent"
-            Grid.Row="2"/>
-        <Button Content="Parcourir" Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="700,0,0,265" Name="selectDirButton" VerticalAlignment="Bottom" Width="75" Click="selectDirButton_Click" />
-        <Button Content="Ajouter" Height="23" HorizontalAlignment="Right" Margin="0,126,23,0" Name="button3" VerticalAlignment="Top" Width="75" Click="button3_Click" />
-        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,127,104,0" Name="textAlbum" VerticalAlignment="Top" Width="120" />
+            Drop="ImageDropEvent" />
+            <Button Content="Parcourir" Height="23" HorizontalAlignment="Left" Name="selectDirButton" VerticalAlignment="Top" Width="75" Click="selectDirButton_Click" />
+        </Grid>
     </Grid>
 </Window>

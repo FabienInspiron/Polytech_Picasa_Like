@@ -72,7 +72,7 @@ namespace ServeurWCF
             gestionBdd.addImage(p);
         }
 
-        public void RemovePicture(int userId, int albumId, int photoId)
+        public int RemovePicture(int userId, int albumId, int photoId)
         {
             throw new NotImplementedException();
         }
@@ -82,9 +82,9 @@ namespace ServeurWCF
             return gestionBdd.addAlbum(a);
         }
 
-        public void RemoveAlbum(int userId, int albumId)
+        public int RemoveAlbum(int userId, int albumId)
         {
-            throw new NotImplementedException();
+            return gestionBdd.delAlbum(albumId);
         }
 
     }

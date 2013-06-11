@@ -42,7 +42,7 @@ namespace ServeurWCF
         Album AddAlbum(Album a);
 
         [OperationContract]
-        void RemoveAlbum(int userId, int albumId);
+        int RemoveAlbum(int userId, int albumId);
 
         #endregion
 
@@ -67,7 +67,7 @@ namespace ServeurWCF
         void AddPicture(Picture p);
 
         [OperationContract]
-        void RemovePicture(int userId, int albumId, int photoId);
+        int RemovePicture(int userId, int albumId, int photoId);
 
         # endregion
     }

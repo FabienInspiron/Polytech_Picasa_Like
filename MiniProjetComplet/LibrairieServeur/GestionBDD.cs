@@ -113,7 +113,7 @@ namespace LibrairieServeur
         /// Suppresion de l'album
         /// </summary>
         /// <param name="id">Numero de l'album à supprimer, Attention cela supprime toutes les photos qui s'y trouve</param>
-        public void delAlbum(int id)
+        public int delAlbum(int id)
         {
             bdd.connexion();
             String sql = "DELETE FROM Album WHERE id=@id";
@@ -122,6 +122,7 @@ namespace LibrairieServeur
             oCommand.ExecuteNonQuery();
             Console.WriteLine("Album supprimé de la base");
             bdd.deconnect();
+            return 1;
         }
 
 
