@@ -32,7 +32,7 @@
   <xs:complexType name="ImageInfo">
     <xs:sequence>
       <xs:element name="Id" type="xs:int" />
-      <xs:element name="Nom" nillable="true" type="xs:string" />
+      <xs:element name="Name" nillable="true" type="xs:string" />
       <xs:element name="Album" type="xs:int" />
     </xs:sequence>
   </xs:complexType>

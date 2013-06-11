@@ -13,25 +13,22 @@
     </style>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" action="MainPage.aspx">
     <div class="style1">
-        
-        <asp:Label ID="Label1" runat="server" Text="Login : "></asp:Label>
-        <asp:TextBox ID="TextBoxLogin" runat="server" style="margin-left: 48px" 
-            Width="171px" ></asp:TextBox>
-        <br />
-        Mot de passe :
-        <asp:TextBox ID="TextBoxMDP" runat="server" Width="168px"></asp:TextBox>
-    
-        <asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
-            Text="Connexion" style="text-align: center" />
-    
+        Login: <input type="text" name="login"><br/>
+        Password: <input type="password" name="password"><br />
+        <input type="submit" value="Submit">
+        <%--<asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
+            Text="Connexion" style="text-align: center" />--%>
     </div>
+    </form>
+    <form id="form2" runat="server">
     <p>
         <asp:Button ID="BoutonInscription" runat="server" onclick="ButtonInscription_Click" 
             Text="Inscription" style="text-align: center" />
     </p>
-
     </form>
+
+    
 </body>
 </html>

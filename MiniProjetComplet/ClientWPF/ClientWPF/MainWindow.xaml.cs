@@ -76,7 +76,7 @@ namespace ClientWPF
             {
                 //Console.WriteLine("Envoi de " + image.Nom + " vers le serveur");
                 ImageInfo i = new ImageInfo();
-                i.Nom = image.Nom;
+                i.Name = image.Nom;
                 i.Album = idSelectedAlbum;
 
                 webService.AddPicture(i, new FileStream(@LocalDirectory + "\\" + image.Nom, FileMode.Open, FileAccess.Read));
@@ -88,7 +88,7 @@ namespace ClientWPF
                 ImageInfo img = new ImageInfo();
                 img.Album = image.Album;
                 img.Id = image.Id;
-                img.Nom = image.Nom;
+                img.Name = image.Nom;
                 Util.StreamToFile(imagePath, webService.GetPicture(img));
             }
 
@@ -135,7 +135,7 @@ namespace ClientWPF
             ImageInfo[] photos = webService.GetPicturesFromUserAlbum(userID, idAlb);
             foreach (ImageInfo p in photos)
             {
-                Photo ph = new Photo(p.Id, p.Nom, p.Album);
+                Photo ph = new Photo(p.Id, p.Name, p.Album);
                 ph.Image = Util.StreamToByte(webService.GetPictureThumbnail(p, 100));
                 remotePictureCollection.Add(ph);
             }

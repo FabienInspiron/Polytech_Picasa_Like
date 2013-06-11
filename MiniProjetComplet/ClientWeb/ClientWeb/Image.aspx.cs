@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ClientWeb.ServiceReference1;
+using ClientWeb.WebServices;
 
 namespace ClientWeb
 {
@@ -16,21 +16,18 @@ namespace ClientWeb
             // On récupére la valeur du paramètre ImageID passé dans l’URL
             String id = Request.QueryString["ImageID"];
             String album = Request.QueryString["album"];
-            String user = Request.QueryString["user"];
 
             int idI = int.Parse(id);
             int albumI = int.Parse(album);
-            int userI = int.Parse(user);
 
             // Si ce paramètre n'est pas nul
             if (id != null)
             {
-                ServiceClient service = new ServiceClient();
+                ImageInfo i = new ImageInfo();
+                i.Album = albumI;
+                i.Id = idI;
 
-                Picture p = service.GetPicture(userI, albumI, idI);
-
-                // on récupére notre image là où il faut
-                Byte[] bytes = p.Image;
+                Byte[] bytes = Util.StreamToByte(WebService.Service.GetPictureThumbnail(i, 100));
 
                 // et on crée le contenu de notre réponse à la requête HTTP
                 // (ici un contenu de type image)

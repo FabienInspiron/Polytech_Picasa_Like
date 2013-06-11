@@ -173,6 +173,42 @@ namespace LibrairieServeur
         }
 
         /// <summary>
+        /// Retourne les 5 derniers albums
+        /// </summary>
+        /// <param name="idUser">Utilisateur connecté auquel on cherche l'album</param>
+        /// <returns>Liste des albums de cet utilisateur</returns>
+        public List<Album> getAlbums()
+        {
+            List<Album> albums = new List<Album>();
+            try
+            {
+                bdd.connexion();
+
+                String sql = "SELECT * FROM Album LIMIT 10";
+
+                SqlCommand oCommand = bdd.executeSQL(sql);
+
+                SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
+                while (myReader.Read())
+                {
+                    albums.Add(new Album(myReader.GetInt32(0), myReader.GetString(1).Trim(), myReader.GetInt32(2)));
+                }
+
+                myReader.Close();
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+            finally
+            {
+                bdd.deconnect();
+            }
+
+            return albums;
+        }
+
+        /// <summary>
         /// Recuperer l'album d'id idAlbum
         /// </summary>
         /// <param name="idAlbum"></param>
@@ -513,7 +549,7 @@ namespace LibrairieServeur
         {
             MemoryStream ms = new MemoryStream();
             p.ImageData.CopyTo(ms);
-            int id = addImage(p.ImageInfo.Nom, ms.ToArray(), p.ImageInfo.Album);
+            int id = addImage(p.ImageInfo.Name, ms.ToArray(), p.ImageInfo.Album);
             p.ImageInfo.Id = id;
             return p.ImageInfo;
         }
@@ -746,8 +782,6 @@ namespace LibrairieServeur
         /// <returns></returns>
         public byte[] getPhoto(int photo)
         {
-
-            String nom = "";
             byte[] blob = { 0, 1 };
             int album = 0;
 

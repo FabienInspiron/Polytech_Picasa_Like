@@ -40,22 +40,22 @@ namespace ObjetDefinition
         [DataMember(Order = 1, IsRequired = true)]
         public int Id { get; set; }
         [DataMember(Order = 2, IsRequired = true)]
-        public String Nom { get; set; }
+        public String Name { get; set; }
         [DataMember(Order = 3, IsRequired = true)]
         public int Album { get; set; }
 
-        public ImageInfo(String nom)
-            : this(-1, nom, -1)
+        public ImageInfo(String name)
+            : this(-1, name, -1)
         { }
 
-        public ImageInfo(String nom, int album)
-            : this(-1, nom, album)
+        public ImageInfo(String name, int album)
+            : this(-1, name, album)
         { }
 
-        public ImageInfo(int id, String nom, int albumId)
+        public ImageInfo(int id, String name, int albumId)
         {
             this.Id = id;
-            this.Nom = nom;
+            this.Name = name;
             this.Album = albumId;
         }
     }

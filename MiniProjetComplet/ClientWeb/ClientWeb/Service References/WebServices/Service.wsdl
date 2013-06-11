@@ -828,7 +828,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:50978/Service.svc</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>X068\user</Upn>
+          <Upn>GORRIERI\user</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ClientWeb.ServiceReference1;
+using ClientWeb.WebServices;
 
 namespace ClientWeb
 {

@@ -13,13 +13,22 @@ namespace ClientWeb {
     public partial class MainPage {
         
         /// <summary>
-        /// Contrôle form1.
+        /// Contrôle HyperLink1.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+        
+        /// <summary>
+        /// Contrôle form.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm form;
         
         /// <summary>
         /// Contrôle TextBox1.
@@ -31,13 +40,13 @@ namespace ClientWeb {
         protected global::System.Web.UI.WebControls.TextBox TextBox1;
         
         /// <summary>
-        /// Contrôle Button3.
+        /// Contrôle AddFolderButton.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
+        protected global::System.Web.UI.WebControls.Button AddFolderButton;
         
         /// <summary>
         /// Contrôle lstBrowser.
@@ -49,13 +58,13 @@ namespace ClientWeb {
         protected global::System.Web.UI.WebControls.ListBox lstBrowser;
         
         /// <summary>
-        /// Contrôle btnAdd.
+        /// Contrôle AlbumRefreshButton.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
+        protected global::System.Web.UI.WebControls.Button AlbumRefreshButton;
         
         /// <summary>
         /// Contrôle FileUpload1.
@@ -67,39 +76,21 @@ namespace ClientWeb {
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
         
         /// <summary>
-        /// Contrôle Button1.
+        /// Contrôle UploadImageButton.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button UploadImageButton;
         
         /// <summary>
-        /// Contrôle listPhoto.
+        /// Contrôle PictureList.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox listPhoto;
-        
-        /// <summary>
-        /// Contrôle Button2.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
-        
-        /// <summary>
-        /// Contrôle ImageCourante.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageCourante;
+        protected global::System.Web.UI.WebControls.ListView PictureList;
     }
 }

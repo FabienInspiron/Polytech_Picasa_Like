@@ -38,6 +38,11 @@ namespace ServeurWCF
             return gestionBdd.getAlbums(userId);
         }
 
+        public List<Album> GetPublicAlbumCollection()
+        {
+            return gestionBdd.getAlbums();
+        }
+
         public List<ImageInfo> GetPicturesFromUserAlbum(int userId, int albumId)
         {
             return gestionBdd.getImagesFromAlbum(userId, albumId);

@@ -194,7 +194,7 @@ namespace ClientWPF.WebService {
         
         private int IdField;
         
-        private string NomField;
+        private string NameField;
         
         private int AlbumField;
         
@@ -222,14 +222,14 @@ namespace ClientWPF.WebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string Nom {
+        public string Name {
             get {
-                return this.NomField;
+                return this.NameField;
             }
             set {
-                if ((object.ReferenceEquals(this.NomField, value) != true)) {
-                    this.NomField = value;
-                    this.RaisePropertyChanged("Nom");
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
                 }
             }
         }

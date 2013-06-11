@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-using ClientWeb.ServiceReference1;
+using ClientWeb.WebServices;
 
 namespace ClientWeb
 {
@@ -19,13 +19,12 @@ namespace ClientWeb
         protected void ButtonInscription_click(object sender, EventArgs e)
         {
             // Création des webservices
-            ServiceReference1.ServiceClient service = new ServiceReference1.ServiceClient();
             Utilisateur u = new Utilisateur();
             u.Prenom = TextBoxPrenom.Text;
             u.Nom = TextBoxNom.Text;
             u.Mdp = TextBoxMDP.Text;
 
-            Utilisateur u_new = service.Inscription(u);
+            Utilisateur u_new = WebService.Service.Inscription(u);
 
             // Mise en place de la variable de session contenant l'utilisateur
             Session["Utilisateur"] = u_new; 

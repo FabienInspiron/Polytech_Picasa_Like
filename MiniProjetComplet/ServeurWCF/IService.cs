@@ -39,6 +39,9 @@ namespace ServeurWCF
         List<Album> GetAlbumCollection(int userId);
 
         [OperationContract]
+        List<Album> GetPublicAlbumCollection();
+
+        [OperationContract]
         Album AddAlbum(Album a);
 
         [OperationContract]
