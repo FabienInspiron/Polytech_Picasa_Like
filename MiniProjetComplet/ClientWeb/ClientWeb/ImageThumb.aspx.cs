@@ -8,7 +8,7 @@ using ClientWeb.WebServices;
 
 namespace ClientWeb
 {
-    public partial class Image : System.Web.UI.Page
+    public partial class ImageThumb : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,7 +27,7 @@ namespace ClientWeb
                 i.Album = albumI;
                 i.Id = idI;
 
-                Byte[] bytes = Util.StreamToByte(WebService.Service.GetPicture(i));
+                Byte[] bytes = Util.StreamToByte(WebService.Service.GetPictureThumbnail(i, 100));
 
                 // et on crée le contenu de notre réponse à la requête HTTP
                 // (ici un contenu de type image)

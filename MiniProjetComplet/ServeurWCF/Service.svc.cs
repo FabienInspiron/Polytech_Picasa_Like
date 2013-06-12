@@ -34,7 +34,6 @@ namespace ServeurWCF
         public List<Album> GetAlbumCollection(int userId)
         {
             List<Album> l = gestionBdd.getAlbums(userId);
-            Console.WriteLine("NB album: {0}", l.Count);
             return gestionBdd.getAlbums(userId);
         }
 

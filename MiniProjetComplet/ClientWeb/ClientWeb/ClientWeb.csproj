@@ -61,6 +61,7 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Connexion.aspx" />
     <Resource Include="dossier.png" />
+    <Content Include="ImageThumb.aspx" />
     <Content Include="Image.aspx" />
     <Content Include="Inscription.aspx" />
     <None Include="Properties\DataSources\ObjetDefinition.Album.datasource" />
@@ -89,7 +90,6 @@
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
-    <Content Include="VoirImage.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -154,6 +154,13 @@
     <Compile Include="Connexion.aspx.designer.cs">
       <DependentUpon>Connexion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ImageThumb.aspx.cs">
+      <DependentUpon>ImageThumb.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ImageThumb.aspx.designer.cs">
+      <DependentUpon>ImageThumb.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -200,13 +207,6 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
-    <Compile Include="VoirImage.aspx.cs">
-      <DependentUpon>VoirImage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="VoirImage.aspx.designer.cs">
-      <DependentUpon>VoirImage.aspx</DependentUpon>
-    </Compile>
     <Compile Include="WebService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -72,8 +72,10 @@
         } %>
         <asp:ListView ID="PictureList" runat="server" DataKeyNames="Id">
             <ItemTemplate>
-                <asp:Image ID="pictureControlID" runat="server" AlternateText='<% #Eval("Name") %>'
-                    ImageUrl='<%# string.Format("Image.aspx?ImageID={0}&album={1}",Eval("Id"),Eval("Album"))%>' />
+                <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl='<%# string.Format("Image.aspx?ImageID={0}&album={1}",Eval("Id"),Eval("Album"))%>'>
+                    <asp:Image ID="pictureControlID" runat="server" AlternateText='<% #Eval("Name") %>'
+                        ImageUrl='<%# string.Format("ImageThumb.aspx?ImageID={0}&album={1}",Eval("Id"),Eval("Album"))%>' />
+                </asp:HyperLink>
             </ItemTemplate>
         </asp:ListView>
     </div>
