@@ -132,7 +132,7 @@ namespace ClientWPF
         {
             // On crée notre collection d'image et on y ajoute deux images
             remotePictureCollection = new ImageCollection();
-            ImageInfo[] photos = webService.GetPicturesFromUserAlbum(userID, idAlb);
+            ImageInfo[] photos = webService.GetPicturesFromAlbum(idAlb);
             foreach (ImageInfo p in photos)
             {
                 Photo ph = new Photo(p.Id, p.Name, p.Album);
@@ -234,6 +234,25 @@ namespace ClientWPF
                         albumCollection.RemoveAt(lb.SelectedIndex);
                     else
                         MessageBox.Show("Error on delete"); 
+                }
+            }
+        }
+
+        private void ListBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            ListBox lb = (ListBox)sender;
+            if (e.Key == Key.Delete && lb.SelectedItem != null)
+            {
+                // Delete confirmation
+                if (MessageBox.Show("Do you want to delete this picture?",
+                    "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+
+                    int pictureId = ((Photo)lb.SelectedItem).Id;
+                    if (webService.RemovePicture(userID, ((Album)ListBoxAlbum.SelectedItem).Id, pictureId) == 1)
+                        remotePictureCollection.RemoveAt(lb.SelectedIndex);
+                    else
+                        MessageBox.Show("Error on delete");
                 }
             }
         }

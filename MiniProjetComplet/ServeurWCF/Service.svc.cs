@@ -74,7 +74,7 @@ namespace ServeurWCF
 
         public int RemovePicture(int userId, int albumId, int photoId)
         {
-            throw new NotImplementedException();
+            return gestionBdd.delImage(photoId);
         }
 
         public Album AddAlbum(Album a)

@@ -558,16 +558,17 @@ namespace LibrairieServeur
         /// Supprimer une image de la base de donnée
         /// </summary>
         /// <param name="ID"></param>
-        public void delImage(String ID)
+        public int delImage(int ID)
         {
             bdd.connexion();
             String sql = "DELETE FROM Image WHERE id=@id";
             SqlCommand oCommand = bdd.executeSQL(sql);
-            oCommand.Parameters.Add("@id", SqlDbType.VarChar, ID.Length).Value = ID;
+            oCommand.Parameters.Add("@id", SqlDbType.Int).Value = ID;
 
             oCommand.ExecuteNonQuery();
             Console.WriteLine("Image supprimée de la base");
             bdd.deconnect();
+            return 1;
         }
 
         /// <summary>

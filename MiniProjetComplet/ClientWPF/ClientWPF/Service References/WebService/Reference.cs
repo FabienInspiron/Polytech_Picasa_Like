@@ -270,20 +270,20 @@ namespace ClientWPF.WebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAlbumCollection", ReplyAction="http://tempuri.org/IService/GetAlbumCollectionResponse")]
         ClientWPF.WebService.Album[] GetAlbumCollection(int userId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPublicAlbumCollection", ReplyAction="http://tempuri.org/IService/GetPublicAlbumCollectionResponse")]
+        ClientWPF.WebService.Album[] GetPublicAlbumCollection();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddAlbum", ReplyAction="http://tempuri.org/IService/AddAlbumResponse")]
         ClientWPF.WebService.Album AddAlbum(ClientWPF.WebService.Album a);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAlbum", ReplyAction="http://tempuri.org/IService/RemoveAlbumResponse")]
         int RemoveAlbum(int userId, int albumId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesFromUserAlbum", ReplyAction="http://tempuri.org/IService/GetPicturesFromUserAlbumResponse")]
-        ClientWPF.WebService.ImageInfo[] GetPicturesFromUserAlbum(int userId, int albumId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesFromAlbum", ReplyAction="http://tempuri.org/IService/GetPicturesFromAlbumResponse")]
+        ClientWPF.WebService.ImageInfo[] GetPicturesFromAlbum(int albumId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesIdFromUserAlbum", ReplyAction="http://tempuri.org/IService/GetPicturesIdFromUserAlbumResponse")]
-        int[] GetPicturesIdFromUserAlbum(int userId, int albumId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesAlbumTuple", ReplyAction="http://tempuri.org/IService/GetPicturesAlbumTupleResponse")]
-        System.Tuple<int, string>[] GetPicturesAlbumTuple(int userId, int albumId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicturesIdFromAlbum", ReplyAction="http://tempuri.org/IService/GetPicturesIdFromAlbumResponse")]
+        int[] GetPicturesIdFromAlbum(int albumId);
         
         // CODEGEN : La génération du contrat de message depuis le nom de wrapper (ImageDownloadRequest) du message ImageDownloadRequest ne correspond pas à la valeur par défaut (GetPicture)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetPicture", ReplyAction="http://tempuri.org/IService/GetPictureResponse")]
@@ -426,6 +426,10 @@ namespace ClientWPF.WebService {
             return base.Channel.GetAlbumCollection(userId);
         }
         
+        public ClientWPF.WebService.Album[] GetPublicAlbumCollection() {
+            return base.Channel.GetPublicAlbumCollection();
+        }
+        
         public ClientWPF.WebService.Album AddAlbum(ClientWPF.WebService.Album a) {
             return base.Channel.AddAlbum(a);
         }
@@ -434,16 +438,12 @@ namespace ClientWPF.WebService {
             return base.Channel.RemoveAlbum(userId, albumId);
         }
         
-        public ClientWPF.WebService.ImageInfo[] GetPicturesFromUserAlbum(int userId, int albumId) {
-            return base.Channel.GetPicturesFromUserAlbum(userId, albumId);
+        public ClientWPF.WebService.ImageInfo[] GetPicturesFromAlbum(int albumId) {
+            return base.Channel.GetPicturesFromAlbum(albumId);
         }
         
-        public int[] GetPicturesIdFromUserAlbum(int userId, int albumId) {
-            return base.Channel.GetPicturesIdFromUserAlbum(userId, albumId);
-        }
-        
-        public System.Tuple<int, string>[] GetPicturesAlbumTuple(int userId, int albumId) {
-            return base.Channel.GetPicturesAlbumTuple(userId, albumId);
+        public int[] GetPicturesIdFromAlbum(int albumId) {
+            return base.Channel.GetPicturesIdFromAlbum(albumId);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

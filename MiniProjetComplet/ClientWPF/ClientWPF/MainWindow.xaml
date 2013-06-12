@@ -84,7 +84,7 @@ Title="MainWindow" Height="620" Width="820">
             Style="{StaticResource ImageListBoxStyle}"
             DataContext="{StaticResource ImageCollection1}"
             PreviewMouseLeftButtonDown="ImageDragEvent"
-            Drop="ImageDropEvent"  />
+            Drop="ImageDropEvent" KeyUp="ListBox1_KeyUp" />
 
         <GridSplitter HorizontalAlignment="Stretch" Grid.Row="3"
                       VerticalAlignment="Center" Background="Azure"
