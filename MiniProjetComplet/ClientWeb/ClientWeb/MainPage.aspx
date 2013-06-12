@@ -40,10 +40,21 @@
         </div>
             <%
         } %>
-        <asp:ListBox ID="lstBrowser" runat="server" Width="200px" OnSelectedIndexChanged="lstBrowser_SelectedIndexChanged"
+        <%--<asp:ListBox ID="AlbumList" runat="server" Width="200px" OnSelectedIndexChanged="AlbumList_SelectedIndexChanged"
             AutoPostBack="True"></asp:ListBox>
         <asp:Button ID="AlbumRefreshButton" runat="server" OnClick="AlbumRefreshButton_Click"
-            Text="Actualiser" />
+            Text="Actualiser" />--%>
+        <asp:ListView ID="AlbumList" runat="server" DataKeyNames="Id">
+            <ItemTemplate>
+                <div style="float:left; text-align:center">
+                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%# string.Format("MainPage.aspx?album={0}",Eval("Id"))%>'>
+                        <asp:Image ID="pictureControlID" runat="server" AlternateText='<% #Eval("Nom") %>' ImageUrl="~/dossier.png" /><br />
+                        <asp:Label ID="Label1" runat="server" Text='<% #Eval("Nom") %>'></asp:Label>
+                    </asp:HyperLink>
+                </div>
+            </ItemTemplate>
+        </asp:ListView>
+        <div style="clear:both"/>
         <br />
     </div>
     <div id="pictures">

@@ -52,13 +52,10 @@ namespace ServeurWCF
         #region photo
 
         [OperationContract]
-        List<ImageInfo> GetPicturesFromUserAlbum(int userId, int albumId);
+        List<ImageInfo> GetPicturesFromAlbum(int albumId);
 
         [OperationContract]
-        List<int> GetPicturesIdFromUserAlbum(int userId, int albumId);
-
-        [OperationContract]
-        List<Tuple<int, String>> GetPicturesAlbumTuple(int userId, int albumId);
+        List<int> GetPicturesIdFromAlbum(int albumId);
 
         [OperationContract]
         ImageDownloadResponse GetPicture(ImageDownloadRequest p);

@@ -184,7 +184,7 @@ namespace LibrairieServeur
             {
                 bdd.connexion();
 
-                String sql = "SELECT * FROM Album LIMIT 10";
+                String sql = "SELECT * FROM Album";
 
                 SqlCommand oCommand = bdd.executeSQL(sql);
 
@@ -646,7 +646,6 @@ namespace LibrairieServeur
 
                 myReader.Close();
 
-                oCommand.ExecuteNonQuery();
                 bdd.deconnect();
             }
             catch (Exception e)
@@ -658,7 +657,7 @@ namespace LibrairieServeur
         }
 
 
-        public List<int> getImagesIdFromAlbum(int idUser, int album)
+        public List<int> getImagesIdFromAlbum(int album)
         {
             List<int> photos = new List<int>();
 
@@ -666,10 +665,9 @@ namespace LibrairieServeur
             {
                 bdd.connexion();
 
-                String sql = "SELECT Image.id FROM Image, Album WHERE Image.album = Album.id AND Album.utilisater = @utilisateur AND Album.id =@album";
+                String sql = "SELECT Image.id FROM Image, Album WHERE Image.album = Album.id AND Album.id =@album";
 
                 SqlCommand oCommand = bdd.executeSQL(sql);
-                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int).Value = idUser;
                 oCommand.Parameters.Add("@album", SqlDbType.Int).Value = album;
 
                 SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
@@ -680,7 +678,6 @@ namespace LibrairieServeur
 
                 myReader.Close();
 
-                //oCommand.ExecuteNonQuery();
                 bdd.deconnect();
             }
             catch (Exception e)
@@ -697,7 +694,7 @@ namespace LibrairieServeur
         /// </summary>
         /// <param name="idUser">Utilisateur connecté auquel on cherche l'album</param>
         /// <returns>Liste des albums de cet utilisateur</returns>
-        public List<ImageInfo> getImagesFromAlbum(int idUser, int idAlbum)
+        public List<ImageInfo> getImagesFromAlbum(int idAlbum)
         {
             List<ImageInfo> tableID = new List<ImageInfo>();
 
@@ -705,10 +702,9 @@ namespace LibrairieServeur
             {
                 bdd.connexion();
 
-                String sql = "SELECT Image.id, Image.nom, Image.album FROM Image, Album WHERE Image.album = Album.id AND Album.utilisater = @utilisateur AND Album.id =@album";
+                String sql = "SELECT Image.id, Image.nom, Image.album FROM Image, Album WHERE Image.album = Album.id AND Album.id =@album";
 
                 SqlCommand oCommand = bdd.executeSQL(sql);
-                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int).Value = idUser;
                 oCommand.Parameters.Add("@album", SqlDbType.Int).Value = idAlbum;
 
                 SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
@@ -729,47 +725,6 @@ namespace LibrairieServeur
             finally
             {
                 bdd.deconnect();
-            }
-
-            return tableID;
-        }
-
-        /// <summary>
-        /// Retourne les tuples des identifiants et des noms des images
-        /// </summary>
-        /// <param name="idUser">Utilisateur connecté auquel on cherche l'album</param>
-        /// <returns>Liste des albums de cet utilisateur</returns>
-        public List<Tuple<int, String>> getImageIDUserTuple(int idUser, int idAlbum)
-        {
-            List<Tuple<int, String>> tableID = new List<Tuple<int, String>>();
-
-            try
-            {
-                bdd.connexion();
-
-                String sql = "SELECT Image.id, Image.nom FROM Image, Album WHERE Image.album = Album.id AND Album.utilisater = @utilisateur AND Album.id =@album";
-
-                SqlCommand oCommand = bdd.executeSQL(sql);
-                oCommand.Parameters.Add("@utilisateur", SqlDbType.Int).Value = idUser;
-                oCommand.Parameters.Add("@album", SqlDbType.Int).Value = idAlbum;
-
-                SqlDataReader myReader = oCommand.ExecuteReader(CommandBehavior.SequentialAccess);
-                while (myReader.Read())
-                {
-                    int res = myReader.GetInt32(0);
-                    string nom = myReader.GetString(1);
-
-                    tableID.Add(new Tuple<int, string>(res, nom));
-                }
-
-                myReader.Close();
-
-                oCommand.ExecuteNonQuery();
-                bdd.deconnect();
-            }
-            catch (Exception e)
-            {
-                Console.Write(e.Message);
             }
 
             return tableID;

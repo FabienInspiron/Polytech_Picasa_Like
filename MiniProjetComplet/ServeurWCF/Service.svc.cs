@@ -43,20 +43,16 @@ namespace ServeurWCF
             return gestionBdd.getAlbums();
         }
 
-        public List<ImageInfo> GetPicturesFromUserAlbum(int userId, int albumId)
+        public List<ImageInfo> GetPicturesFromAlbum(int albumId)
         {
-            return gestionBdd.getImagesFromAlbum(userId, albumId);
+            return gestionBdd.getImagesFromAlbum(albumId);
         }
 
-        public List<int> GetPicturesIdFromUserAlbum(int userId, int albumId)
+        public List<int> GetPicturesIdFromAlbum(int albumId)
         {
-            return gestionBdd.getImagesIdFromAlbum(userId, albumId);
+            return gestionBdd.getImagesIdFromAlbum(albumId);
         }
 
-        public List<Tuple<int, String>> GetPicturesAlbumTuple(int userId, int albumId)
-        {
-            return gestionBdd.getImageIDUserTuple(userId, albumId);
-        }
 
         public ImageDownloadResponse GetPicture(ImageDownloadRequest p)
         {

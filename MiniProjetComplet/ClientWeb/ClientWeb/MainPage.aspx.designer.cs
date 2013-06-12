@@ -49,22 +49,13 @@ namespace ClientWeb {
         protected global::System.Web.UI.WebControls.Button AddFolderButton;
         
         /// <summary>
-        /// Contrôle lstBrowser.
+        /// Contrôle AlbumList.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstBrowser;
-        
-        /// <summary>
-        /// Contrôle AlbumRefreshButton.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AlbumRefreshButton;
+        protected global::System.Web.UI.WebControls.ListView AlbumList;
         
         /// <summary>
         /// Contrôle FileUpload1.

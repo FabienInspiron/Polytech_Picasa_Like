@@ -60,6 +60,7 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Connexion.aspx" />
+    <Resource Include="dossier.png" />
     <Content Include="Image.aspx" />
     <Content Include="Inscription.aspx" />
     <None Include="Properties\DataSources\ObjetDefinition.Album.datasource" />
@@ -107,9 +108,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\WebServices\Service4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\WebServices\Service5.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

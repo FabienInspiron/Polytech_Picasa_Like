@@ -30,6 +30,10 @@ namespace ClientWeb
 
                 sess = u;
             }
+            else if (Session["Utilisateur"] != null)
+            {
+                sess = (Utilisateur) Session["Utilisateur"];
+            }
 
             String signOut = Request.QueryString["signout"];
             if (signOut != null)
@@ -37,23 +41,26 @@ namespace ClientWeb
                 sess = null;
                 Session.Clear();
             }
+            MajAlbums();
+
+            String album = Request.QueryString["album"];
+            if (album != null)
+            {
+                albumSelected = int.Parse(album);
+                MAJPhotos();
+            }
         }
 
-        protected void AlbumRefreshButton_Click(object sender, EventArgs e)
+        private void MajAlbums()
         {
             try
             {
-                Album[] albums = WebService.Service.GetAlbumCollection(sess.Id);
+                Album[] albums;
+                if (sess != null) albums = WebService.Service.GetAlbumCollection(sess.Id);
+                else albums = WebService.Service.GetPublicAlbumCollection();
 
-                lstBrowser.Items.Clear();
-                foreach (Album a in albums)
-                {
-                    ListItem item = new ListItem();
-                    item.Text = a.Nom;
-                    item.Value = a.Id.ToString();
-
-                    lstBrowser.Items.Add(item);
-                }
+                AlbumList.DataSource = albums;
+                AlbumList.DataBind();
             }
             catch (Exception f)
             {
@@ -71,17 +78,15 @@ namespace ClientWeb
         //    }
         //}
 
-        protected void lstBrowser_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            MAJPhotos();
-        }
+        //protected void AlbumList_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if(AlbumList.SelectedItem != null)
+        //        albumSelected = int.Parse(AlbumList.SelectedValue);
+        //        MAJPhotos();
+        //}
 
         public void MAJPhotos(){
-            int pho = int.Parse(lstBrowser.SelectedItem.Value);
-            albumSelected = pho;
-            //Photo[] listPhotos = WebService.Service.GetPhotoAlbum(sess.Id, pho);
-
-            ImageInfo[] listPhotos = WebService.Service.GetPicturesFromUserAlbum(sess.Id, pho);
+            ImageInfo[] listPhotos = WebService.Service.GetPicturesFromAlbum(albumSelected);
             PictureList.DataSource = listPhotos;
             PictureList.DataBind();
 
@@ -101,7 +106,7 @@ namespace ClientWeb
             {
                 Picture p = new Picture();
                 p.ImageInfo = new ImageInfo();
-                p.ImageInfo.Album = int.Parse(lstBrowser.SelectedItem.Value);
+                p.ImageInfo.Album = albumSelected;
                 p.ImageInfo.Name = FileUpload1.FileName;
                 p.ImageData = new MemoryStream(FileUpload1.FileBytes);
                 WebService.Service.AddPicture(p.ImageInfo, p.ImageData);
