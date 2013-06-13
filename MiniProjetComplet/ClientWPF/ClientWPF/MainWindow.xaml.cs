@@ -209,7 +209,7 @@ namespace ClientWPF
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button3_Click(object sender, RoutedEventArgs e)
+        private void AddAlbum_Click(object sender, RoutedEventArgs e)
         {
             Album a = new Album();
             a.Nom = textAlbum.Text;
@@ -227,8 +227,7 @@ namespace ClientWPF
                 // Delete confirmation
                 if (MessageBox.Show("Do you want to delete this folder?",
                     "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    
+                {   
                     int albumId = ((Album)lb.SelectedItem).Id;
                     if (webService.RemoveAlbum(userID, albumId) == 1)
                         albumCollection.RemoveAt(lb.SelectedIndex);
